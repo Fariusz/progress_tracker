@@ -1,0 +1,1 @@
+insert into activity(id, activityName, content) values (1, 'Podciąganie', '7');
