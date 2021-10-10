@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     String HelloWorld(){
-        return "Hello there!";
+        return "This is REST API of Radosław Loth progress tracker application." +
+                "<br>List of available endpoints:<br>";
     }
 }
