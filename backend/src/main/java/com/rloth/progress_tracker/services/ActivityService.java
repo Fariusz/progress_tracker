@@ -16,4 +16,9 @@ public class ActivityService {
     public List<Activity> getActivities(){
         return repository.findAll();
     }
+
+    public Activity getActivity(long id) {
+        return repository.findById(id)
+                .orElseThrow();
+    }
 }

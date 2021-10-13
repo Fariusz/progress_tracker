@@ -8,7 +8,7 @@ CREATE TABLE USER (
 CREATE TABLE ACTIVITY (
     id BIGINT AUTO_INCREMENT  PRIMARY KEY ,
     user_id BIGINT NOT NULL ,
-    activityName VARCHAR(400) NOT NULL ,
+    activity_name VARCHAR(400) NOT NULL ,
     created timestamp
 );
 
