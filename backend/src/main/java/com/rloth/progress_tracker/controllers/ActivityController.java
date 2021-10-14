@@ -27,4 +27,8 @@ public class ActivityController {
         return service.getActivity(id);
     }
 
+    @GetMapping("/findAllByActivityName/{activityName}")
+    public List<Activity> findAllByActivityName(@PathVariable("activityName") String name) {
+        return service.findAllByActivityName(name);
+    }
 }

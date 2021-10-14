@@ -14,11 +14,15 @@ public class ActivityService {
     private final ActivityRepository repository;
 
     public List<Activity> getActivities(){
-        return repository.findAll();
+        return repository.findAllActivities();
     }
 
     public Activity getActivity(long id) {
         return repository.findById(id)
                 .orElseThrow();
+    }
+
+    public List<Activity> findAllByActivityName(String name){
+        return repository.findAllByActivityName(name);
     }
 }
