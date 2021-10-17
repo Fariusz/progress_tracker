@@ -1,9 +1,9 @@
 package com.rloth.progress_tracker.repos;
 
 import com.rloth.progress_tracker.models.Activity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,8 +13,11 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     List<Activity> findAllByActivityName(String activityName);
 
-    @Query("select a from Activity a" + " left join fetch a.content")
+    @Query("select distinct a from Activity a" + " left join fetch a.content")
     List<Activity> findAllActivities();
+
+    @Query("select distinct a from Activity a" + " left join fetch a.content")
+    List<Activity> findAllActivitiesPageable(Pageable page);
 
 /*
     findAllByActivityName i findActivityWithContent działają w jednakowy sposób XDD
