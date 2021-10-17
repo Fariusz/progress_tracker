@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 public class Activity {
     @Id
-    private Long id;
+    private long id;
     private Long userId;
     private String activityName;
     private LocalDateTime created;

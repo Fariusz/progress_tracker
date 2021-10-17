@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Setter
 public class Content {
     @Id
-    private Long id;
-    private Long activityId;
+    private long id;
+    private long activityId;
     private String content;
     private LocalDateTime created;
 }
