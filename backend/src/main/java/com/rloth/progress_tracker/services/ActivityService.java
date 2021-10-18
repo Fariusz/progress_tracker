@@ -55,4 +55,8 @@ public class ActivityService {
                 .filter(content -> content.getActivityId() == id)
                 .collect(Collectors.toList());
     }
+
+    public Activity addActivity(Activity activity) {
+        return activityRepository.save(activity);
+    }
 }

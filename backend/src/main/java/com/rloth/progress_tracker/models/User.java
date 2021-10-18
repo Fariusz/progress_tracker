@@ -16,16 +16,16 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Activity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userId;
-    private String activityName;
+    private String login;
+    private String password;
     private LocalDateTime created;
 
     //Relacja jeden (Activity) do wielu (Content)
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "activityId", updatable = false, insertable = false)
-    private List<Content> content;
+    @JoinColumn(name = "userId", updatable = false, insertable = false)
+    private List<Activity> activities;
 }

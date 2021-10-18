@@ -6,10 +6,7 @@ import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.services.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,27 +19,34 @@ public class ActivityController {
     private final ActivityService service;
 
     @GetMapping("/activities/all")
-    public List<Activity> getActivities(){ return service.getActivities(); }
+    public List<Activity> getAllActivities(){ return service.getActivities(); }
 
     @GetMapping("/activities/pageable")
-    public List<ActivityDto> getActivitiesPageable(@RequestParam(required = false) int page, Sort.Direction sort){
-        int pageNumber = page > 0 ? page: 1;
-        return ActivityDtoMapper.mapToActivityDto (service.getActivitiesPageable(pageNumber - 1, sort));
+    public List<ActivityDto> getActivitiesPageable(@RequestParam(required = false) Integer page, Sort.Direction sort){
+        int pageNumber = page != null && page > 0 ? page: 1;
+        Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
+        return ActivityDtoMapper.mapToActivityDto (service.getActivitiesPageable(pageNumber - 1, sortDirection));
     }
 
     @GetMapping("/activities/pageable/content")
-    public List<Activity> getActivitiesWithContent(@RequestParam(required = false) int page, Sort.Direction sort){
-        int pageNumber = page > 0 ? page: 1;
-        return service.getActivitiesWithContent(pageNumber - 1, sort);
+    public List<Activity> getActivitiesPageableWithContent(@RequestParam(required = false) Integer page, Sort.Direction sort){
+        int pageNumber = page != null && page > 0 ? page: 1;
+        Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
+        return service.getActivitiesWithContent(pageNumber - 1, sortDirection);
     }
 
     @GetMapping("/activities/{id}")
-    public Activity getActivity(@PathVariable long id) {
+    public Activity getActivityById(@PathVariable long id) {
         return service.getActivity(id);
     }
 
     @GetMapping("/findAllByActivityName/{activityName}")
-    public List<Activity> findAllByActivityName(@PathVariable("activityName") String name) {
+    public List<Activity> getActivityByName(@PathVariable("activityName") String name) {
         return service.findAllByActivityName(name);
+    }
+
+    @PostMapping("/activites")
+    public Activity addActivity(@RequestBody Activity activity){
+        return service.addActivity(activity);
     }
 }
