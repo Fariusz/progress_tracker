@@ -49,4 +49,15 @@ public class ActivityController {
     public Activity addActivity(@RequestBody Activity activity){
         return service.addActivity(activity);
     }
+
+    @PutMapping("/activities")
+    public Activity editActivity(@RequestBody Activity activity){
+        return service.editActivity(activity);
+    }
+
+    @DeleteMapping("/activities/{id}")
+    public void deleteActivity(@PathVariable long id){
+        service.deleteActivity(id);
+
+    }
 }

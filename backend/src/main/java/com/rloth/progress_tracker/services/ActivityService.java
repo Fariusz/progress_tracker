@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +59,17 @@ public class ActivityService {
 
     public Activity addActivity(Activity activity) {
         return activityRepository.save(activity);
+    }
+
+    @Transactional
+    public Activity editActivity(Activity activity) {
+        Activity activityEdited = activityRepository.findById(activity.getId()).orElseThrow();
+        activityEdited.setActivityName(activity.getActivityName());
+        activityEdited.setContent(activity.getContent());
+        return activityEdited;
+    }
+
+    public void deleteActivity(long id) {
+        activityRepository.deleteById(id);
     }
 }
