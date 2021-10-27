@@ -20,7 +20,6 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userId;
     private String activityName;
     private LocalDateTime created;
 

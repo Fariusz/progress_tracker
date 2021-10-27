@@ -19,7 +19,6 @@ public class ActivityDtoMapper {
     public static ActivityDto mapToActivityDto(Activity activity){
         return ActivityDto.builder()
                 .id(activity.getId())
-                .userId(activity.getUserId())
                 .activityName(activity.getActivityName())
                 .created(activity.getCreated())
                 .build();

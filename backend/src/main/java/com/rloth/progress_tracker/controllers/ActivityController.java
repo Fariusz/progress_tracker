@@ -6,6 +6,8 @@ import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.services.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +21,9 @@ public class ActivityController {
     private final ActivityService service;
 
     @GetMapping("/activities/all")
-    public List<Activity> getAllActivities(){ return service.getActivities(); }
+    public List<Activity> getAllActivities(@AuthenticationPrincipal UsernamePasswordAuthenticationToken user){
+        return service.getActivities();
+    }
 
     @GetMapping("/activities/pageable")
     public List<ActivityDto> getActivitiesPageable(@RequestParam(required = false) Integer page, Sort.Direction sort){
