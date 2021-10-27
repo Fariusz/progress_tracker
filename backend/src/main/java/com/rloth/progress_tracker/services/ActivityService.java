@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,6 +25,7 @@ public class ActivityService {
     private final ActivityRepository activityRepository;
     private final ContentRepository contentRepository;
 
+    @Cacheable(cacheNames = "Activities")
     public List<Activity> getActivities() {
         return activityRepository.findAllActivities();
     }
@@ -32,6 +36,7 @@ public class ActivityService {
                         /* Sort.by(Sort.Order.asc("id"), Sort.Order.desc(("created"))) */));
     }
 
+    @Cacheable(cacheNames = "SingleActivity", key = "#id")
     public Activity getActivity(long id) {
         return activityRepository.findById(id)
                 .orElseThrow();
@@ -62,6 +67,7 @@ public class ActivityService {
     }
 
     @Transactional
+    @CachePut(cacheNames = "SingleActivity", key = "#result.id")
     public Activity editActivity(Activity activity) {
         Activity activityEdited = activityRepository.findById(activity.getId()).orElseThrow();
         activityEdited.setActivityName(activity.getActivityName());
@@ -69,7 +75,13 @@ public class ActivityService {
         return activityEdited;
     }
 
+    @CacheEvict(cacheNames = "SingleActivity")
     public void deleteActivity(long id) {
         activityRepository.deleteById(id);
+    }
+
+    @CacheEvict(cacheNames = "Activities")
+    public void clearActivities(){
+        //Ta metoda czyści Cache
     }
 }
