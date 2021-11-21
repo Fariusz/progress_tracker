@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset rloth:1
+--changeset rloth:2
 
 CREATE TABLE CONTENT(
     id BIGINT AUTO_INCREMENT PRIMARY KEY ,
