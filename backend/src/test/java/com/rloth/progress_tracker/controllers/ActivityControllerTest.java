@@ -15,11 +15,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser
@@ -34,7 +37,7 @@ class ActivityControllerTest {
 
     @Test
     @Transactional
-    void shouldGetSingleActivity() throws Exception{
+    void shouldGetSingleActivity() throws Exception {
         // given
         Activity newActivity = new Activity();
         newActivity.setActivityName("Test");
@@ -53,5 +56,4 @@ class ActivityControllerTest {
         assertThat(activity.getId()).isEqualTo(newActivity.getId());
         assertThat(activity.getActivityName()).isEqualTo("Test");
     }
-
 }
