@@ -4,11 +4,12 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
+
   // @ts-ignore
   form: FormGroup;
 
@@ -16,14 +17,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      login: '',
       email: '',
       password: ''
-    })
+    });
   }
 
   submit(): void{
-    this.http.post('http://localhost:8080/login', this.form.getRawValue(), {
-      withCredentials: true
-    }).subscribe(() => this.router.navigate(['/home']));
+    this.http.post("http://localhost:8080/register", this.form.getRawValue())
+      .subscribe(() => this.router.navigate(['/login']));
   }
+
 }
