@@ -20,7 +20,7 @@ public class ActivityController {
 
     private final ActivityService service;
 
-    @GetMapping("/activities/all")
+    @GetMapping("/activities")
     public List<Activity> getAllActivities(@AuthenticationPrincipal UsernamePasswordAuthenticationToken user){
         return service.getActivities();
     }
