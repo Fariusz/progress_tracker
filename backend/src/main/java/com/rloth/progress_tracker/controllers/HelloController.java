@@ -1,6 +1,6 @@
 package com.rloth.progress_tracker.controllers;
 
-import com.rloth.progress_tracker.controllers.dtos.HelloDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/hello")
-    HelloDto HelloWorld() {
-        return new HelloDto("tutaj restapi", HelloDto.Status.SUCCESS);
+    ResponseEntity HelloWorld() {
+        return ResponseEntity.ok("Hello");
     }
 }
 
