@@ -1,7 +1,9 @@
 package com.rloth.progress_tracker.services;
 
 import com.rloth.progress_tracker.controllers.dtos.UserDto;
+import com.rloth.progress_tracker.models.Authority;
 import com.rloth.progress_tracker.models.User;
+import com.rloth.progress_tracker.repos.AuthorityRepository;
 import com.rloth.progress_tracker.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class LoginService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AuthorityRepository authorityRepository;
 
     public boolean emailExist(UserDto user){
         return (userRepository.findByEmail(user.getEmail()) != null) ? true : false;
@@ -31,7 +35,15 @@ public class LoginService {
         user.setPassword("{bcrypt}" + passwordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
         user.setEnabled(true);
-        return userRepository.save(user);
+
+        Authority authority = new Authority();
+        authority.setAuthority("USER");
+        authority.setUser(user);
+
+        userRepository.save(user);
+        authorityRepository.save(authority);
+
+        return user;
     }
 
     public List<User> listUsers() {
