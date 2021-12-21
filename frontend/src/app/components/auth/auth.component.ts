@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -9,18 +9,19 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class AuthComponent implements OnInit {
 
-  isLoginMode: boolean = true;
+  isLoginMode: boolean = false;
 
   isLoading = false;
   error: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   onSwitchMode(){
-/*
     this.authService.isLoginMode ? this.authService.toggleLoginModeToFalse() : this.authService.toggleLoginModeToTrue();
-*/
-    this.authService.toggleLoginMode();
+  }
+
+  ngOnInit(): void {
+    this.authService.changeLoginMode.subscribe(isLoginMode => {this.isLoginMode = isLoginMode;});
   }
 
   onSubmit(form: NgForm){
@@ -42,7 +43,6 @@ export class AuthComponent implements OnInit {
           this.isLoading = true;
         },
         errorMessage => {
-          console.log(errorMessage);
           this.error = errorMessage;
           this.isLoading = false;
         });
@@ -52,18 +52,10 @@ export class AuthComponent implements OnInit {
           this.isLoading = true;
         },
         errorMessage => {
-          console.log(errorMessage);
           this.error = errorMessage;
           this.isLoading = false;
         });
     }
     form.reset();
   }
-
-  ngOnInit(): void {
-    this.authService.changeLoginMode.subscribe(isLoginMode => {
-      this.isLoginMode = isLoginMode;
-    });
-  }
-
 }

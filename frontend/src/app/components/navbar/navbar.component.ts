@@ -1,5 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {AuthComponent} from "../auth/auth.component";
+import {Component} from '@angular/core';
 import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
@@ -7,12 +6,9 @@ import {AuthService} from "../../services/auth/auth.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
 
   register(){
     this.authService.toggleLoginModeToFalse();

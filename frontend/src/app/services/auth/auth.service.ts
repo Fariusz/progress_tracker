@@ -1,37 +1,27 @@
-import {EventEmitter, Injectable, OnInit, Output} from '@angular/core';
+import { Injectable, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import {BehaviorSubject, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthService implements OnInit {
+export class AuthService {
 
   isLoginMode: boolean = false;
-  @Output() changeLoginMode: EventEmitter<boolean> = new EventEmitter();
+  @Output() changeLoginMode: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoginMode);
 
-  constructor(private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
-    this.changeLoginMode.emit(this.isLoginMode);
-  }
-
-  toggleLoginMode() {
-    this.isLoginMode = !this.isLoginMode;
-    this.changeLoginMode.emit(this.isLoginMode);
-  }
+  constructor(private http: HttpClient) {}
 
   toggleLoginModeToTrue() {
     this.isLoginMode = true;
-    this.changeLoginMode.emit(this.isLoginMode);
+    this.changeLoginMode.next(this.isLoginMode);
   }
 
   toggleLoginModeToFalse() {
     this.isLoginMode = false;
-    this.changeLoginMode.emit(this.isLoginMode);
+    this.changeLoginMode.next(this.isLoginMode);
   }
 
   login(password: string, username: string) {
