@@ -1,0 +1,55 @@
+<div class="text-center">
+
+  <div class="alert alert-danger" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <form #authForm="ngForm" class="form-signin" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <input *ngIf="!isLoginMode"
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      ngModel
+      name="email"
+      placeholder="email"
+      required
+      autofocus
+      email
+    >
+    <input
+      type="username"
+      id="inputUsername"
+      class="form-control"
+      ngModel
+      name="username"
+      placeholder="username"
+      required
+      autofocus
+      minlength="3"
+    >
+    <input
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      ngModel
+      name="password"
+      minlength="3"
+      placeholder="password"
+      required
+    >
+    <div class="checkbox mb-3" *ngIf="isLoginMode">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button> |
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="onSwitchMode()">Switch to {{ !isLoginMode ? 'Login' : 'Sign Up' }}</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  </form>
+</div>

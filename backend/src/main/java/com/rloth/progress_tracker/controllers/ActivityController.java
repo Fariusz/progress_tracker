@@ -62,6 +62,5 @@ public class ActivityController {
     @DeleteMapping("/activities/{id}")
     public void deleteActivity(@PathVariable long id){
         service.deleteActivity(id);
-
     }
 }
