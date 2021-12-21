@@ -10,7 +10,7 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.component';
+import { LoadingspinnerComponent } from './components/loadingspinner/loadingspinner.component';
 
 @NgModule({
   declarations: [
