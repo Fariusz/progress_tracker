@@ -25,6 +25,10 @@ public class LoginService {
         return (userRepository.findByEmail(user.getEmail()) != null) ? true : false;
     }
 
+    public boolean usernameExist(UserDto user){
+        return (userRepository.findByUsername(user.getUsername()) != null) ? true : false;
+    }
+
     public User register(UserDto accountDto){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
