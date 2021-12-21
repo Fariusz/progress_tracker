@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthComponent} from "../auth/auth.component";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -15,11 +15,10 @@ export class NavbarComponent implements OnInit {
   }
 
   register(){
-    console.log("register");
+    this.authService.toggleLoginModeToFalse();
   }
 
   login(){
-    console.log("login");
+    this.authService.toggleLoginModeToTrue();
   }
-
 }

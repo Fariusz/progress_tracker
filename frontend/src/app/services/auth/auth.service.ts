@@ -1,19 +1,42 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthService {
+export class AuthService implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  isLoginMode: boolean = false;
+  @Output() changeLoginMode: EventEmitter<boolean> = new EventEmitter();
 
-  login(password: string, username: string ){
-    const body = { username: username, password: password };
-    return this.http.post('http://localhost:8080/login', body, { observe: 'response'})
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    this.changeLoginMode.emit(this.isLoginMode);
+  }
+
+  toggleLoginMode() {
+    this.isLoginMode = !this.isLoginMode;
+    this.changeLoginMode.emit(this.isLoginMode);
+  }
+
+  toggleLoginModeToTrue() {
+    this.isLoginMode = true;
+    this.changeLoginMode.emit(this.isLoginMode);
+  }
+
+  toggleLoginModeToFalse() {
+    this.isLoginMode = false;
+    this.changeLoginMode.emit(this.isLoginMode);
+  }
+
+  login(password: string, username: string) {
+    const body = {username: username, password: password};
+    return this.http.post('http://localhost:8080/login', body, {observe: 'response'})
       .pipe(
         catchError(errorRes => {
           let errorMessage = 'An unknown error occurred!';
