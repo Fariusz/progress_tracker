@@ -17,13 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  toggleLoginModeToTrue() {
-    this.isLoginMode = true;
-    this.changeLoginMode.next(this.isLoginMode);
-  }
-
-  toggleLoginModeToFalse() {
-    this.isLoginMode = false;
+  toggleLoginMode(trueOrFalse: boolean) {
+    this.isLoginMode = trueOrFalse;
     this.changeLoginMode.next(this.isLoginMode);
   }
 

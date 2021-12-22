@@ -11,10 +11,10 @@ export class NavbarComponent {
   constructor(private authService: AuthService) { }
 
   register(){
-    this.authService.toggleLoginModeToFalse();
+    this.authService.toggleLoginMode(false);
   }
 
   login(){
-    this.authService.toggleLoginModeToTrue();
+    this.authService.toggleLoginMode(true);
   }
 }

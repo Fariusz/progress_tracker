@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   onSwitchMode(){
-    this.authService.isLoginMode ? this.authService.toggleLoginModeToFalse() : this.authService.toggleLoginModeToTrue();
+    this.authService.isLoginMode ? this.authService.toggleLoginMode(false) : this.authService.toggleLoginMode(true);
   }
 
   ngOnInit(): void {
