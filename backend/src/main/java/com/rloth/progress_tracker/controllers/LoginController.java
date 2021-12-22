@@ -29,17 +29,17 @@ public class LoginController {
     public ResponseEntity<String> processRegister(@RequestBody UserDto accountDto){
 
         if (loginService.emailExist(accountDto)) {
-            return new ResponseEntity<>("EMAIL_EXISTS", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{\n" + "  \"message\" : \"EMAIL_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
         }
         else if (loginService.usernameExist(accountDto)) {
-            return new ResponseEntity<>("USERNAME_EXISTS", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{\n" + "  \"message\" : \"USERNAME_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
         }
         else if (!loginService.emailExist(accountDto)){
             loginService.register(accountDto);
             return new ResponseEntity<>("{\n" + "  \"message\" : \"REGISTER_SUCCESS\"\n" + "}\n", HttpStatus.CREATED);
         }
         else {
-            return new ResponseEntity<>("UNKNOWN", HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>("{\n" + "  \"message\" : \"UNKNOWN\"\n" + "}\n", HttpStatus.NOT_IMPLEMENTED);
         }
     }
 

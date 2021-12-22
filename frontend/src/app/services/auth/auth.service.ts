@@ -1,13 +1,16 @@
 import { Injectable, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {BehaviorSubject, throwError} from 'rxjs';
+import {BehaviorSubject, Subject, throwError} from 'rxjs';
+import {User} from "../../models/User";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+
+  user = new Subject<User>();
 
   isLoginMode: boolean = false;
   @Output() changeLoginMode: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoginMode);
@@ -27,39 +30,45 @@ export class AuthService {
   login(password: string, username: string) {
     const body = {username: username, password: password};
     return this.http.post('http://localhost:8080/login', body, {observe: 'response'})
-      .pipe(
-        catchError(errorRes => {
-          let errorMessage = 'An unknown error occurred!';
-          return throwError(errorMessage + errorRes.error);
-        })
-      );
+      .pipe(catchError(this.handleError));
   }
 
   signUp(email: string, password: string, username: string) {
     const body = {email: email, username: username, password: password};
     return this.http.post('http://localhost:8080/register', body)
-      .pipe(
-        catchError(errorRes => {
-          let errorMessage = 'An unknown error occurred!' + errorRes.error;
+      .pipe(catchError(this.handleError));
+  }
 
-          if (!errorRes.error) {
-            return throwError(errorMessage);
-          }
+  private handleError(errorRes: HttpErrorResponse){
 
-          switch (errorRes.error) {
-            case 'EMAIL_EXISTS':
-              errorMessage = 'There is an account with that email adress: ' + email;
-          }
-          switch (errorRes.error) {
-            case 'USERNAME_EXISTS':
-              errorMessage = 'There is an account with that username: ' + username;
-          }
-          switch (errorRes.error) {
-            case 'UNKNOWN':
-              errorMessage = 'UNKNOWN';
-          }
-          return throwError(errorMessage);
-        })
-      );
+    let errorMessage = 'An unknown error occurred!';
+
+    if (errorRes.status == 401){
+      return throwError("Wrong username or password.")
+    }
+
+    else if(!errorRes.error || !errorRes.error.message){
+      return throwError(errorMessage);
+    }
+
+    switch (errorRes.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'There is an account with that email adress.';
+        break;
+    }
+
+    switch (errorRes.error.message) {
+      case 'USERNAME_EXISTS':
+        errorMessage = 'There is an account with that username.';
+        break;
+    }
+
+    switch (errorRes.error.message) {
+      case 'UNKNOWN':
+        errorMessage = 'UNKNOWN';
+        break;
+    }
+
+    return throwError(errorMessage);
   }
 }
