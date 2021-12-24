@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { LoadingspinnerComponent } from './components/loadingspinner/loadingspinner.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoadingspinnerComponent } from './components/loadingspinner/loadingspin
     ActivityComponent,
     HomeComponent,
     AuthComponent,
-    LoadingspinnerComponent
+    LoadingspinnerComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

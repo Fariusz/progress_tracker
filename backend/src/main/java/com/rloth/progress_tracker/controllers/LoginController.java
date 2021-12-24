@@ -34,7 +34,7 @@ public class LoginController {
         else if (loginService.usernameExist(accountDto)) {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"USERNAME_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
         }
-        else if (!loginService.emailExist(accountDto)){
+        else if (!loginService.emailExist(accountDto) || !loginService.usernameExist(accountDto)){
             loginService.register(accountDto);
             return new ResponseEntity<>("{\n" + "  \"message\" : \"REGISTER_SUCCESS\"\n" + "}\n", HttpStatus.CREATED);
         }
