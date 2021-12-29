@@ -9,9 +9,9 @@ import {HttpClientModule} from "@angular/common/http";
 import { ActivityComponent } from './components/activity/activity.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { LoadingspinnerComponent } from './components/loadingspinner/loadingspinner.component';
 import { MainComponent } from './components/main/main.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +19,9 @@ import { MainComponent } from './components/main/main.component';
     NavbarComponent,
     ActivityComponent,
     HomeComponent,
-    AuthComponent,
     LoadingspinnerComponent,
-    MainComponent
+    MainComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

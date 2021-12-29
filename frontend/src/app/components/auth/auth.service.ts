@@ -10,7 +10,6 @@ import {User} from "../../models/User";
 
 export class AuthService {
 
-  // @ts-ignore
   user = new BehaviorSubject<User>(null);
 
   isLoginMode: boolean = true;
