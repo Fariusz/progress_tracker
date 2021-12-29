@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <div class="container-fluid">
-    <a routerLink="/" class="navbar-brand">Home</a>
-
-    <div>
+    <a routerLink="/" class="navbar-brand">Main</a>
+    <div *ngIf="!isAuthenticated">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
           <a routerLink="/auth" class="nav-link" (click)="login()">Login</a>
@@ -12,6 +11,12 @@
         </li>
       </ul>
     </div>
+    <div *ngIf="isAuthenticated">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-
