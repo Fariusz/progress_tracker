@@ -4,17 +4,17 @@
     <div *ngIf="!isAuthenticated">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link" (click)="login()">Login</a>
+          <a routerLink="/login" class="nav-link" (click)="onLogin()">Login</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link" (click)="register()">Register</a>
+          <a routerLink="/login" class="nav-link" (click)="onRegister()">Register</a>
         </li>
       </ul>
     </div>
     <div *ngIf="isAuthenticated">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
-          <a routerLink="/" class="nav-link" (click)="logout()">Logout</a>
+          <a routerLink="/" class="nav-link" (click)="onLogout()">Logout</a>
         </li>
       </ul>
     </div>

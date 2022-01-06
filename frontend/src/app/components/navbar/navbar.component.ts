@@ -20,16 +20,16 @@ export class NavbarComponent implements OnInit, OnDestroy{
     });
   }
 
-  register(){
+  onRegister(){
     this.authService.toggleLoginMode(false);
   }
 
-  login(){
+  onLogin(){
     this.authService.toggleLoginMode(true);
   }
 
-  logout(){
-
+  onLogout(){
+    this.authService.logout();
   }
 
   ngOnDestroy() {
