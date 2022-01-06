@@ -1,15 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
-import {AuthService} from "./auth.service";
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import {AuthService, LoginCredentials} from "../auth/auth.service";
 import {Router} from "@angular/router";
+import {NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AuthComponent implements OnInit {
+export class LoginComponent implements OnInit {
+
+  loginCredentials: LoginCredentials = {
+    password: null,
+    username: null,
+    email: null
+  };
 
   isLoginMode: boolean = true;
   isLoading = false;
@@ -30,9 +35,10 @@ export class AuthComponent implements OnInit {
       this.error = "form invalid";
       return;
     }
-    const username = form.value.username;
-    const password = form.value.password;
-    const email = form.value.email;
+
+    this.loginCredentials.password = form.value.password;
+    this.loginCredentials.username = form.value.username;
+    this.loginCredentials.email = form.value.email;
 
     let authObs: string | null;
 
@@ -40,10 +46,9 @@ export class AuthComponent implements OnInit {
 
     if(this.isLoginMode)
     {
-      this.authService.login(username, password).subscribe(
+      this.authService.login(this.loginCredentials).subscribe(
         resp => {
           authObs = resp.headers.get('Authorization');
-          console.log(authObs);
           this.error = '';
           this.isLoading = true;
           this.router.navigate(['/home']);
@@ -53,7 +58,7 @@ export class AuthComponent implements OnInit {
           this.isLoading = false;
         });
     } else {
-      this.authService.signUp(email, username, password).subscribe(
+      this.authService.signUp(this.loginCredentials).subscribe(
         resp => {
           this.isLoading = true;
           this.error = '';

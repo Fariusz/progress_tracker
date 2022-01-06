@@ -1,8 +1,15 @@
 import { Injectable, Output } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {throwError, BehaviorSubject, Observable} from 'rxjs';
 import {User} from "../../models/User";
+import {Router} from "@angular/router";
+
+export interface LoginCredentials{
+  password: string;
+  username: string;
+  email: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +17,13 @@ import {User} from "../../models/User";
 
 export class AuthService {
 
-  // @ts-ignore
   user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
 
   isLoginMode: boolean = true;
   @Output() changeLoginMode: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoginMode);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   toggleLoginMode(trueOrFalse: boolean) {
@@ -24,29 +31,63 @@ export class AuthService {
     this.changeLoginMode.next(this.isLoginMode);
   }
 
-  login(password: string, username: string) {
-    const body = {username: username, password: password};
-    return this.http.post('http://localhost:8080/login', body, {observe: 'response'})
+  login(loginCredentials: LoginCredentials) {
+    return this.http.post('http://localhost:8080/login', loginCredentials, {observe: 'response'})
       .pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuthentication(username, resData.headers.get('Authorization'), resData.headers.get('Expires'))}));
+        this.handleAuthentication(
+          loginCredentials.username,
+          resData.headers.get('Authorization'),
+          resData.headers.get('Expires'))}));
   }
 
-  signUp(email: string, password: string, username: string) {
-    const body = {email: email, username: username, password: password};
-    return this.http.post('http://localhost:8080/register', body)
-      .pipe(catchError(this.handleError), tap(resData => {
-        console.log(resData);
-      }));
+  signUp(loginCredentials: LoginCredentials) {
+    return this.http.post('http://localhost:8080/register', loginCredentials)
+      .pipe(catchError(this.handleError));
   }
 
-  handleAuthentication(username: string, token: string | null, tokenExpirationTime: string | null){
-    const user = new User(
-      username,
-      token,
-      new Date(new Date().getTime() + Number(tokenExpirationTime))
-    );
+  handleAuthentication(username: string, token: string, tokenExpirationTime: string){
+    const user = new User(username, token, new Date(new Date().getTime() + Number(tokenExpirationTime)));
     this.user.next(user);
-    console.log(user);
+    this.autoLogout(Number(tokenExpirationTime));
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getLoggedUser(){
+    return localStorage.getItem('user');
+  }
+
+  autoLogin(){
+    const userData:{
+      username: string,
+      _token: string,
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('user'));
+    if(!userData){
+      return;
+    }
+
+    const loadedUser = new User(userData.username, userData._token, new Date(userData._tokenExpirationDate));
+
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+      this.autoLogout(new Date(userData._tokenExpirationDate).getTime() - new Date().getTime());
+    }
+  }
+
+  logout(){
+    this.user.next(null);
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+    if(this.tokenExpirationTimer){
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number){
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration)
   }
 
   private handleError(errorRes: HttpErrorResponse) {
