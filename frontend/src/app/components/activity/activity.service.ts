@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ActivityDto} from "../../models/ActivityDto";
 import {AuthService} from "../auth/auth.service";
-import {exhaustMap, take} from "rxjs/operators";
+import {exhaustMap, map, take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,21 @@ export class ActivityService {
 
   private serviceUrl = "http://localhost:8080";
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   getActivities(){
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.httpClient.get<ActivityDto[]>(`${this.serviceUrl}/activities`,
-          // @ts-ignore
-          {headers: new HttpHeaders().set('Authorization' , user.token)});
-      })
-    )
+        return this.httpClient
+          .get<ActivityDto[]>(
+            `${this.serviceUrl}/activities`
+          );/*.pipe(
+            map(activites => {
+              return activites.map(activity => {
+                return {
+                  ...activity
+                }
+              })
+            })
+          );*/
   }
 
   getActivity(id: number): Observable<ActivityDto>{

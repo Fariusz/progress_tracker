@@ -1,8 +1,14 @@
 import { Injectable, Output } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {throwError, BehaviorSubject, Observable} from 'rxjs';
 import {User} from "../../models/User";
+
+export interface LoginCredentials{
+  password: string;
+  username: string;
+  email: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +29,18 @@ export class AuthService {
     this.changeLoginMode.next(this.isLoginMode);
   }
 
-  login(password: string, username: string) {
-    const body = {username: username, password: password};
-    return this.http.post('http://localhost:8080/login', body, {observe: 'response'})
+  login(loginCredentials: LoginCredentials) {
+    return this.http.post('http://localhost:8080/login', loginCredentials, {observe: 'response'})
       .pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuthentication(username, resData.headers.get('Authorization'), resData.headers.get('Expires'))}));
+        this.handleAuthentication(
+          loginCredentials.username,
+          resData.headers.get('Authorization'),
+          resData.headers.get('Expires'))}));
   }
 
-  signUp(email: string, password: string, username: string) {
-    const body = {email: email, username: username, password: password};
-    return this.http.post('http://localhost:8080/register', body)
-      .pipe(catchError(this.handleError), tap(resData => {
-        console.log(resData);
-      }));
+  signUp(loginCredentials: LoginCredentials) {
+    return this.http.post('http://localhost:8080/register', loginCredentials)
+      .pipe(catchError(this.handleError));
   }
 
   handleAuthentication(username: string, token: string | null, tokenExpirationTime: string | null){
@@ -44,8 +49,17 @@ export class AuthService {
       token,
       new Date(new Date().getTime() + Number(tokenExpirationTime))
     );
+
+    localStorage.setItem('user', JSON.stringify(user));
     this.user.next(user);
-    console.log(user);
+  }
+
+  getLoggedUser(){
+    return localStorage.getItem('user');
+  }
+
+  logout(){
+    localStorage.removeItem('user');
   }
 
   private handleError(errorRes: HttpErrorResponse) {
