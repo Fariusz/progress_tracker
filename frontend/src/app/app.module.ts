@@ -14,6 +14,7 @@ import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import {ActivityService} from "./components/activity/activity.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {AuthInterceptorService} from "./components/auth/auth-interceptor.service
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     ActivityService,
