@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ContentDto} from "../../models/ContentDto";
+import {ContentService} from "./content.service";
 
 @Component({
   selector: 'app-content',
@@ -7,9 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  content: ContentDto[] = [];
+
+  constructor(private contentService: ContentService) { }
 
   ngOnInit(): void {
+    this.contentService.getContent().subscribe(
+      (content: ContentDto[]) => { this.content = content; });
   }
 
 }

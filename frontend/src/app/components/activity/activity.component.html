@@ -1,12 +1,9 @@
-<!--<tr *ngFor="let activity of activities">
-  <td>{{activity.activityName}}</td>
-</tr>-->
-
 <div class="container" *ngFor="let activity of activities">
   <div class="row">
     <div class="col-md-4">
       <h2>{{activity.activityName}}</h2>
       <p>{{activity.created}}</p>
+      <app-content></app-content>
       <p><a class="btn btn-primary" href="#" role="button">Details &raquo;</a></p>
     </div>
   </div>
