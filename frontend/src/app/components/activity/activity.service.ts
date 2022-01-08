@@ -1,35 +1,25 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ActivityDto} from "../../models/ActivityDto";
-import {AuthService} from "../auth/auth.service";
-import {exhaustMap, map, take} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
 
-  private serviceUrl = "http://localhost:8080";
-
   constructor(private httpClient: HttpClient) { }
 
   getActivities(){
         return this.httpClient
           .get<ActivityDto[]>(
-            `${this.serviceUrl}/activities`
-          );/*.pipe(
-            map(activites => {
-              return activites.map(activity => {
-                return {
-                  ...activity
-                }
-              })
-            })
-          );*/
+            `${environment.APIEndpoint}/activities`
+          );
   }
 
   getActivity(id: number): Observable<ActivityDto>{
-    return this.httpClient.get<ActivityDto>(`${this.serviceUrl}/activities/${id}`);
+    return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 }

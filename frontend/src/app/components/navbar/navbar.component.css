@@ -3,3 +3,6 @@ body {
   min-height: 75rem;
 }
 
+.navbar-collapse {
+  padding-left:0;
+}

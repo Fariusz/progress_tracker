@@ -1,19 +1,21 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { ActivityComponent } from './components/activity/activity.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './components/home/home.component';
-import { LoadingspinnerComponent } from './components/loadingspinner/loadingspinner.component';
-import { MainComponent } from './components/main/main.component';
-import { LoginComponent } from './components/login/login.component';
+import {ActivityComponent} from './components/activity/activity.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HomeComponent} from './components/home/home.component';
+import {LoadingspinnerComponent} from './components/loadingspinner/loadingspinner.component';
+import {MainComponent} from './components/main/main.component';
+import {LoginComponent} from './components/login/login.component';
 import {ActivityService} from "./components/activity/activity.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {ContentComponent} from './components/content/content.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {AuthInterceptorService} from "./components/auth/auth-interceptor.service
     HomeComponent,
     LoadingspinnerComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import {AuthInterceptorService} from "./components/auth/auth-interceptor.service
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     ActivityService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivityDto} from "../../models/ActivityDto";
 import {ActivityService} from "./activity.service";
 
