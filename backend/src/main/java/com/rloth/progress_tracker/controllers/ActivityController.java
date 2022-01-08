@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.rloth.progress_tracker.controllers.mappers.ActivityDtoMapper.mapToActivityDto;
-
 @RestController
 @RequiredArgsConstructor
 public class ActivityController {

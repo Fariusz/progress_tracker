@@ -18,4 +18,5 @@ public class ContentController {
     public List<Content> getContent(){
         return service.getContent();
     }
+
 }

@@ -15,7 +15,7 @@ export class ActivityService {
   getActivities(){
         return this.httpClient
           .get<ActivityDto[]>(
-            `${environment.APIEndpoint}/activities`
+            `${environment.APIEndpoint}/activities/pageable/content`
           );
   }
 
