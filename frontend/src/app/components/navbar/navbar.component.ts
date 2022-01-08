@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
-import {faSearch, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
