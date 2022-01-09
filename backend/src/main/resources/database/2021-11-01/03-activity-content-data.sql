@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset rloth:3
-insert into activity (id, activity_name, created) values (1, 'Push ups', '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, created) values (2, 'Bench press', '2020-04-20T13:14:05.724885500');
+insert into activity (id, activity_name, author_id ,created) values (1, 'Push ups', 1 ,'2020-04-20T13:14:05.724885500');
+insert into activity (id, activity_name, author_id , created) values (2, 'Bench press', 2 ,'2020-04-20T13:14:05.724885500');
 insert into activity (id, activity_name, created) values (3, 'Squad', '2020-04-20T13:14:05.724885500');
 insert into activity (id, activity_name, created) values (4, 'Dead lift', '2020-04-20T13:14:05.724885500');
 insert into activity (id, activity_name, created) values (5, 'Over head press', '2020-04-20T13:14:05.724885500');

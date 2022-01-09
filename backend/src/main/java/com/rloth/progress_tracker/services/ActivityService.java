@@ -25,6 +25,10 @@ public class ActivityService {
     private final ActivityRepository activityRepository;
     private final ContentRepository contentRepository;
 
+    public List<Activity> getUserActivities(Long id) {
+        return activityRepository.findAllUserActivities(id);
+    }
+
     @Cacheable(cacheNames = "Activities")
     public List<Activity> getActivities() {
         return activityRepository.findAllActivities();
