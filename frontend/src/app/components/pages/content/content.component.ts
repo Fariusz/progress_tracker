@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ContentDto} from "../../models/ContentDto";
+import {ContentDto} from "../../../models/ContentDto";
 import {ContentService} from "./content.service";
 
 @Component({
