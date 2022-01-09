@@ -53,4 +53,8 @@ public class LoginService {
     public List<User> listUsers() {
         return userRepository.findAll();
     }
+
+    public Long getUserId(String username){
+       return userRepository.findByUsername(username).getId();
+    }
 }
