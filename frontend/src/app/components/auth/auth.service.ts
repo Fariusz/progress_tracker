@@ -95,8 +95,9 @@ export class AuthService {
     let errorMessage = 'An unknown error occurred!';
 
     if (errorRes.status == 401) {
-      return throwError("Wrong username or password.")
-    } else if (!errorRes.error || !errorRes.error.message) {
+      return throwError("Wrong username or password.");
+    }
+    else if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
     }
 

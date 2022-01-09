@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginCredentials.username = form.value.username;
     this.loginCredentials.email = form.value.email;
 
-    let authObs: string | null;
+    let authObs: string;
 
     this.isLoading = true;
 
@@ -60,9 +60,9 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.signUp(this.loginCredentials).subscribe(
         resp => {
-          this.isLoading = true;
           this.error = '';
-          this.router.navigate(['/auth']);
+          this.isLoading = true;
+          this.router.navigate(['/home']);
         },
         errorMessage => {
           this.error = errorMessage;

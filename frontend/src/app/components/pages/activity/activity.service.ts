@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ActivityDto} from "../../models/ActivityDto";
-import {environment} from "../../../environments/environment";
+import {ActivityDto} from "../../../models/ActivityDto";
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ActivityService {
   getActivities(){
         return this.httpClient
           .get<ActivityDto[]>(
-            `${environment.APIEndpoint}/activities/pageable/content`
+            `${environment.APIEndpoint}/userActivities`
           );
   }
 

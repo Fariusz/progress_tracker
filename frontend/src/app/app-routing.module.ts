@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./components/pages/home/home.component";
 import {MainComponent} from "./components/pages/main/main.component";
-import {ActivityComponent} from "./components/activity/activity.component";
+import {ActivityComponent} from "./components/pages/activity/activity.component";
 import {LoginComponent} from "./components/pages/login/login.component";
 import {AuthGuardService} from "./components/auth/auth-guard.service";
 
