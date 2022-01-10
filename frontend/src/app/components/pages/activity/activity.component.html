@@ -1,23 +1,26 @@
-<!--<div>
-  <ol>
-    <li *ngFor="let item of activities" >
-      <div>{{item.activityName}}</div>
-      <ol>
-        <li *ngFor="let subItem of item.content">
-          <div>{{subItem.content}}</div>
-        </li>
-      </ol>
-    </li>
-  </ol>
-</div>-->
-
-<div class="container" *ngFor="let activity of activities">
-  <div class="row">
-    <div class="col-md-4">
-      <h2>{{activity.activityName}}</h2>
-      <p *ngFor="let content of activity.content">{{content.content}}</p>
-      <p><a class="btn btn-primary" href="#" role="button">Details &raquo;</a></p>
-    </div>
+<div class="container">
+  <h2>Activities</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th>no.</th>
+        <th>name</th>
+        <th>entries</th>
+        <th>updated</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let activity of activities">
+      <tr>
+        <td>{{activity.id}}</td>
+        <td>{{activity.activityName}}</td>
+        <td>{{activity.content.length}}</td>
+        <ng-container *ngFor="let content of activity.content let last = last; ">
+          <td *ngIf="last">{{content.created.toString().split("T",1)}}</td>
+        </ng-container>
+        <td><a class="btn btn-primary" href="#" role="button">Details &raquo;</a></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <hr>
 </div>

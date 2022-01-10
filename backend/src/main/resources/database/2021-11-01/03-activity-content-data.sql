@@ -14,11 +14,11 @@ insert into activity (id, activity_name, author_id, created) values (10, 'Coffee
 --changeset rloth:4
 insert into content (id, activity_id, content, created) values (1, 1,'15', '2020-04-20T13:14:05.724885500');
 insert into content (id, activity_id, content, created) values (6, 1,'17', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created) values (7, 1,'23', '2020-04-20T13:14:05.724885500');
+insert into content (id, activity_id, content, created) values (7, 1,'23', '2021-06-20T08:00:00.0');
 insert into content (id, activity_id, content, created) values (2, 2, '80 kg', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created) values (8, 2, '85 kg', '2020-04-20T13:14:05.724885500');
+insert into content (id, activity_id, content, created) values (8, 2, '85 kg', '2021-06-20T08:00:00.0');
 insert into content (id, activity_id, content, created) values (9, 2, '90 kg', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created) values (3, 3, '100 kg', '2020-04-20T13:14:05.724885500');
+insert into content (id, activity_id, content, created) values (3, 3, '100 kg', '2021-06-20T08:00:00.0');
 insert into content (id, activity_id, content, created) values (10, 3, '105 kg', '2020-04-20T13:14:05.724885500');
 insert into content (id, activity_id, content, created) values (11, 3, '110 kg', '2020-04-20T13:14:05.724885500');
 insert into content (id, activity_id, content, created) values (12, 4, '90 kg', '2020-04-20T13:14:05.724885500');
