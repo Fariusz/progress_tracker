@@ -11,8 +11,6 @@ import {tap} from "rxjs/operators";
 })
 export class ActivitiesService {
 
-  private statusObs: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
   constructor(private httpClient: HttpClient) { }
 
   getActivities(){
@@ -26,17 +24,11 @@ export class ActivitiesService {
     return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 
-  editActivity(id: number, activity: ActivityDto):Observable<ActivityDto> {
-    return this.httpClient.put<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`, activity)
-      .pipe(
-        tap(res => this.statusObs.next('Activity edited'))
-      );
+  editActivity(activity: ActivityDto):Observable<ActivityDto> {
+    return this.httpClient.put<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
   addActivity(activity: ActivityDto): Observable<ActivityDto> {
-    return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity)
-      .pipe(
-        tap(res => this.statusObs.next('Activity added'))
-      );
+    return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 }
