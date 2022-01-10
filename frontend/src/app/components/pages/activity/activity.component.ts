@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivityDto} from "../../../models/ActivityDto";
-import {ActivityService} from "./activity.service";
+import { Component, OnInit } from '@angular/core';
+import {ActivitiesService} from "../activities/activities.service";
 
 @Component({
   selector: 'app-activity',
@@ -9,14 +8,8 @@ import {ActivityService} from "./activity.service";
 })
 export class ActivityComponent implements OnInit {
 
-  activities: ActivityDto[] = [];
+  constructor(private activitiesService: ActivitiesService) { }
 
-  constructor(private activityService: ActivityService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.activityService.getActivities().subscribe(
-      (activies: ActivityDto[]) => {
-        this.activities = activies;
-      });
-  }
 }
