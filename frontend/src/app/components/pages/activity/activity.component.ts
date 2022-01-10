@@ -10,6 +10,7 @@ import {ActivityDto} from "../../../models/ActivityDto";
   styleUrls: ['./activity.component.css']
 })
 export class ActivityComponent implements OnInit {
+
   form: FormGroup;
   id: number;
 
@@ -32,11 +33,6 @@ export class ActivityComponent implements OnInit {
       activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
       created: new FormControl(activity.created),
       id: new FormControl(activity.id)
-    });
-
-    this.form.controls['nazwa'].valueChanges.subscribe(nowaNazwa => {
-      console.log(nowaNazwa);
-      this.form.controls['nazwa'].setValue(nowaNazwa);
     });
   }
 

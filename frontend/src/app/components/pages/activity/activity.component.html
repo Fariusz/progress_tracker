@@ -1,19 +1,16 @@
 <div class="container">
-  <h4 class="mb-3">Dodawanie produktu:</h4>
+  <h4 class="mb-3">Edit activity:</h4>
   <div class="row">
     <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="col-md-8 order-md-1">
         <div class="row">
           <div class="mb-3">
-            <label for="nazwa">nazwa:</label>
-            <input class="form-control" id="nazwa" name="nazwa" formControlName="activityName" required minlength="2"
-                   maxlength="100">
+            <input class="form-control" formControlName="activityName" required minlength="2" maxlength="100">
           </div>
         </div>
       </div>
       <div class="mb-3">
-        <button class="btn btn-danger" type="reset">Wyczysc</button>
-        <button class="btn btn-primary" [disabled]="form.invalid">Zatwierdz</button>
+        <button class="btn btn-primary" [disabled]="form.invalid">Confirm</button>
       </div>
     </form>
   </div>

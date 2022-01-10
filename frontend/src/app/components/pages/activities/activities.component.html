@@ -18,7 +18,7 @@
         <ng-container *ngFor="let content of activity.content let last = last; ">
           <td *ngIf="last">{{content.created.toString().split("T",1)}}</td>
         </ng-container>
-        <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Details &raquo;</button></td>
+        <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Edit &raquo;</button></td>
       </tr>
       </tbody>
     </table>
