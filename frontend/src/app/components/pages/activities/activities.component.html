@@ -10,16 +10,16 @@
         <th>updated</th>
       </tr>
       </thead>
-      <tbody *ngFor="let activity of activities">
+      <tbody *ngFor="let activity of activities; let index = index">
       <tr>
-        <td>{{activity.id}}</td>
+        <td>{{index + 1}}</td>
         <td>{{activity.activityName}}</td>
         <td>{{activity.content.length}}</td>
         <td *ngIf="activity.content.length == 0">never</td>
         <ng-container *ngFor="let content of activity.content let last = last; ">
           <td *ngIf="last">{{content.created.toString().split("T",1)}}</td>
         </ng-container>
-        <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Edit &raquo;</button></td>
+        <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Edit &raquo;</button>
       </tr>
       </tbody>
       <tbody>
