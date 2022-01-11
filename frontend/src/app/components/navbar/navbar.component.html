@@ -9,16 +9,16 @@
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a routerLink="/home" class="nav-link active">Main</a>
+          <a routerLink="/home" routerLinkActive="active" class="nav-link" >Home</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/activities" class="nav-link">Activities</a>
+          <a routerLink="/activities" routerLinkActive="active" class="nav-link">Activities</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Menu </a>
+        <li routerLink="/activities" routerLinkActive="active" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Activities </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" routerLink="/activities">List activities</a></li>
+            <li><a class="dropdown-item" >Add activity</a></li>
           </ul>
         </li>
       </ul>

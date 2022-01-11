@@ -52,10 +52,8 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        console.log(resData);
         this.error = '';
         if(this.isLoginMode){
-          console.log(resData.headers.get('Authorization'));
           this.isLoading = false;
           this.router.navigate(['/home']);
         }else {
@@ -65,7 +63,6 @@ export class LoginComponent implements OnInit {
         }
       },
       errorMessage => {
-        console.log(errorMessage);
         this.error = errorMessage;
         this.isLoading = false;
       }

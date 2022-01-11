@@ -28,12 +28,21 @@ export class ActivityComponent implements OnInit {
     }
   }
 
-  private createForm(activity?: ActivityDto){
-    this.form = this.fb.group({
-      activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-      created: new FormControl(activity.created),
-      id: new FormControl(activity.id)
-    });
+  private createForm(activity: ActivityDto){
+    if(activity != null) {
+      this.form = this.fb.group({
+        activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        created: new FormControl(activity.created),
+        id: new FormControl(activity.id)
+      });
+    }
+    else{
+      this.form = this.fb.group({
+        activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        created: new FormControl(new Date())
+      });
+    }
+
   }
 
   onSubmit(){

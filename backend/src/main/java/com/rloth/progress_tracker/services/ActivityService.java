@@ -24,9 +24,11 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final ContentRepository contentRepository;
+    private final LoginService loginService;
 
-    public List<Activity> getUserActivities(Long id){
-        return activityRepository.findActivitiesByUserId(id);
+
+    public List<Activity> getUserActivities(String username){
+        return activityRepository.findActivitiesByUserId(loginService.getUserId(username));
     }
 
     @Cacheable(cacheNames = "Activities")
@@ -66,7 +68,8 @@ public class ActivityService {
                 .collect(Collectors.toList());
     }
 
-    public Activity addActivity(Activity activity) {
+    public Activity addActivity(Activity activity, String username) {
+        activity.setAuthor_id(loginService.getUserId(username));
         return activityRepository.save(activity);
     }
 

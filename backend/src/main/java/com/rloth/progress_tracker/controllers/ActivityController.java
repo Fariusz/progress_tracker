@@ -18,11 +18,10 @@ import java.util.List;
 public class ActivityController {
 
     private final ActivityService activityService;
-    private final LoginService loginService;
 
     @GetMapping("/userActivities")
-    public List<Activity> getUserActivities(@AuthenticationPrincipal String user){
-       return activityService.getUserActivities(loginService.getUserId(user));
+    public List<Activity> getUserActivities(@AuthenticationPrincipal String username){
+       return activityService.getUserActivities(username);
     }
     
     @GetMapping("/activities")
@@ -54,9 +53,9 @@ public class ActivityController {
         return activityService.findAllByActivityName(name);
     }
 
-    @PostMapping("/activites")
-    public Activity addActivity(@RequestBody Activity activity){
-        return activityService.addActivity(activity);
+    @PostMapping("/activities")
+    public Activity addActivity(@RequestBody Activity activity, @AuthenticationPrincipal String username){
+        return activityService.addActivity(activity, username);
     }
 
     @PutMapping("/activities")

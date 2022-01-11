@@ -15,11 +15,15 @@
         <td>{{activity.id}}</td>
         <td>{{activity.activityName}}</td>
         <td>{{activity.content.length}}</td>
+        <td *ngIf="activity.content.length == 0">never</td>
         <ng-container *ngFor="let content of activity.content let last = last; ">
           <td *ngIf="last">{{content.created.toString().split("T",1)}}</td>
         </ng-container>
         <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Edit &raquo;</button></td>
       </tr>
+      </tbody>
+      <tbody>
+        <button [routerLink]="0" class="btn btn-primary" role="button">New &raquo;</button>
       </tbody>
     </table>
   </div>
