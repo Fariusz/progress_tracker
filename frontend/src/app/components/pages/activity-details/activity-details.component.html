@@ -1,0 +1,14 @@
+<app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
+
+
+<table class="table table-striped table-sm">
+  <tbody>
+  <tr>
+    <td>{{activity.activityName}}</td>
+    <ng-container *ngFor="let content of activity.content">
+      <td>{{content.content}}</td>
+      <td>{{content.created}}</td>
+    </ng-container>
+  </tr>
+  </tbody>
+</table>

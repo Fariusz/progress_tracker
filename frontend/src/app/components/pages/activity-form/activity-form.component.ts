@@ -6,24 +6,29 @@ import {ActivityDto} from "../../../models/ActivityDto";
 
 @Component({
   selector: 'app-activity',
-  templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.css']
+  templateUrl: './activity-form.component.html',
+  styleUrls: ['./activity-form.component.css']
 })
-export class ActivityComponent implements OnInit {
+export class ActivityFormComponent implements OnInit {
 
   form: FormGroup;
   id: number;
+  isLoading = false;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private activitiesService: ActivitiesService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     if(this.id > 0){
       this.activitiesService.getActivity(this.id).subscribe(o =>
       {
+        this.isLoading = false;
         this.createForm(o)
       });
     }else{
+      this.isLoading = false;
       this.createForm(null);
     }
   }
@@ -42,7 +47,6 @@ export class ActivityComponent implements OnInit {
         created: new FormControl(new Date())
       });
     }
-
   }
 
   onSubmit(){
@@ -52,5 +56,4 @@ export class ActivityComponent implements OnInit {
       this.activitiesService.addActivity(this.form.value).subscribe(o => this.router.navigateByUrl('activities'));
     }
   }
-
 }

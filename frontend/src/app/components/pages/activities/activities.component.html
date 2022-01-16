@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Activities</h2>
-  <div class="table-responsive">
+  <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
+  <div class="table-responsive" *ngIf="!isLoading">
     <table class="table table-striped table-sm">
       <thead>
       <tr>
@@ -20,6 +21,7 @@
           <td *ngIf="last">{{content.created.toString().split("T",1)}}</td>
         </ng-container>
         <td><button [routerLink]="activity.id" class="btn btn-primary" role="button">Edit &raquo;</button>
+        <button routerLink="/details/{{activity.id}}" class="btn btn-secondary" role="button">Details &raquo;</button></td>
       </tr>
       </tbody>
       <tbody>

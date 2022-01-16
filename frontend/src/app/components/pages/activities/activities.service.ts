@@ -4,11 +4,6 @@ import {Observable} from "rxjs";
 import {ActivityDto} from "../../../models/ActivityDto";
 import {environment} from "../../../../environments/environment";
 
-export interface Pagination {
-  page: number;
-  pageSize: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +18,7 @@ export class ActivitiesService {
           );
   }
 
-  getActivity(id: number): Observable<ActivityDto>{
+  getActivity(id: number){
     return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 

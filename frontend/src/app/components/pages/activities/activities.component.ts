@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivityDto} from "../../../models/ActivityDto";
-import {ActivitiesService, Pagination} from "./activities.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivitiesService} from "./activities.service";
 
 @Component({
   selector: 'app-activity',
@@ -12,14 +11,17 @@ export class ActivitiesComponent implements OnInit {
   @Input() activity: ActivityDto;
 
   page: number = 1;
+  isLoading = false;
   activities: ActivityDto[] = [];
 
-  constructor(private activityService: ActivitiesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private activitiesService: ActivitiesService) { }
 
   ngOnInit(): void {
-    this.activityService.getActivities().subscribe(
-      (activies: ActivityDto[]) => {
-        this.activities = activies;
+    this.isLoading = true;
+    this.activitiesService.getActivities().subscribe(
+      (activities: ActivityDto[]) => {
+        this.activities = activities;
+        this.isLoading = false;
       });
   }
 }

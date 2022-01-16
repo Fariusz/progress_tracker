@@ -20,7 +20,7 @@ public class ActivityController {
 
     @GetMapping("/userActivities")
     public List<Activity> getUserActivities(@AuthenticationPrincipal String username){
-       return activityService.getUserActivities(username);
+        return activityService.getUserActivities(username);
     }
 
     @GetMapping("/userActivities/pageable")
