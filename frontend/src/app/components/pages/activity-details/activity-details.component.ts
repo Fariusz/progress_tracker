@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ActivityDetailsComponent implements OnInit {
 
   id: number;
-  activity: ActivityDto;
+  activity: ActivityDto = null;
   isLoading = false;
 
   constructor(private activitiesService: ActivitiesService, private route: ActivatedRoute) { }

@@ -20,6 +20,7 @@ import { ActivityFormComponent } from './components/pages/activity-form/activity
 import {NgxPaginationModule} from "ngx-pagination";
 import { ActivityDetailsComponent } from './components/pages/activity-details/activity-details.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     ActivitiesService,
