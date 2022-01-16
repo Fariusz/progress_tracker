@@ -19,6 +19,7 @@ import {ContentComponent} from './components/pages/content/content.component';
 import { ActivityFormComponent } from './components/pages/activity-form/activity-form.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { ActivityDetailsComponent } from './components/pages/activity-details/activity-details.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ActivityDetailsComponent } from './components/pages/activity-details/ac
     LoginComponent,
     ContentComponent,
     ActivityFormComponent,
-    ActivityDetailsComponent
+    ActivityDetailsComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
