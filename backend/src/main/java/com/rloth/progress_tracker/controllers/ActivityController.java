@@ -4,7 +4,6 @@ import com.rloth.progress_tracker.controllers.dtos.ActivityDto;
 import com.rloth.progress_tracker.controllers.mappers.ActivityDtoMapper;
 import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.services.ActivityService;
-import com.rloth.progress_tracker.services.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +21,15 @@ public class ActivityController {
     @GetMapping("/userActivities")
     public List<Activity> getUserActivities(@AuthenticationPrincipal String username){
        return activityService.getUserActivities(username);
+    }
+
+    @GetMapping("/userActivities/pageable")
+    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, Sort.Direction sort){
+
+        int pageNumber = page != null && page > 0 ? page: 1;
+        Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
+        return activityService.getUserActivitiesPageable(username, pageNumber - 1, sortDirection);
+
     }
     
     @GetMapping("/activities")
