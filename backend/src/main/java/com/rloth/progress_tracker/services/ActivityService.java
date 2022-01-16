@@ -31,9 +31,9 @@ public class ActivityService {
         return activityRepository.findActivitiesByUserId(loginService.getUserId(username));
     }
 
-    public List<Activity> getUserActivitiesPageable(String username, int page, Sort.Direction sort){
+    public List<Activity> getUserActivitiesPageable(String username, int page, int pageSize, Sort.Direction sort){
         return activityRepository.findActivitiesByUserIdPageable
-                (loginService.getUserId(username), PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id")
+                (loginService.getUserId(username), PageRequest.of(page, pageSize, Sort.by(sort, "id")
                         /* Sort.by(Sort.Order.asc("id"), Sort.Order.desc(("created"))) */));
     }
 

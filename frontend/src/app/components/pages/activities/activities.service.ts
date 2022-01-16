@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {ActivityDto} from "../../../models/ActivityDto";
 import {environment} from "../../../../environments/environment";
-import {tap} from "rxjs/operators";
 
+export interface Pagination {
+  page: number;
+  pageSize: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +16,15 @@ export class ActivitiesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivities(){
+  getActivities(pagination: Pagination){
         return this.httpClient
           .get<ActivityDto[]>(
-            `${environment.APIEndpoint}/userActivities`
+            `${environment.APIEndpoint}/userActivities/pageable`,{
+              params: {
+                page: pagination.page.toString(),
+                pageSize: pagination.pageSize.toString()
+              }
+            }
           );
   }
 

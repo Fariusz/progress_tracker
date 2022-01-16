@@ -24,11 +24,11 @@ public class ActivityController {
     }
 
     @GetMapping("/userActivities/pageable")
-    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, Sort.Direction sort){
+    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize, Sort.Direction sort){
 
         int pageNumber = page != null && page > 0 ? page: 1;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
-        return activityService.getUserActivitiesPageable(username, pageNumber - 1, sortDirection);
+        return activityService.getUserActivitiesPageable(username, pageNumber - 1, pageSize, sortDirection);
 
     }
     
