@@ -16,15 +16,10 @@ export class ActivitiesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivities(pagination: Pagination){
+  getActivities(){
         return this.httpClient
           .get<ActivityDto[]>(
-            `${environment.APIEndpoint}/userActivities/pageable`,{
-              params: {
-                page: pagination.page.toString(),
-                pageSize: pagination.pageSize.toString()
-              }
-            }
+            `${environment.APIEndpoint}/userActivities`
           );
   }
 

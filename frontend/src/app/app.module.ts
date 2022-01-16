@@ -17,6 +17,7 @@ import {AuthInterceptorService} from "./components/auth/auth-interceptor.service
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ContentComponent} from './components/pages/content/content.component';
 import { ActivityComponent } from './components/pages/activity/activity.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ActivityComponent } from './components/pages/activity/activity.componen
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [
     ActivitiesService,
