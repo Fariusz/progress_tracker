@@ -21,6 +21,8 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { ActivityDetailsComponent } from './components/pages/activity-details/activity-details.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
+import { ModalComponent } from './components/modal/modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
     ContentComponent,
     ActivityFormComponent,
     ActivityDetailsComponent,
-    LineChartComponent
+    LineChartComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
     BrowserAnimationsModule,
     FontAwesomeModule,
     NgxPaginationModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgbModule
   ],
   providers: [
     ActivitiesService,

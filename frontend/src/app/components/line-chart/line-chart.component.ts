@@ -1,9 +1,5 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivityDto} from "../../models/ActivityDto";
-import {BehaviorSubject, Observable} from "rxjs";
-import {tap} from "rxjs/operators";
-import {ContentDto} from "../../models/ContentDto";
-import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-line-chart',

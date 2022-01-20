@@ -39,7 +39,35 @@
           </tr>
         </ng-container>
         </tbody>
+        <tbody>
+        <button class="btn btn-primary" role="button" (click)="openModal()">New &raquo;</button>
+        </tbody>
       </table>
     </div>
   </main>
 </div>
+
+<app-modal #modal [modalConfig]="modalConfig">
+  <form>
+    <input
+      type="number"
+      id="value"
+      class="form-control"
+      ngModel
+      name="value"
+      placeholder="value"
+      required
+      autofocus
+      minlength="1"
+    >
+    <input
+      type="date"
+      id="date"
+      class="form-control"
+      ngModel
+      name="date"
+      placeholder="date"
+      autofocus
+    >
+  </form>
+</app-modal>

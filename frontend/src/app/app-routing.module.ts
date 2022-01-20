@@ -7,6 +7,7 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {AuthGuardService} from "./components/auth/auth-guard.service";
 import {ActivityFormComponent} from "./components/pages/activity-form/activity-form.component";
 import {ActivityDetailsComponent} from "./components/pages/activity-details/activity-details.component";
+import {ModalComponent} from "./components/modal/modal.component";
 
 const routes: Routes = [
   {path: '', component: MainComponent},
