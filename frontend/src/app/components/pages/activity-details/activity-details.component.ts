@@ -4,6 +4,9 @@ import {ActivitiesService} from "../activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ContentDto} from "../../../models/ContentDto";
+import {ContentService} from "../content/content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -14,8 +17,33 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class ActivityDetailsComponent implements OnInit {
   @ViewChild('modal') private modalComponent: ModalComponent;
 
-  async openModal() {
+  id: number;
+  activity: ActivityDto = null;
+  isLoading = false;
+  modalConfig: ModalConfig;
+  form: FormGroup;
 
+  constructor(private modalService: NgbModal,
+              private fb: FormBuilder,
+              private contentService: ContentService,
+              private activitiesService: ActivitiesService,
+              private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+
+    this.createForm(null);
+    this.isLoading = true;
+
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+
+    this.activitiesService.getActivity(this.id).subscribe(
+      (activity: ActivityDto) => {
+        this.isLoading = false;
+        this.activity = activity;
+      });
+  }
+
+  async openModal() {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
@@ -25,9 +53,9 @@ export class ActivityDetailsComponent implements OnInit {
       }, disableDismissButton() {
         return false;
       }, hideCloseButton() {
-        return false;
+        return true;
       }, hideDismissButton() {
-        return false;
+        return true;
       }, onClose() {
         return true;
       }, onDismiss() {
@@ -41,22 +69,27 @@ export class ActivityDetailsComponent implements OnInit {
     return await this.modalComponent.open()
   }
 
-  id: number;
-  activity: ActivityDto = null;
-  isLoading = false;
-  modalConfig: ModalConfig;
-
-  constructor(private activitiesService: ActivitiesService, private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.isLoading = true;
-
-    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-
-    this.activitiesService.getActivity(this.id).subscribe(
-      (activity: ActivityDto) => {
-        this.isLoading = false;
-        this.activity = activity;
+  private createForm(content: ContentDto) {
+    if (content != null) {
+      this.form = this.fb.group({
+        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        created: new FormControl(content.created),
+        id: new FormControl(content.id)
       });
+    } else {
+      this.form = this.fb.group({
+        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        created: new FormControl(new Date())
+      });
+    }
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+    this.modalComponent.close();
+  }
+
+  onDismiss(){
+    this.modalComponent.dismiss();
   }
 }

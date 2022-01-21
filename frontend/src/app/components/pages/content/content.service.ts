@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {ContentDto} from "../../../models/ContentDto";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,11 @@ export class ContentService {
       .get<ContentDto[]>(
         `${environment.APIEndpoint}/content`
       );
+  }
+
+  addContent(content: ContentDto): Observable<ContentDto> {
+    return this.httpClient
+      .post<ContentDto>(
+        `${environment.APIEndpoint}/content`, content);
   }
 }
