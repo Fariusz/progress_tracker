@@ -48,7 +48,7 @@
 <app-modal #modal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input class="form-control" formControlName="activityName" type="text" placeholder="Name" required minlength="2" maxlength="100">
+      <input class="form-control" formControlName="activityName" type="text" placeholder="Name" required minlength="2" maxlength="50">
       <div class="modal-footer">
         <button class="btn btn-outline-secondary" (click)="onDismiss()" type="reset">Dissmis</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
