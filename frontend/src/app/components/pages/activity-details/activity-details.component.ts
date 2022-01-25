@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivityDto} from "../../../models/ActivityDto";
 import {ActivitiesService} from "../activities/activities.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -28,17 +28,20 @@ export class ActivityDetailsComponent implements OnInit {
               private fb: FormBuilder,
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
-              private route: ActivatedRoute,
-              private router: Router) {}
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
+    this.activitiesService.getActivity(this.id).subscribe(activity =>{
+      this.activity = activity;
+    })
+
     this.contentService.getActivityContent(this.id).subscribe(
       (content: ContentDto[]) => {
-        this.isLoading = false;
         this.content = content;
+        this.isLoading = false;
       });
   }
 

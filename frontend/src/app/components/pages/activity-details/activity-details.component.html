@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="content?.length > 0">
+    <ng-container *ngIf="activity?.content.length > 0">
       <app-line-chart [data]="activity"></app-line-chart>
     </ng-container>
 
@@ -59,7 +59,7 @@
 <app-modal #modal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input class="form-control" formControlName="content" placeholder="content" required minlength="1">
+      <input class="form-control" type="number" formControlName="content" placeholder="content" required minlength="1">
       <input class="form-control" type="date" id="date" name="date">
       <div class="modal-footer">
         <button class="btn btn-outline-secondary" (click)="onDismiss()" type="reset">Dissmis</button>

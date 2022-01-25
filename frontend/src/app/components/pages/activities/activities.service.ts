@@ -25,4 +25,8 @@ export class ActivitiesService {
   addActivity(activity: ActivityDto) : Observable<ActivityDto> {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
+
+  deleteActivity(id: bigint) {
+    return this.httpClient.delete(`${environment.APIEndpoint}/activities/${id}`);
+  }
 }
