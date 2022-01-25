@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivityDto} from "../../../models/ActivityDto";
 import {ActivitiesService} from "../activities/activities.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -19,6 +19,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   id: number;
   activity: ActivityDto = null;
+  content: ContentDto[] = [];
   isLoading = false;
   modalConfig: ModalConfig;
   form: FormGroup;
@@ -27,23 +28,38 @@ export class ActivityDetailsComponent implements OnInit {
               private fb: FormBuilder,
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit(): void {
-
-    this.createForm(null);
     this.isLoading = true;
-
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
-    this.activitiesService.getActivity(this.id).subscribe(
-      (activity: ActivityDto) => {
+    this.contentService.getActivityContent(this.id).subscribe(
+      (content: ContentDto[]) => {
         this.isLoading = false;
-        this.activity = activity;
+        this.content = content;
       });
   }
 
+  private createForm(content: ContentDto) {
+    if (content != null) {
+      this.form = this.fb.group({
+        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        created: new FormControl(content.created),
+        id: new FormControl(content.id)
+      });
+    } else {
+      this.form = this.fb.group({
+        activityId: new FormControl(this.id),
+        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        created: new FormControl(new Date())
+      });
+    }
+  }
+
   async openModal() {
+    this.createForm(null);
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
@@ -69,23 +85,11 @@ export class ActivityDetailsComponent implements OnInit {
     return await this.modalComponent.open()
   }
 
-  private createForm(content: ContentDto) {
-    if (content != null) {
-      this.form = this.fb.group({
-        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
-        created: new FormControl(content.created),
-        id: new FormControl(content.id)
-      });
-    } else {
-      this.form = this.fb.group({
-        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
-        created: new FormControl(new Date())
-      });
-    }
-  }
-
   onSubmit() {
     console.log(this.form.value);
+    this.contentService.addContent(this.form.value).subscribe(content => {
+      this.content.push(content);
+    });
     this.modalComponent.close();
   }
 

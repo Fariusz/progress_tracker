@@ -16,9 +16,8 @@
       </div>
     </div>
 
-    <ng-container *ngIf="activity?.content.length > 0">
+    <ng-container *ngIf="content?.length > 0">
       <app-line-chart [data]="activity"></app-line-chart>
-    </ng-container>
 
     <h2>Entries</h2>
     <div class="table-responsive">
@@ -32,11 +31,11 @@
         </tr>
         </thead>
         <tbody>
-        <ng-container *ngFor="let content of activity?.content; let index = index">
+        <ng-container *ngFor="let entry of content; let index = index">
           <tr>
             <td>{{index+1}}</td>
-            <td>{{content.content}}</td>
-            <td>{{content.created | date: 'short'}}</td>
+            <td>{{entry.content}}</td>
+            <td>{{entry.created | date: 'short'}}</td>
             <td>
               <button class="btn btn-sm btn-warning">
                 <i class="fa fa-edit"> Edit</i>
@@ -53,6 +52,7 @@
         </tbody>
       </table>
     </div>
+    </ng-container>
   </main>
 </div>
 

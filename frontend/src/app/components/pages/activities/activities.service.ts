@@ -11,22 +11,18 @@ export class ActivitiesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivities(){
-        return this.httpClient
-          .get<ActivityDto[]>(
-            `${environment.APIEndpoint}/userActivities`
-          );
+  getActivities(){return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivities`);
   }
 
-  getActivity(id: number){
+  getActivity(id: number) : Observable<ActivityDto>{
     return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 
-  editActivity(activity: ActivityDto):Observable<ActivityDto> {
+  editActivity(activity: ActivityDto) : Observable<ActivityDto> {
     return this.httpClient.put<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  addActivity(activity: ActivityDto): Observable<ActivityDto> {
+  addActivity(activity: ActivityDto) : Observable<ActivityDto> {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 }
