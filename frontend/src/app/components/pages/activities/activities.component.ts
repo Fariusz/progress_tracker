@@ -3,7 +3,6 @@ import {ActivityDto} from "../../../models/ActivityDto";
 import {ActivitiesService} from "./activities.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ModalConfig} from "../../modal/modal.config";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModalComponent} from "../../modal/modal.component";
 
 @Component({
@@ -88,8 +87,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   onAddSubmit() {
+    this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
-      this.activities.push(activity)
+      this.activities.push(activity);
+      this.isLoading = false;
     });
     this.addModalComponent.close();
     window.location.reload();
@@ -105,7 +106,8 @@ export class ActivitiesComponent implements OnInit {
   }
 
   onDelete() {
-    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe();
+    this.isLoading = true;
+    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(()=>{this.isLoading=false;});
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
   }
 
@@ -120,8 +122,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   onEditSubmit() {
+    this.isLoading = true;
     this.activitiesService.editActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity)
+      this.isLoading = false;
     });
     this.addModalComponent.close();
   }
