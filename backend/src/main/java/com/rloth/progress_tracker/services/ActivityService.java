@@ -37,6 +37,10 @@ public class ActivityService {
                         /* Sort.by(Sort.Order.asc("id"), Sort.Order.desc(("created"))) */));
     }
 
+    public List<Activity> getUserActivities(Long id) {
+        return activityRepository.findAllUserActivities(id);
+    }
+
     @Cacheable(cacheNames = "Activities")
     public List<Activity> getActivities() {
         return activityRepository.findAllActivities();

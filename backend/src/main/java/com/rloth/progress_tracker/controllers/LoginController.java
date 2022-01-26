@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,16 @@ public class LoginController {
         else {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"UNKNOWN\"\n" + "}\n", HttpStatus.NOT_IMPLEMENTED);
         }
+    }
+
+    @GetMapping("/user")
+    public String getUser(@AuthenticationPrincipal String user){
+        return user;
+    }
+
+    @GetMapping("/id")
+    public Long getUserId(@AuthenticationPrincipal String user){
+        return loginService.getUserId(user);
     }
 
     @GetMapping("/users")

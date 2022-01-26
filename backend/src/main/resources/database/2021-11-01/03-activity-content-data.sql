@@ -6,6 +6,7 @@ insert into activity (id, activity_name, author_id, created) values (3, 'Squad',
 insert into activity (id, activity_name, author_id, created) values (4, 'Dead lift', 1, '2020-04-20T13:14:05.724885500');
 insert into activity (id, activity_name, author_id, created) values (5, 'Over head press', 1, '2020-04-20T13:14:05.724885500');
 
+
 insert into activity (id, activity_name, author_id, created) values (6, 'Books', 2, '2021-06-20T22:54:05.724885500');
 insert into activity (id, activity_name, author_id, created) values (7, 'Water', 2, '2021-08-20T07:13:05.724885500');
 insert into activity (id, activity_name, author_id, created) values (8, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
