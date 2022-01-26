@@ -42,7 +42,8 @@ export class ActivitiesComponent implements OnInit {
     }
   };
 
-  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder) { }
+  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -53,15 +54,14 @@ export class ActivitiesComponent implements OnInit {
       });
   }
 
-  private createForm(activity: ActivityDto){
-    if(activity != null) {
+  private createForm(activity: ActivityDto) {
+    if (activity != null) {
       this.form = this.fb.group({
         activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
         created: new FormControl(activity.created),
         id: new FormControl(activity.id)
       });
-    }
-    else{
+    } else {
       this.form = this.fb.group({
         activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
         created: new FormControl(new Date())
@@ -69,7 +69,7 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  onDismiss(modal: string){
+  onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
       : (modal == 'editModal') ? this.editModalComponent.dismiss()
         : (modal == 'deleteModal') ? this.deleteModalComponent.dismiss()
@@ -80,8 +80,12 @@ export class ActivitiesComponent implements OnInit {
     this.createForm(null);
     this.modalConfig = {
       modalTitle: "Add activity",
-      hideCloseButton() {return true;},
-      hideDismissButton() {return true;}
+      hideCloseButton() {
+        return true;
+      },
+      hideDismissButton() {
+        return true;
+      }
     };
     return await this.addModalComponent.open();
   }
@@ -90,33 +94,32 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
-      this.isLoading = false;
     });
-    this.addModalComponent.close();
     window.location.reload();
+    this.addModalComponent.close();
+    this.isLoading = false;
   }
 
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
-    this.modalConfig = {modalTitle: "Are you sure?",
-      hideCloseButton() {return true;},
-      hideDismissButton() {return true;}
+    this.modalConfig = {
+      modalTitle: "Are you sure?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
     return await this.deleteModalComponent.open();
   }
 
   onDelete() {
     this.isLoading = true;
-    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(()=>{this.isLoading=false;});
+    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
+      this.isLoading = false;
+    });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
   }
 
   async openEditModal(activity: ActivityDto) {
     this.createForm(activity);
     this.modalConfig = {
-      modalTitle: "Edit activity",
-      hideCloseButton() {return true;},
-      hideDismissButton() {return true;}
+      modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
     return await this.addModalComponent.open();
   }
