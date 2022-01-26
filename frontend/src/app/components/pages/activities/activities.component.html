@@ -27,7 +27,7 @@
             <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
               <i class="fa fa-search"> Details</i>
             </button>
-            <button [routerLink]="activity.id" class="btn btn-sm btn-warning">
+            <button class="btn btn-sm btn-warning" (click)="openEditModal(activity)">
               <i class="fa fa-edit"> Edit</i>
             </button>
             <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
@@ -61,4 +61,17 @@
 <app-modal #deleteModal [modalConfig]="modalConfig">
   <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
   <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok</button>
+</app-modal>
+
+<app-modal #editModal [modalConfig]="modalConfig">
+  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
+    <div class="form-group">
+      <input class="form-control" formControlName="activityName" type="text" placeholder="Name" required minlength="2"
+             maxlength="50">
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
 </app-modal>

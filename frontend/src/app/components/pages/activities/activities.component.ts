@@ -43,9 +43,7 @@ export class ActivitiesComponent implements OnInit {
     }
   };
 
-  constructor(private activitiesService: ActivitiesService,
-              private fb: FormBuilder,
-              private modalService: NgbModal) { }
+  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -109,5 +107,22 @@ export class ActivitiesComponent implements OnInit {
   onDelete() {
     this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe();
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
+  }
+
+  async openEditModal(activity: ActivityDto) {
+    this.createForm(activity);
+    this.modalConfig = {
+      modalTitle: "Edit activity",
+      hideCloseButton() {return true;},
+      hideDismissButton() {return true;}
+    };
+    return await this.addModalComponent.open();
+  }
+
+  onEditSubmit() {
+    this.activitiesService.editActivity(this.form.value).subscribe(activity => {
+      this.activities.push(activity)
+    });
+    this.addModalComponent.close();
   }
 }
