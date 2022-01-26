@@ -26,7 +26,7 @@ export class ActivitiesService {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  deleteActivity(id: bigint) {
-    return this.httpClient.delete(`${environment.APIEndpoint}/activities/${id}`);
+  deleteActivity(id: bigint) :Observable<ActivityDto> {
+    return this.httpClient.delete<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 }

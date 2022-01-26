@@ -88,8 +88,8 @@ export class ActivitiesComponent implements OnInit {
     this.modalComponent.dismiss();
   }
 
-  delete(id: bigint) {
-    this.activitiesService.deleteActivity(id).subscribe();
-    window.location.reload();
+  delete(activity: ActivityDto) {
+    this.activitiesService.deleteActivity(activity.id).subscribe();
+    this.activities = this.activities.filter(item => item !== activity);
   }
 }
