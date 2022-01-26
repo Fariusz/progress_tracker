@@ -1,10 +1,10 @@
 package com.rloth.progress_tracker.controllers;
 
+import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.models.Content;
 import com.rloth.progress_tracker.services.ContentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,10 +12,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContentController {
 
-    private final ContentService service;
+    private final ContentService contentService;
 
     @GetMapping("/content")
     public List<Content> getContent(){
-        return service.getContent();
+        return contentService.getContent();
+    }
+
+    @GetMapping("/content/{id}")
+    public List<Content> getActivityContent(@PathVariable long id){
+        return contentService.getActivityContent(id);
+    }
+
+    @PostMapping("/content")
+    public Content addContent(@RequestBody Content content){
+        return contentService.addContent(content);
     }
 }

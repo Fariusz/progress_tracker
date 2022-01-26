@@ -41,8 +41,15 @@ export class AuthService {
   }
 
   signUp(loginCredentials: LoginCredentials) {
-    return this.http.post('http://localhost:8080/register', loginCredentials)
-      .pipe(catchError(this.handleError));
+    return this.http.post('http://localhost:8080/register', loginCredentials, { observe: 'response'})
+      .pipe(catchError(this.handleError), tap(resData => {
+        this.handleRegister(resData.status, JSON.stringify(resData.body));
+      }));
+  }
+
+  handleRegister(status: number, body: string){
+    this.user.next(null);
+    return "code: " + status + "body: " + body;
   }
 
   handleAuthentication(username: string, token: string, tokenExpirationTime: string){
@@ -95,8 +102,9 @@ export class AuthService {
     let errorMessage = 'An unknown error occurred!';
 
     if (errorRes.status == 401) {
-      return throwError("Wrong username or password.")
-    } else if (!errorRes.error || !errorRes.error.message) {
+      return throwError("Wrong username or password.");
+    }
+    else if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
     }
 

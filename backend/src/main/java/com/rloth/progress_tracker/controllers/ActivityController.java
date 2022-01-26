@@ -13,18 +13,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.rloth.progress_tracker.controllers.mappers.ActivityDtoMapper.mapToActivityDto;
-
 @RestController
 @RequiredArgsConstructor
 public class ActivityController {
 
     private final ActivityService activityService;
-    private final LoginService loginService;
 
     @GetMapping("/userActivities")
-    public List<Activity> getAllUserActivities(@AuthenticationPrincipal String user){
-       return activityService.getUserActivities(loginService.getUserId(user));
+    public List<Activity> getUserActivities(@AuthenticationPrincipal String username){
+        return activityService.getUserActivities(username);
+    }
+
+    @GetMapping("/userActivities/pageable")
+    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize, Sort.Direction sort){
+
+        int pageNumber = page != null && page > 0 ? page: 1;
+        Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
+        return activityService.getUserActivitiesPageable(username, pageNumber - 1, pageSize, sortDirection);
+
     }
     
     @GetMapping("/activities")
@@ -56,9 +62,10 @@ public class ActivityController {
         return activityService.findAllByActivityName(name);
     }
 
-    @PostMapping("/activites")
-    public Activity addActivity(@RequestBody Activity activity){
-        return activityService.addActivity(activity);
+    @PostMapping("/activities")
+    public Activity addActivity(@RequestBody Activity activity, @AuthenticationPrincipal String username){
+        return activityService.addActivity(activity, username);
+
     }
 
     @PutMapping("/activities")
@@ -70,4 +77,6 @@ public class ActivityController {
     public void deleteActivity(@PathVariable long id){
         activityService.deleteActivity(id);
     }
+
+
 }

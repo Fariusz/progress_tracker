@@ -24,6 +24,18 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final ContentRepository contentRepository;
+    private final LoginService loginService;
+
+
+    public List<Activity> getUserActivities(String username){
+        return activityRepository.findActivitiesByUserId(loginService.getUserId(username));
+    }
+
+    public List<Activity> getUserActivitiesPageable(String username, int page, int pageSize, Sort.Direction sort){
+        return activityRepository.findActivitiesByUserIdPageable
+                (loginService.getUserId(username), PageRequest.of(page, pageSize, Sort.by(sort, "id")
+                        /* Sort.by(Sort.Order.asc("id"), Sort.Order.desc(("created"))) */));
+    }
 
     public List<Activity> getUserActivities(Long id) {
         return activityRepository.findAllUserActivities(id);
@@ -66,7 +78,8 @@ public class ActivityService {
                 .collect(Collectors.toList());
     }
 
-    public Activity addActivity(Activity activity) {
+    public Activity addActivity(Activity activity, String username) {
+        activity.setAuthor_id(loginService.getUserId(username));
         return activityRepository.save(activity);
     }
 

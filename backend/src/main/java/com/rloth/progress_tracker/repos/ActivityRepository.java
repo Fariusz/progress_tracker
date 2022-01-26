@@ -20,7 +20,12 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> findAllActivitiesPageable(Pageable page);
 
     @Query("select a from Activity a where author_id = ?1")
-    List<Activity> findAllUserActivities(Long id);
+
+    List<Activity> findActivitiesByUserId(Long id);
+
+    @Query("select a from Activity a where author_id = ?1")
+    List<Activity> findActivitiesByUserIdPageable(Long id, Pageable page);
+
 
 /*
     findAllByActivityName i findActivityWithContent działają w jednakowy sposób XDD

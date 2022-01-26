@@ -6,27 +6,38 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ActivityComponent} from './components/activity/activity.component';
+import {ActivitiesComponent} from './components/pages/activities/activities.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HomeComponent} from './components/home/home.component';
+import {HomeComponent} from './components/pages/home/home.component';
 import {LoadingspinnerComponent} from './components/loadingspinner/loadingspinner.component';
-import {MainComponent} from './components/main/main.component';
-import {LoginComponent} from './components/login/login.component';
-import {ActivityService} from "./components/activity/activity.service";
+import {MainComponent} from './components/pages/main/main.component';
+import {LoginComponent} from './components/pages/login/login.component';
+import {ActivitiesService} from "./components/pages/activities/activities.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {ContentComponent} from './components/content/content.component';
+import {ContentComponent} from './components/pages/content/content.component';
+import { ActivityFormComponent } from './components/pages/activity-form/activity-form.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { ActivityDetailsComponent } from './components/pages/activity-details/activity-details.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import {MDBBootstrapModule} from "angular-bootstrap-md";
+import { ModalComponent } from './components/modal/modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ActivityComponent,
+    ActivitiesComponent,
     HomeComponent,
     LoadingspinnerComponent,
     MainComponent,
     LoginComponent,
-    ContentComponent
+    ContentComponent,
+    ActivityFormComponent,
+    ActivityDetailsComponent,
+    LineChartComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +46,13 @@ import {ContentComponent} from './components/content/content.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule,
+    MDBBootstrapModule.forRoot(),
+    NgbModule
   ],
   providers: [
-    ActivityService,
+    ActivitiesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
