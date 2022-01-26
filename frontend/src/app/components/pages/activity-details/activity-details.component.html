@@ -38,10 +38,10 @@
             <td>{{entry.content}}</td>
             <td>{{entry.created | date: 'short'}}</td>
             <td>
-              <button class="btn btn-sm btn-warning">
+              <button class="btn btn-sm btn-warning" (click)="openEditModal(entry)">
                 <i class="fa fa-edit"> Edit</i>
               </button>
-              <button class="btn btn-sm btn-danger">
+              <button class="btn btn-sm btn-danger" (click)="openDeleteModal(entry)">
                 <i class="fa fa-trash"> Delete</i>
               </button>
             </td>
@@ -49,20 +49,40 @@
         </ng-container>
         </tbody>
         <tbody>
-        <button class="btn btn-primary" role="button" (click)="openModal()">New &raquo;</button>
+        <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
         </tbody>
       </table>
     </div>
   </main>
 </div>
 
-<app-modal #modal [modalConfig]="modalConfig">
-  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onSubmit()">
+<app-modal #addModal [modalConfig]="modalConfig">
+  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onAddSubmit()">
     <div class="form-group">
       <input class="form-control" type="number" formControlName="content" placeholder="content" required minlength="1" maxlength="50">
       <input class="form-control" type="date" id="date" name="date">
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss()" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal #deleteModal [modalConfig]="modalConfig">
+  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
+  <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
+  </button>
+</app-modal>
+
+<app-modal #editModal [modalConfig]="modalConfig">
+  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
+    <div class="form-group">
+      <input class="form-control" formControlName="content" type="text" placeholder="Entry" required minlength="1"
+             maxlength="50">
+      <input class="form-control" type="date" name="date">
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Dissmis</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>

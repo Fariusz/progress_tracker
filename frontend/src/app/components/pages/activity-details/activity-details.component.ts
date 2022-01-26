@@ -15,13 +15,35 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./activity-details.component.css']
 })
 export class ActivityDetailsComponent implements OnInit {
-  @ViewChild('modal') private modalComponent: ModalComponent;
+  @ViewChild('addModal') private addModalComponent: ModalComponent;
+  @ViewChild('editModal') private editModalComponent: ModalComponent;
+  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
   id: number;
   activity: ActivityDto = null;
   content: ContentDto[] = [];
+  selectedContent: ContentDto;
   isLoading = false;
-  modalConfig: ModalConfig;
+  modalConfig: ModalConfig = {
+    modalTitle: "undefined",
+    disableCloseButton() {
+      return true;
+    }, disableDismissButton() {
+      return true;
+    }, hideCloseButton() {
+      return true;
+    }, hideDismissButton() {
+      return true;
+    }, onClose() {
+      return true;
+    }, onDismiss() {
+      return true;
+    }, shouldClose() {
+      return true;
+    }, shouldDismiss() {
+      return true;
+    }
+  };
   form: FormGroup;
 
   constructor(private modalService: NgbModal,
@@ -48,55 +70,75 @@ export class ActivityDetailsComponent implements OnInit {
   private createForm(content: ContentDto) {
     if (content != null) {
       this.form = this.fb.group({
-        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
         created: new FormControl(content.created),
         id: new FormControl(content.id)
       });
     } else {
       this.form = this.fb.group({
         activityId: new FormControl(this.id),
-        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
+        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
         created: new FormControl(new Date())
       });
     }
   }
 
-  async openModal() {
+  onDismiss(modal: string) {
+    (modal == 'addModal') ? this.addModalComponent.dismiss()
+      : (modal == 'editModal') ? this.editModalComponent.dismiss()
+        : (modal == 'deleteModal') ? this.deleteModalComponent.dismiss()
+          : alert('error');
+  }
+
+  async openAddModal() {
     this.createForm(null);
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Add entry",
-      disableCloseButton() {
-        return false;
-      }, disableDismissButton() {
-        return false;
-      }, hideCloseButton() {
-        return true;
-      }, hideDismissButton() {
-        return true;
-      }, onClose() {
-        return true;
-      }, onDismiss() {
-        return true;
-      }, shouldClose() {
-        return true;
-      }, shouldDismiss() {
-        return true;
-      }
-    }
-    return await this.modalComponent.open()
+      modalTitle: "Add entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
+    return await this.addModalComponent.open()
   }
 
-  onSubmit() {
-    console.log(this.form.value);
+  onAddSubmit() {
+    this.isLoading = true;
     this.contentService.addContent(this.form.value).subscribe(content => {
       this.content.push(content);
+      this.isLoading = false;
     });
-    this.modalComponent.close();
+    this.addModalComponent.close();
   }
 
-  onDismiss(){
-    this.modalComponent.dismiss();
+  async openEditModal(content: ContentDto) {
+    this.createForm(content);
+    this.modalConfig = {
+      closeButtonLabel: "Ok",
+      dismissButtonLabel: "Dismiss",
+      modalTitle: "Edit entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
+    return await this.addModalComponent.open()
+  }
+
+  onEditSubmit() {
+    this.isLoading = true;
+    this.contentService.editContent(this.form.value).subscribe(content => {
+      this.content.push(content)
+      this.isLoading = false;
+    });
+    this.addModalComponent.close();
+  }
+
+  async openDeleteModal(content: ContentDto) {
+    this.selectedContent = content;
+    this.modalConfig = {
+      modalTitle: "Are you sure?",
+      hideCloseButton() {return true;}, hideDismissButton() {return true;}};
+    return await this.deleteModalComponent.open();
+  }
+
+  onDelete() {
+    this.isLoading = true;
+    this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
+    });
+    this.isLoading = false;
+    this.content = this.content.filter(item => item !== this.selectedContent);
   }
 }

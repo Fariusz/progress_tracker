@@ -26,4 +26,8 @@ export class ContentService {
   addContent(content: ContentDto):Observable<ContentDto> {
     return this.httpClient.post<ContentDto>(`${environment.APIEndpoint}/content`, content);
   }
+
+  deleteContent(id: bigint) : Observable<ContentDto> {
+    return this.httpClient.delete<ContentDto>(`${environment.APIEndpoint}/content/${id}`);
+  }
 }

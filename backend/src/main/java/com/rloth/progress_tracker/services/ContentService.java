@@ -5,6 +5,7 @@ import com.rloth.progress_tracker.repos.ContentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,4 +24,14 @@ public class ContentService {
     }
 
     public Content addContent(Content content) { return contentRepository.save(content); }
+
+    public void deleteContent(long id) {contentRepository.deleteById(id);}
+
+    @Transactional
+    public Content editContent(Content content) {
+        Content contentEdited = contentRepository.findById(content.getId()).orElseThrow();
+        contentEdited.setContent(content.getContent());
+        contentEdited.setCreated(content.getCreated());
+        return contentEdited;
+    }
 }

@@ -60,7 +60,8 @@
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
   <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
-  <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok</button>
+  <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
+  </button>
 </app-modal>
 
 <app-modal #editModal [modalConfig]="modalConfig">

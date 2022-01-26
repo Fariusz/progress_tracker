@@ -28,4 +28,14 @@ public class ContentController {
     public Content addContent(@RequestBody Content content){
         return contentService.addContent(content);
     }
+
+    @PutMapping("/content")
+    public Content editContent(@RequestBody Content content){
+        return contentService.editContent(content);
+    }
+
+    @DeleteMapping("/content/{id}")
+    public void deleteContent(@PathVariable long id){
+        contentService.deleteContent(id);
+    }
 }
