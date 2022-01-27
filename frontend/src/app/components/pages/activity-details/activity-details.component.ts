@@ -6,7 +6,7 @@ import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContentDto} from "../../../models/ContentDto";
-import {ContentService} from "../content/content.service";
+import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -24,6 +24,7 @@ export class ActivityDetailsComponent implements OnInit {
   content: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
+  form: FormGroup;
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
     disableCloseButton() {
@@ -44,19 +45,19 @@ export class ActivityDetailsComponent implements OnInit {
       return true;
     }
   };
-  form: FormGroup;
 
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
-    this.activitiesService.getActivity(this.id).subscribe(activity =>{
+    this.activitiesService.getActivity(this.id).subscribe(activity => {
       this.activity = activity;
     })
 
@@ -77,7 +78,7 @@ export class ActivityDetailsComponent implements OnInit {
     } else {
       this.form = this.fb.group({
         activityId: new FormControl(this.id),
-        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+        content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
         created: new FormControl(new Date())
       });
     }
@@ -95,7 +96,12 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Add entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
+      modalTitle: "Add entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    }
     return await this.addModalComponent.open()
   }
 
@@ -113,24 +119,34 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Edit entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
-    return await this.addModalComponent.open()
+      modalTitle: "Edit entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    }
+    return await this.editModalComponent.open()
   }
 
   onEditSubmit() {
     this.isLoading = true;
     this.contentService.editContent(this.form.value).subscribe(content => {
-      this.content.push(content)
+      this.content.find(item => item.id == content.id).content = content.content;
       this.isLoading = false;
     });
-    this.addModalComponent.close();
+    this.editModalComponent.close();
   }
 
   async openDeleteModal(content: ContentDto) {
     this.selectedContent = content;
     this.modalConfig = {
       modalTitle: "Are you sure?",
-      hideCloseButton() {return true;}, hideDismissButton() {return true;}};
+      hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    };
     return await this.deleteModalComponent.open();
   }
 
@@ -140,5 +156,6 @@ export class ActivityDetailsComponent implements OnInit {
     });
     this.isLoading = false;
     this.content = this.content.filter(item => item !== this.selectedContent);
+    this.deleteModalComponent.close();
   }
 }

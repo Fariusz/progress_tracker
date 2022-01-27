@@ -100,6 +100,23 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = false;
   }
 
+  async openEditModal(activity: ActivityDto) {
+    this.createForm(activity);
+    this.modalConfig = {
+      modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+    };
+    return await this.addModalComponent.open();
+  }
+
+  onEditSubmit() {
+    this.isLoading = true;
+    this.activitiesService.editActivity(this.form.value).subscribe(activity => {
+      this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
+      this.isLoading = false;
+    });
+    this.addModalComponent.close();
+  }
+
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
     this.modalConfig = {
@@ -114,22 +131,5 @@ export class ActivitiesComponent implements OnInit {
       this.isLoading = false;
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
-  }
-
-  async openEditModal(activity: ActivityDto) {
-    this.createForm(activity);
-    this.modalConfig = {
-      modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
-    };
-    return await this.addModalComponent.open();
-  }
-
-  onEditSubmit() {
-    this.isLoading = true;
-    this.activitiesService.editActivity(this.form.value).subscribe(activity => {
-      this.activities.push(activity)
-      this.isLoading = false;
-    });
-    this.addModalComponent.close();
   }
 }

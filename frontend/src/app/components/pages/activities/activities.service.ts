@@ -11,7 +11,8 @@ export class ActivitiesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getActivities(){return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivities`);
+  getActivities() : Observable<ActivityDto[]> {
+    return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivities`);
   }
 
   getActivity(id: number) : Observable<ActivityDto>{
@@ -26,7 +27,7 @@ export class ActivitiesService {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  deleteActivity(id: bigint) :Observable<ActivityDto> {
+  deleteActivity(id: bigint) : Observable<ActivityDto> {
     return this.httpClient.delete<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 }

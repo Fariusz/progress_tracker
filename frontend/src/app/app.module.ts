@@ -15,7 +15,6 @@ import {LoginComponent} from './components/pages/login/login.component';
 import {ActivitiesService} from "./components/pages/activities/activities.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {ContentComponent} from './components/pages/content/content.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {ActivityDetailsComponent} from './components/pages/activity-details/activity-details.component';
 import {LineChartComponent} from './components/line-chart/line-chart.component';
@@ -32,7 +31,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     LoadingspinnerComponent,
     MainComponent,
     LoginComponent,
-    ContentComponent,
     ActivityDetailsComponent,
     LineChartComponent,
     ModalComponent

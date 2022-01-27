@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
+          alert("Registered successfully, proceed to login.")
         }
       },
       errorMessage => {
