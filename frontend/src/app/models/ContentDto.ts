@@ -5,7 +5,8 @@ export class ContentDto{
   private _content: string;
   private _created: Date;
 
-  constructor(id: bigint, activityId: bigint, content: string, created: Date) {
+
+  constructor(id?: bigint, activityId?: bigint, content?: string, created?: Date) {
     this._id = id;
     this._activityId = activityId;
     this._content = content;

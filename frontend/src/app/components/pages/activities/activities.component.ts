@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ModalConfig} from "../../modal/modal.config";
 import {ModalComponent} from "../../modal/modal.component";
 import {ToastrService} from "ngx-toastr";
+import {ContentDto} from "../../../models/ContentDto";
 
 @Component({
   selector: 'app-activity',
@@ -56,15 +57,19 @@ export class ActivitiesComponent implements OnInit {
   }
 
   private createForm(activity: ActivityDto) {
+    const content: ContentDto[] = [];
+
     if (activity != null) {
       this.form = this.fb.group({
         activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
         created: new FormControl(activity.created),
         id: new FormControl(activity.id)
       });
     } else {
       this.form = this.fb.group({
         activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
         created: new FormControl(new Date())
       });
     }
@@ -95,7 +100,6 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
-      window.location.reload();
     });
     this.addModalComponent.close();
     this.isLoading = false;
@@ -107,7 +111,7 @@ export class ActivitiesComponent implements OnInit {
     this.modalConfig = {
       modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
-    return await this.addModalComponent.open();
+    return await this.editModalComponent.open();
   }
 
   onEditSubmit() {
@@ -134,6 +138,7 @@ export class ActivitiesComponent implements OnInit {
       this.isLoading = false;
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
+    this.deleteModalComponent.close();
     this.showSuccess('','Successfully deleted');
   }
 
