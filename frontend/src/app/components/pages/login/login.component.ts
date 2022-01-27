@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   isLoginMode: boolean = true;
   isLoading = false;
-  error: string = '';
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
@@ -34,13 +33,9 @@ export class LoginComponent implements OnInit {
     this.authService.changeLoginMode.subscribe(isLoginMode => {this.isLoginMode = isLoginMode;});
   }
 
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
-  }
-
   onSubmit(form: NgForm){
     if (!form.valid){
-      this.error = "form invalid";
+      this.showError('Try again','Form invalid')
       return;
     }
 
@@ -57,7 +52,6 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        this.error = '';
         if(this.isLoginMode){
           this.isLoading = false;
           this.router.navigate(['/home']);
@@ -69,11 +63,18 @@ export class LoginComponent implements OnInit {
         }
       },
       errorMessage => {
-        this.error = errorMessage;
+        this.showError('Please check your email', errorMessage);
         this.isLoading = false;
       }
     );
-
     form.reset();
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
+
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
   }
 }

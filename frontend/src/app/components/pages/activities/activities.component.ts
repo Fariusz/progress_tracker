@@ -4,6 +4,7 @@ import {ActivitiesService} from "./activities.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ModalConfig} from "../../modal/modal.config";
 import {ModalComponent} from "../../modal/modal.component";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-activity',
@@ -42,7 +43,7 @@ export class ActivitiesComponent implements OnInit {
     }
   };
 
-  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder) {
+  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -94,10 +95,11 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
+      window.location.reload();
     });
-    window.location.reload();
     this.addModalComponent.close();
     this.isLoading = false;
+    this.showSuccess('','Successfully added')
   }
 
   async openEditModal(activity: ActivityDto) {
@@ -114,7 +116,8 @@ export class ActivitiesComponent implements OnInit {
       this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
       this.isLoading = false;
     });
-    this.addModalComponent.close();
+    this.editModalComponent.close();
+    this.showSuccess('','Successfully edited');
   }
 
   async openDeleteModal(activity: ActivityDto) {
@@ -131,5 +134,14 @@ export class ActivitiesComponent implements OnInit {
       this.isLoading = false;
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
+    this.showSuccess('','Successfully deleted');
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
+
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
   }
 }
