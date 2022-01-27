@@ -97,11 +97,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Add entry", hideCloseButton() {
-        return true;
-      }, hideDismissButton() {
-        return true;
-      }
+      modalTitle: "Add entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     }
     return await this.addModalComponent.open()
   }
