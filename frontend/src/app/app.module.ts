@@ -21,6 +21,8 @@ import {LineChartComponent} from './components/line-chart/line-chart.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import {ModalComponent} from './components/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CommonModule} from "@angular/common";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FontAwesomeModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule
+    NgbModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     ActivitiesService,

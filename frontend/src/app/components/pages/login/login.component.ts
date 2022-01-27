@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   onSwitchMode(){
     this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
@@ -31,6 +32,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.changeLoginMode.subscribe(isLoginMode => {this.isLoginMode = isLoginMode;});
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
   }
 
   onSubmit(form: NgForm){
@@ -60,7 +65,7 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
-          alert("Registered successfully, proceed to login.")
+          this.showSuccess('Proceed to login', 'Register success');
         }
       },
       errorMessage => {
