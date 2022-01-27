@@ -8,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContentDto} from "../../../models/ContentDto";
 import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-activity-details',
@@ -50,7 +51,8 @@ export class ActivityDetailsComponent implements OnInit {
               private fb: FormBuilder,
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -61,8 +63,7 @@ export class ActivityDetailsComponent implements OnInit {
       this.activity = activity;
     })
 
-    this.contentService.getActivityContent(this.id).subscribe(
-      (content: ContentDto[]) => {
+    this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
         this.content = content;
         this.isLoading = false;
       });
@@ -109,9 +110,10 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.addContent(this.form.value).subscribe(content => {
       this.content.push(content);
-      this.isLoading = false;
+      this.showSuccess(content.content,'Successfully added');
     });
     this.addModalComponent.close();
+    this.isLoading = false;
   }
 
   async openEditModal(content: ContentDto) {
@@ -119,11 +121,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Edit entry", hideCloseButton() {
-        return true;
-      }, hideDismissButton() {
-        return true;
-      }
+      modalTitle: "Edit entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     }
     return await this.editModalComponent.open()
   }
@@ -132,20 +130,17 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.editContent(this.form.value).subscribe(content => {
       this.content.find(item => item.id == content.id).content = content.content;
-      this.isLoading = false;
+      this.showSuccess(content.content,'Successfully edited');
     });
     this.editModalComponent.close();
+    this.isLoading = false;
   }
 
   async openDeleteModal(content: ContentDto) {
     this.selectedContent = content;
     this.modalConfig = {
       modalTitle: "Are you sure?",
-      hideCloseButton() {
-        return true;
-      }, hideDismissButton() {
-        return true;
-      }
+      hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
     return await this.deleteModalComponent.open();
   }
@@ -153,9 +148,14 @@ export class ActivityDetailsComponent implements OnInit {
   onDelete() {
     this.isLoading = true;
     this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
+      this.content = this.content.filter(item => item !== this.selectedContent);
+      this.showSuccess(this.selectedContent.content,'Successfully deleted');
     });
-    this.isLoading = false;
-    this.content = this.content.filter(item => item !== this.selectedContent);
     this.deleteModalComponent.close();
+    this.isLoading = false;
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
   }
 }
