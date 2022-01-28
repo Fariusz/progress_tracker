@@ -70,3 +70,8 @@ frontend/.angular/cache/13.2.0/angular-webpack/6083d67a0e9a79a49332310b39b71cb5f
 frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/index.pack
 frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/0.pack
 .DS_Store
+frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/index.pack.old
+frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/3.pack
+frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/2.pack
+frontend/.angular/cache/13.2.0/angular-webpack/00913c482d89e46065a2bc2f3b06d49a99523eab/1.pack
+*.pack
