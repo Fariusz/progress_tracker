@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ActivityDto} from "../../models/ActivityDto";
 import {ContentDto} from "../../models/ContentDto";
+import {Observable, Subject} from "rxjs";
 
 @Component({
   selector: 'app-line-chart',
@@ -10,16 +11,25 @@ import {ContentDto} from "../../models/ContentDto";
 export class LineChartComponent implements OnInit, OnChanges {
 
   @Input() data: ContentDto[];
+
   dataSet = [];
 
+
   ngOnInit(): void {
+    this.prepareData();
+    this.setDataToChart();
+  }
+
+  prepareData(){
     this.data.forEach(data => {
       this.dataSet.push(data.content);
     });
+  }
 
-/*
+  setDataToChart(){
+    /*
     this.chartDatasets[0].label = this.data.activityName;
-*/
+    */
     this.chartDatasets[0].data = this.dataSet;
 
     this.data.forEach(data => {
@@ -29,11 +39,11 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.data){
-      console.log("Nastąpiła zmiana!");
+      console.log("Zmiana inputa");
     }
   }
 
-  public chartDatasets: Array<any> = [{data: [], label: 'Entries'}];
+  public chartDatasets: Array<any> = [{data: [], label: 'Wykres'}];
 
   public chartType: string = 'line';
 

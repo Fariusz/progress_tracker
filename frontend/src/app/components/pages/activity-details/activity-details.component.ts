@@ -18,6 +18,7 @@ export class ActivityDetailsComponent implements OnInit {
   @ViewChild('addModal') private addModalComponent: ModalComponent;
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
+  @ViewChild('chart') private chart;
 
   id: number;
   content: ContentDto[] = [];
@@ -99,7 +100,12 @@ export class ActivityDetailsComponent implements OnInit {
   onAddSubmit() {
     this.isLoading = true;
     this.contentService.addContent(this.form.value).subscribe(content => {
+/*
       this.content.push(content);
+*/
+      //Concat to create new array to get onChanges in chart works.
+      this.content = this.content.concat([content]);
+
       this.showSuccess(content.content,'Successfully added');
     });
     this.addModalComponent.close();

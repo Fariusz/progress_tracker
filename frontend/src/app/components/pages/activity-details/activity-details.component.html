@@ -17,7 +17,7 @@
       </div>
 
       <ng-container *ngIf="content.length > 0">
-        <app-line-chart [data]="content"></app-line-chart>
+        <app-line-chart #chart [data]="content"></app-line-chart>
       </ng-container>
 
       <h2>Entries</h2>
