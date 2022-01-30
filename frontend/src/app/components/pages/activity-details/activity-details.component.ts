@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivityDto} from "../../../models/ActivityDto";
 import {ActivitiesService} from "../activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
@@ -21,7 +20,6 @@ export class ActivityDetailsComponent implements OnInit {
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
   id: number;
-  activity: ActivityDto = null;
   content: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
@@ -58,10 +56,6 @@ export class ActivityDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-
-    this.activitiesService.getActivity(this.id).subscribe(activity => {
-      this.activity = activity;
-    })
 
     this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
         this.content = content;

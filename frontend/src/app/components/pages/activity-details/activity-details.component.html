@@ -16,8 +16,8 @@
         </div>
       </div>
 
-      <ng-container *ngIf="activity?.content.length > 0">
-        <app-line-chart [data]="activity"></app-line-chart>
+      <ng-container *ngIf="content.length > 0">
+        <app-line-chart [data]="content"></app-line-chart>
       </ng-container>
 
       <h2>Entries</h2>

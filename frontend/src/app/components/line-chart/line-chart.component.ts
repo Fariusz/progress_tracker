@@ -1,27 +1,36 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ActivityDto} from "../../models/ActivityDto";
+import {ContentDto} from "../../models/ContentDto";
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnChanges {
 
-  @Input() data: ActivityDto;
+  @Input() data: ContentDto[];
   dataSet = [];
 
   ngOnInit(): void {
-    this.data.content.forEach(data => {
+    this.data.forEach(data => {
       this.dataSet.push(data.content);
     });
 
+/*
     this.chartDatasets[0].label = this.data.activityName;
+*/
     this.chartDatasets[0].data = this.dataSet;
 
-    this.data.content.forEach(data => {
+    this.data.forEach(data => {
       this.chartLabels.push(data.created);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.data){
+      console.log("Nastąpiła zmiana!");
+    }
   }
 
   public chartDatasets: Array<any> = [{data: [], label: 'Entries'}];
@@ -52,6 +61,4 @@ export class LineChartComponent implements OnInit {
 
   public chartHovered(e: any): void {
   }
-
-
 }
