@@ -51,7 +51,7 @@
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
-                      <td>{{entry.created | date: 'short'}}</td>
+                      <td>{{entry.created | date: 'fullDate'}}</td>
                       <td>
                         <button class="btn btn-sm btn-warning" (click)="openEditModal(entry)">
                           <i class="fa fa-edit"> Edit</i>

@@ -8,49 +8,51 @@
               <h5 class="mb-0 text-center"><strong>Activities</strong></h5>
             </div>
             <div class="card-body">
-              <table class="table table-hover text-nowrap">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Entries</th>
-                  <th>Updated</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ng-container
-                  *ngFor="let activity of activities |
+              <div class="table-responsive">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Entries</th>
+                    <th>Updated</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <ng-container
+                    *ngFor="let activity of activities |
                   paginate: {itemsPerPage: 10, currentPage: page};
                   let index = index"
-                >
-                  <tr>
-                    <td>{{index + 1}}</td>
-                    <td>{{activity.activityName}}</td>
-                    <td>{{activity.content.length}}</td>
-                    <td *ngIf="activity.content.length == 0">never</td>
-                    <ng-container *ngFor="let content of activity.content let last = last; ">
-                      <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
-                    </ng-container>
-                    <td>
-                      <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
-                        <i class="fa fa-search"> Details</i>
-                      </button>
-                      <button class="btn btn-sm btn-warning" (click)="openEditModal(activity)">
-                        <i class="fa fa-edit"> Edit</i>
-                      </button>
-                      <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
-                        <i class="fa fa-trash"> Delete</i>
-                      </button>
-                    </td>
-                  </tr>
-                </ng-container>
-                </tbody>
-                <tbody>
-                <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
-                </tbody>
-              </table>
-              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                  >
+                    <tr>
+                      <td>{{index + 1}}</td>
+                      <td>{{activity.activityName}}</td>
+                      <td>{{activity.content.length}}</td>
+                      <td *ngIf="activity.content.length == 0">never</td>
+                      <ng-container *ngFor="let content of activity.content let last = last; ">
+                        <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
+                      </ng-container>
+                      <td>
+                        <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
+                          <i class="fa fa-search"> Details</i>
+                        </button>
+                        <button class="btn btn-sm btn-warning" (click)="openEditModal(activity)">
+                          <i class="fa fa-edit"> Edit</i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
+                          <i class="fa fa-trash"> Delete</i>
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                  <tbody>
+                  <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
+                  </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
             </div>
           </div>
         </section>

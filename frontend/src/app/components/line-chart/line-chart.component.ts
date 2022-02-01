@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ContentDto} from "../../models/ContentDto";
-import {BaseChartDirective, ChartsModule} from "angular-bootstrap-md";
+import {ChartsModule} from "angular-bootstrap-md";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-line-chart',
@@ -11,9 +12,8 @@ export class LineChartComponent implements OnInit, OnChanges {
   @ViewChild('baseChart') private chart: ChartsModule;
 
   @Input() data: ContentDto[];
-
-  dataSetContent = [];
-  dataSetLabel = [];
+  private dataSetContent = [];
+  private dataSetLabel = [];
 
   ngOnInit() : void {
     this.setDataToChart();
@@ -27,7 +27,7 @@ export class LineChartComponent implements OnInit, OnChanges {
 
     this.dataSetLabel = [];
     this.data.forEach(data => {
-      this.dataSetLabel.push(data.created);
+      this.dataSetLabel.push(formatDate(new Date(data.created), 'dd-MM-yyyy', 'en-US'));
     });
 
     this.chartDatasets[0].label = "TEST";
