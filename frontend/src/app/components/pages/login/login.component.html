@@ -1,51 +1,94 @@
 <div class="text-center">
+  <ng-container *ngIf="!isLoading">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-5 col-md-8">
 
-  <div *ngIf="isLoading">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
+            <form #authForm="ngForm" class="bg-white  rounded-5 shadow-5-strong p-5" (ngSubmit)="onSubmit(authForm)">
 
-  <form #authForm="ngForm" class="form-signin" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <input *ngIf="!isLoginMode"
-           type="email"
-           id="inputEmail"
-           class="form-control"
-           ngModel
-           name="email"
-           placeholder="email"
-           required
-           autofocus
-           email
-    >
-    <input
-      type="username"
-      id="inputUsername"
-      class="form-control"
-      ngModel
-      name="username"
-      placeholder="username"
-      required
-      autofocus
-      minlength="3"
-    >
-    <input
-      type="password"
-      id="inputPassword"
-      class="form-control"
-      ngModel
-      name="password"
-      minlength="3"
-      placeholder="password"
-      required
-    >
-    <div class="checkbox mb-3" *ngIf="isLoginMode">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+              <div class="form-floating mb-3">
+                <input *ngIf="!isLoginMode"
+                       type="email"
+                       id="inputEmail"
+                       class="form-control"
+                       ngModel
+                       name="email"
+                       required
+                       autofocus
+                       email
+                       placeholder="name@example.com"
+                >
+                <label for="inputEmail">Email address</label>
+              </div>
+
+              <div class="form-floating">
+                <input
+                  type="username"
+                  id="inputUsername"
+                  class="form-control"
+                  ngModel
+                  name="username"
+                  placeholder="username"
+                  required
+                  autofocus
+                  minlength="3"
+                >
+                <label for="inputUsername">Username</label>
+              </div>
+
+              <div class="form-floating">
+                <input
+                  type="password"
+                  id="inputPassword"
+                  class="form-control"
+                  ngModel
+                  name="password"
+                  minlength="3"
+                  placeholder="password"
+                  required
+                >
+                <label for="inputPassword">Password</label>
+              </div>
+
+              <!-- 2 column grid layout for inline styling -->
+              <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                  <!-- Checkbox -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked/>
+                    <label class="form-check-label" for="rememberMe">
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col text-center">
+                  <!-- Simple link -->
+                  <a href="#!">Forgot password?</a>
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                [disabled]="!authForm.valid">{{ isLoginMode ? 'Sign in' : 'Sign Up' }}
+              </button>
+              or
+              <button
+                type="button"
+                class="btn btn-secondary btn-block"
+                (click)="onSwitchMode()">{{ !isLoginMode ? 'Sign in' : 'Sign Up' }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button> |
-    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="onSwitchMode()">Switch to {{ !isLoginMode ? 'Login' : 'Sign Up' }}</button>
-    <p class="mt-5 mb-3 text-muted">&copy; Progress tracker 2021</p>
-  </form>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </ng-container>
 </div>
