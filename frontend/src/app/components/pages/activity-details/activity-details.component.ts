@@ -8,7 +8,7 @@ import {ContentDto} from "../../../models/ContentDto";
 import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
-import {BaseChartDirective} from "angular-bootstrap-md";
+import {ActivityDto} from "../../../models/ActivityDto";
 
 @Component({
   selector: 'app-activity-details',
@@ -22,6 +22,7 @@ export class ActivityDetailsComponent implements OnInit {
 
   page: number = 1;
   id: number;
+  activity: ActivityDto;
   content: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
@@ -60,9 +61,15 @@ export class ActivityDetailsComponent implements OnInit {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
     this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
-        this.content = content;
-        this.isLoading = false;
-      });
+      this.content = content;
+      this.isLoading = false;
+    });
+
+    this.activitiesService.getActivity(this.id).subscribe(
+      activity => {
+        this.activity = activity;
+      }
+    );
   }
 
   private createForm(content: ContentDto) {
@@ -93,7 +100,11 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Add entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      modalTitle: "Add entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
     }
     return await this.addModalComponent.open()
   }
@@ -101,13 +112,13 @@ export class ActivityDetailsComponent implements OnInit {
   onAddSubmit() {
     this.isLoading = true;
     this.contentService.addContent(this.form.value).subscribe(content => {
-/*
-      this.content.push(content);
-*/
+      /*
+            this.content.push(content);
+      */
       //Concat to create new array to get onChanges in chart works.
       this.content = this.content.concat([content]);
 
-      this.showSuccess(content.content,'Successfully added');
+      this.showSuccess(content.content, 'Successfully added');
     });
     this.addModalComponent.close();
     this.isLoading = false;
@@ -118,7 +129,11 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Edit entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      modalTitle: "Edit entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
     }
     return await this.editModalComponent.open()
   }
@@ -127,7 +142,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.editContent(this.form.value).subscribe(content => {
       this.content.find(item => item.id == content.id).content = content.content;
-      this.showSuccess(content.content,'Successfully edited');
+      this.showSuccess(content.content, 'Successfully edited');
     });
     this.editModalComponent.close();
     this.isLoading = false;
@@ -137,7 +152,11 @@ export class ActivityDetailsComponent implements OnInit {
     this.selectedContent = content;
     this.modalConfig = {
       modalTitle: "Are you sure?",
-      hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
     };
     return await this.deleteModalComponent.open();
   }
@@ -146,7 +165,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
       this.content = this.content.filter(item => item !== this.selectedContent);
-      this.showSuccess(this.selectedContent.content,'Successfully deleted');
+      this.showSuccess(this.selectedContent.content, 'Successfully deleted');
     });
     this.deleteModalComponent.close();
     this.isLoading = false;

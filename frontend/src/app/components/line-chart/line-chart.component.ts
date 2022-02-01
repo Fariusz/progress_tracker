@@ -12,6 +12,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   @ViewChild('baseChart') private chart: ChartsModule;
 
   @Input() data: ContentDto[];
+  @Input() activityName: string;
   private dataSetContent = [];
   private dataSetLabel = [];
 
@@ -30,7 +31,7 @@ export class LineChartComponent implements OnInit, OnChanges {
       this.dataSetLabel.push(formatDate(new Date(data.created), 'dd-MM-yyyy', 'en-US'));
     });
 
-    this.chartDatasets[0].label = "TEST";
+    this.chartDatasets[0].label = 'Progress';
     this.chartDatasets[0].data = this.dataSetContent;
     this.chartLabels = this.dataSetLabel;
   }
@@ -47,7 +48,7 @@ export class LineChartComponent implements OnInit, OnChanges {
     }
   }
 
-  public chartDatasets: Array<any> = [{data: [], label: 'Wykres'}];
+  public chartDatasets: Array<any> = [{data: []}];
 
   public chartType: string = 'line';
 

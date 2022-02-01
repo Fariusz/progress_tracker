@@ -4,9 +4,10 @@
       <div class="container pt-4">
 
         <section class="mb-4">
+          <ng-container *ngIf="content.length > 0">
           <div class="card">
             <div class="card-header py-3">
-              <h5 class="mb-0 text-center"><strong>Chart</strong></h5>
+              <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
             </div>
             <div class="card-body">
               <div class="btn-group me-2">
@@ -18,10 +19,9 @@
                 This week
               </button>
             </div>
-            <ng-container *ngIf="content.length > 0">
               <app-line-chart [data]="content"></app-line-chart>
-            </ng-container>
           </div>
+          </ng-container>
         </section>
 
         <section class="mb-4">
