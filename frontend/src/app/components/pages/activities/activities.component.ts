@@ -129,7 +129,7 @@ export class ActivitiesComponent implements OnInit {
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
     this.modalConfig = {
-      modalTitle: "Are you sure?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      modalTitle: "Are you sure to delete?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
     return await this.deleteModalComponent.open();
   }

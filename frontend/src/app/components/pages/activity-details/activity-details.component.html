@@ -39,7 +39,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Entry</th>
                     <th scope="col">Created</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -53,18 +53,33 @@
                       <td>{{entry.content}}</td>
                       <td>{{entry.created | date: 'fullDate'}}</td>
                       <td>
-                        <button class="btn btn-sm btn-warning" (click)="openEditModal(entry)">
-                          <i class="fa fa-edit"> Edit</i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" (click)="openDeleteModal(entry)">
-                          <i class="fa fa-trash"> Delete</i>
-                        </button>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item" (click)="openEditModal(entry)">
+                                  Edit
+                                <i class="fa fa-pen float-end"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="openDeleteModal(entry)">
+                                  Delete
+                                <i class="fa fa-trash float-end"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </td>
                     </tr>
                   </ng-container>
                   </tbody>
                   <tbody>
-                  <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
+                  <button class="btn btn-secondary" role="button" (click)="openAddModal()">
+                    <i class="fa fa-plus float-end"></i>
+                  </button>
                   </tbody>
                 </table>
                 <pagination-controls (pageChange)="page = $event"></pagination-controls>

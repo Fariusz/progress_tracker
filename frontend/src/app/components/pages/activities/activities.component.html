@@ -16,7 +16,7 @@
                     <th>Name</th>
                     <th>Entries</th>
                     <th>Updated</th>
-                    <th>Action</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -34,25 +34,39 @@
                         <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
                       </ng-container>
                       <td>
-
-
-                        <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
-                          <i class="fa fa-search"> Details</i>
-                        </button>
-                        <button class="btn btn-sm btn-warning" (click)="openEditModal(activity)">
-                          <i class="fa fa-edit"> Edit</i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
-                          <i class="fa fa-trash"> Delete</i>
-                        </button>
-
-                        
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item" routerLink="/details/{{activity.id}}">
+                                Details
+                                <i class="fa fa-search float-end"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="openEditModal(activity)">
+                                Edit
+                                <i class="fa fa-pen float-end"></i>
+                            </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="openDeleteModal(activity)">
+                                Delete
+                                <i class="fa fa-trash float-end"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </td>
                     </tr>
                   </ng-container>
                   </tbody>
                   <tbody>
-                  <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
+                  <button class="btn btn-secondary" role="button" (click)="openAddModal()">
+                    <i class="fa fa-plus float-end"></i>
+                  </button>
                   </tbody>
                 </table>
                 <pagination-controls (pageChange)="page = $event"></pagination-controls>
@@ -64,7 +78,6 @@
     </main>
   </div>
 </ng-container>
-
 
 <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
 
