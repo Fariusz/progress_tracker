@@ -1,30 +1,54 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivityDto} from "../../models/ActivityDto";
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {ContentDto} from "../../models/ContentDto";
+import {ChartsModule} from "angular-bootstrap-md";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnChanges {
+  @ViewChild('baseChart') private chart: ChartsModule;
 
-  @Input() data: ActivityDto;
-  dataSet = [];
+  @Input() data: ContentDto[];
+  @Input() activityName: string;
+  private dataSetContent = [];
+  private dataSetLabel = [];
 
-  ngOnInit(): void {
-    this.data.content.forEach(data => {
-      this.dataSet.push(data.content);
-    });
-
-    this.chartDatasets[0].label = this.data.activityName;
-    this.chartDatasets[0].data = this.dataSet;
-
-    this.data.content.forEach(data => {
-      this.chartLabels.push(data.created);
-    });
+  ngOnInit() : void {
+    this.setDataToChart();
   }
 
-  public chartDatasets: Array<any> = [{data: [], label: 'Entries'}];
+  setDataToChart(){
+    this.dataSetContent = [];
+    this.data.forEach(data => {
+      this.dataSetContent.push(data.content);
+    });
+
+    this.dataSetLabel = [];
+    this.data.forEach(data => {
+      this.dataSetLabel.push(formatDate(new Date(data.created), 'dd-MM-yyyy', 'en-US'));
+    });
+
+    this.chartDatasets[0].label = 'Progress';
+    this.chartDatasets[0].data = this.dataSetContent;
+    this.chartLabels = this.dataSetLabel;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.data){
+      this.reloadChart();
+    }
+  }
+
+  reloadChart() {
+    if (this.chart !== undefined) {
+      this.setDataToChart();
+    }
+  }
+
+  public chartDatasets: Array<any> = [{data: []}];
 
   public chartType: string = 'line';
 
@@ -52,6 +76,4 @@ export class LineChartComponent implements OnInit {
 
   public chartHovered(e: any): void {
   }
-
-
 }

@@ -4,6 +4,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {BehaviorSubject, throwError} from 'rxjs';
 import {User} from "../../models/User";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 export interface LoginCredentials{
   password: string;
@@ -32,7 +33,7 @@ export class AuthService {
   }
 
   login(loginCredentials: LoginCredentials) {
-    return this.http.post('http://localhost:8080/login', loginCredentials, {observe: 'response'})
+    return this.http.post(`${environment.APIEndpoint}/login`, loginCredentials, {observe: 'response'})
       .pipe(catchError(this.handleError), tap(resData => {
         this.handleAuthentication(
           loginCredentials.username,
@@ -41,7 +42,7 @@ export class AuthService {
   }
 
   signUp(loginCredentials: LoginCredentials) {
-    return this.http.post('http://localhost:8080/register', loginCredentials, { observe: 'response'})
+    return this.http.post(`${environment.APIEndpoint}/register`, loginCredentials, { observe: 'response'})
       .pipe(catchError(this.handleError), tap(resData => {
         this.handleRegister(resData.status, JSON.stringify(resData.body));
       }));

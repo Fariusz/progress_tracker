@@ -15,13 +15,14 @@ import {LoginComponent} from './components/pages/login/login.component';
 import {ActivitiesService} from "./components/pages/activities/activities.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {ContentComponent} from './components/pages/content/content.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {ActivityDetailsComponent} from './components/pages/activity-details/activity-details.component';
 import {LineChartComponent} from './components/line-chart/line-chart.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import {ModalComponent} from './components/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CommonModule} from "@angular/common";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     LoadingspinnerComponent,
     MainComponent,
     LoginComponent,
-    ContentComponent,
     ActivityDetailsComponent,
     LineChartComponent,
     ModalComponent
@@ -47,7 +47,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FontAwesomeModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule
+    NgbModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     ActivitiesService,

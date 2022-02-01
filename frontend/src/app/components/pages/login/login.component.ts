@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,8 @@ export class LoginComponent implements OnInit {
 
   isLoginMode: boolean = true;
   isLoading = false;
-  error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   onSwitchMode(){
     this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm){
     if (!form.valid){
-      this.error = "form invalid";
+      this.showError('Try again','Form invalid')
       return;
     }
 
@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        this.error = '';
         if(this.isLoginMode){
           this.isLoading = false;
           this.router.navigate(['/home']);
@@ -60,14 +59,22 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
+          this.showSuccess('Proceed to login', 'Register success');
         }
       },
       errorMessage => {
-        this.error = errorMessage;
+        this.showError('Please check your email', errorMessage);
         this.isLoading = false;
       }
     );
-
     form.reset();
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
+
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
   }
 }

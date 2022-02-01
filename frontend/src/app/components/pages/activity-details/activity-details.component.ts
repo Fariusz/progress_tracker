@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivityDto} from "../../../models/ActivityDto";
 import {ActivitiesService} from "../activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContentDto} from "../../../models/ContentDto";
-import {ContentService} from "../content/content.service";
+import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToastrService} from "ngx-toastr";
+import {ActivityDto} from "../../../models/ActivityDto";
 
 @Component({
   selector: 'app-activity-details',
@@ -19,11 +20,13 @@ export class ActivityDetailsComponent implements OnInit {
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
+  page: number = 1;
   id: number;
-  activity: ActivityDto = null;
+  activity: ActivityDto;
   content: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
+  form: FormGroup;
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
     disableCloseButton() {
@@ -44,27 +47,29 @@ export class ActivityDetailsComponent implements OnInit {
       return true;
     }
   };
-  form: FormGroup;
 
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
-    this.activitiesService.getActivity(this.id).subscribe(activity =>{
-      this.activity = activity;
-    })
+    this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
+      this.content = content;
+      this.isLoading = false;
+    });
 
-    this.contentService.getActivityContent(this.id).subscribe(
-      (content: ContentDto[]) => {
-        this.content = content;
-        this.isLoading = false;
-      });
+    this.activitiesService.getActivity(this.id).subscribe(
+      activity => {
+        this.activity = activity;
+      }
+    );
   }
 
   private createForm(content: ContentDto) {
@@ -77,7 +82,7 @@ export class ActivityDetailsComponent implements OnInit {
     } else {
       this.form = this.fb.group({
         activityId: new FormControl(this.id),
-        content: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+        content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
         created: new FormControl(new Date())
       });
     }
@@ -95,17 +100,28 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Add entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
+      modalTitle: "Add entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    }
     return await this.addModalComponent.open()
   }
 
   onAddSubmit() {
     this.isLoading = true;
     this.contentService.addContent(this.form.value).subscribe(content => {
-      this.content.push(content);
-      this.isLoading = false;
+      /*
+            this.content.push(content);
+      */
+      //Concat to create new array to get onChanges in chart works.
+      this.content = this.content.concat([content]);
+
+      this.showSuccess(content.content, 'Successfully added');
     });
     this.addModalComponent.close();
+    this.isLoading = false;
   }
 
   async openEditModal(content: ContentDto) {
@@ -113,32 +129,56 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Edit entry", hideCloseButton() {return true;}, hideDismissButton() {return true;}}
-    return await this.addModalComponent.open()
+      modalTitle: "Edit entry", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    }
+    return await this.editModalComponent.open()
   }
 
   onEditSubmit() {
     this.isLoading = true;
     this.contentService.editContent(this.form.value).subscribe(content => {
-      this.content.push(content)
-      this.isLoading = false;
+      //Workaround to get new array to trigger ngOnChanges in chart component
+      let temp = this.content;
+      temp.find(item => item.id == content.id).content = content.content;
+      this.content = [];
+      this.content = this.content.concat(temp);
+      /*
+            this.content.find(item => item.id == content.id).content = content.content;
+      */
+      this.showSuccess(content.content, 'Successfully edited');
     });
-    this.addModalComponent.close();
+    this.editModalComponent.close();
+    this.isLoading = false;
   }
 
   async openDeleteModal(content: ContentDto) {
     this.selectedContent = content;
     this.modalConfig = {
       modalTitle: "Are you sure?",
-      hideCloseButton() {return true;}, hideDismissButton() {return true;}};
+      hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
+    };
     return await this.deleteModalComponent.open();
   }
 
   onDelete() {
     this.isLoading = true;
     this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
+      this.content = this.content.filter(item => item !== this.selectedContent);
+      this.showSuccess(this.selectedContent.content, 'Successfully deleted');
     });
+    this.deleteModalComponent.close();
     this.isLoading = false;
-    this.content = this.content.filter(item => item !== this.selectedContent);
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
   }
 }

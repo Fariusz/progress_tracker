@@ -4,6 +4,8 @@ import {ActivitiesService} from "./activities.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ModalConfig} from "../../modal/modal.config";
 import {ModalComponent} from "../../modal/modal.component";
+import {ToastrService} from "ngx-toastr";
+import {ContentDto} from "../../../models/ContentDto";
 
 @Component({
   selector: 'app-activity',
@@ -42,7 +44,9 @@ export class ActivitiesComponent implements OnInit {
     }
   };
 
-  constructor(private activitiesService: ActivitiesService, private fb: FormBuilder) {
+  constructor(private activitiesService: ActivitiesService,
+              private fb: FormBuilder,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -55,15 +59,19 @@ export class ActivitiesComponent implements OnInit {
   }
 
   private createForm(activity: ActivityDto) {
+    const content: ContentDto[] = [];
+
     if (activity != null) {
       this.form = this.fb.group({
         activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
         created: new FormControl(activity.created),
         id: new FormControl(activity.id)
       });
     } else {
       this.form = this.fb.group({
         activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
         created: new FormControl(new Date())
       });
     }
@@ -94,26 +102,10 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
+      this.showSuccess(activity.activityName,'Successfully added')
     });
-    window.location.reload();
     this.addModalComponent.close();
     this.isLoading = false;
-  }
-
-  async openDeleteModal(activity: ActivityDto) {
-    this.selectedActivity = activity;
-    this.modalConfig = {
-      modalTitle: "Are you sure?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
-    };
-    return await this.deleteModalComponent.open();
-  }
-
-  onDelete() {
-    this.isLoading = true;
-    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
-      this.isLoading = false;
-    });
-    this.activities = this.activities.filter(item => item !== this.selectedActivity);
   }
 
   async openEditModal(activity: ActivityDto) {
@@ -121,15 +113,38 @@ export class ActivitiesComponent implements OnInit {
     this.modalConfig = {
       modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
     };
-    return await this.addModalComponent.open();
+    return await this.editModalComponent.open();
   }
 
   onEditSubmit() {
     this.isLoading = true;
     this.activitiesService.editActivity(this.form.value).subscribe(activity => {
-      this.activities.push(activity)
-      this.isLoading = false;
+      this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
+      this.showSuccess(activity.activityName,'Successfully edited');
     });
-    this.addModalComponent.close();
+    this.editModalComponent.close();
+    this.isLoading = false;
+  }
+
+  async openDeleteModal(activity: ActivityDto) {
+    this.selectedActivity = activity;
+    this.modalConfig = {
+      modalTitle: "Are you sure to delete?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+    };
+    return await this.deleteModalComponent.open();
+  }
+
+  onDelete() {
+    this.isLoading = true;
+    this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
+      this.showSuccess(this.selectedActivity.activityName,'Successfully deleted');
+    });
+    this.activities = this.activities.filter(item => item !== this.selectedActivity);
+    this.deleteModalComponent.close();
+    this.isLoading = false;
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
   }
 }

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  APIEndpoint: 'https://progress-tracker2.herokuapp.com'
 };

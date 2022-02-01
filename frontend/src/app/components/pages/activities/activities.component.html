@@ -1,57 +1,105 @@
-<div class="container">
-  <h2>Activities</h2>
-  <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
-  <div class="table-responsive" *ngIf="!isLoading">
-    <table class="table table-striped table-sm">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Entries</th>
-        <th>Updated</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <ng-container
-        *ngFor="let activity of activities | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
-        <tr>
-          <td>{{index + 1}}</td>
-          <td>{{activity.activityName}}</td>
-          <td>{{activity.content.length}}</td>
-          <td *ngIf="activity.content.length == 0">never</td>
-          <ng-container *ngFor="let content of activity.content let last = last; ">
-            <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
-          </ng-container>
-          <td>
-            <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
-              <i class="fa fa-search"> Details</i>
-            </button>
-            <button class="btn btn-sm btn-warning" (click)="openEditModal(activity)">
-              <i class="fa fa-edit"> Edit</i>
-            </button>
-            <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
-              <i class="fa fa-trash"> Delete</i>
-            </button>
-          </td>
-        </tr>
-      </ng-container>
-      </tbody>
-      <tbody>
-      <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
-      </tbody>
-    </table>
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+<ng-container *ngIf="!isLoading">
+  <div class="container-fluid">
+    <main>
+      <div class="container pt-4">
+        <section class="mb-4">
+          <div class="card">
+            <div class="card-header text-center py-3">
+              <h5 class="mb-0 text-center"><strong>Activities</strong></h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Entries</th>
+                    <th>Updated</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <ng-container
+                    *ngFor="let activity of activities |
+                  paginate: {itemsPerPage: 10, currentPage: page};
+                  let index = index"
+                  >
+                    <tr>
+                      <td>{{index + 1}}</td>
+                      <td>{{activity.activityName}}</td>
+                      <td>{{activity.content.length}}</td>
+                      <td *ngIf="activity.content.length == 0">never</td>
+                      <ng-container *ngFor="let content of activity.content let last = last; ">
+                        <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
+                      </ng-container>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item" routerLink="/details/{{activity.id}}">
+                                Details
+                                <i class="fa fa-search float-end"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="openEditModal(activity)">
+                                Edit
+                                <i class="fa fa-pen float-end"></i>
+                            </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="openDeleteModal(activity)">
+                                Delete
+                                <i class="fa fa-trash float-end"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                  <tbody>
+                  <button class="btn btn-secondary" role="button" (click)="openAddModal()">
+                    <i class="fa fa-plus float-end"></i>
+                  </button>
+                  </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   </div>
-</div>
+</ng-container>
+
+<app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
 
 <app-modal #addModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onAddSubmit()">
     <div class="form-group">
-      <input class="form-control" formControlName="activityName" type="text" placeholder="Name" required minlength="2"
-             maxlength="50">
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="activityName"
+          type="text"
+          placeholder="Name"
+          required minlength="2"
+          maxlength="50"
+          id="addActivityName"
+        >
+        <label for="editActivityName">Name</label>
+      </div>
+
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>
@@ -59,7 +107,7 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
+  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Cancel</button>
   <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
   </button>
 </app-modal>
@@ -67,10 +115,21 @@
 <app-modal #editModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
     <div class="form-group">
-      <input class="form-control" formControlName="activityName" type="text" placeholder="Name" required minlength="2"
-             maxlength="50">
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="activityName"
+          type="text"
+          placeholder="Name"
+          required minlength="2"
+          maxlength="50"
+          id="editActivityName"
+        >
+        <label for="editActivityName">Name</label>
+      </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>
