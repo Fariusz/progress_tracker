@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ActivityDto} from "../../models/ActivityDto";
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ContentDto} from "../../models/ContentDto";
-import {Observable, Subject} from "rxjs";
+import {BaseChartDirective, ChartsModule} from "angular-bootstrap-md";
 
 @Component({
   selector: 'app-line-chart',
@@ -9,37 +8,42 @@ import {Observable, Subject} from "rxjs";
   styleUrls: ['./line-chart.component.css']
 })
 export class LineChartComponent implements OnInit, OnChanges {
+  @ViewChild('baseChart') private chart: ChartsModule;
 
   @Input() data: ContentDto[];
 
-  dataSet = [];
+  dataSetContent = [];
+  dataSetLabel = [];
 
-
-  ngOnInit(): void {
-    this.prepareData();
+  ngOnInit() : void {
     this.setDataToChart();
   }
 
-  prepareData(){
-    this.data.forEach(data => {
-      this.dataSet.push(data.content);
-    });
-  }
-
   setDataToChart(){
-    /*
-    this.chartDatasets[0].label = this.data.activityName;
-    */
-    this.chartDatasets[0].data = this.dataSet;
-
+    this.dataSetContent = [];
     this.data.forEach(data => {
-      this.chartLabels.push(data.created);
+      this.dataSetContent.push(data.content);
     });
+
+    this.dataSetLabel = [];
+    this.data.forEach(data => {
+      this.dataSetLabel.push(data.created);
+    });
+
+    this.chartDatasets[0].label = "TEST";
+    this.chartDatasets[0].data = this.dataSetContent;
+    this.chartLabels = this.dataSetLabel;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.data){
-      console.log("Zmiana inputa");
+      this.reloadChart();
+    }
+  }
+
+  reloadChart() {
+    if (this.chart !== undefined) {
+      this.setDataToChart();
     }
   }
 

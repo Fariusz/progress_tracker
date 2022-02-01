@@ -1,6 +1,6 @@
 <ng-container *ngIf="chartDatasets[0].data.length > 0">
   <div style="display: block">
-    <canvas mdbChart
+    <canvas mdbChart #baseChart height="60px"
             [chartType]="chartType"
             [datasets]="chartDatasets"
             [labels]="chartLabels"
@@ -9,7 +9,6 @@
             [legend]="true"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"
-            height="60px"
     >
     </canvas>
   </div>

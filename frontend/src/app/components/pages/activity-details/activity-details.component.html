@@ -1,23 +1,21 @@
 <ng-container *ngIf="!isLoading">
   <div class="container-fluid">
     <main>
-      <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h2> {{ activity?.activityName }}</h2>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
-        </div>
-      </div>
-
       <ng-container *ngIf="content.length > 0">
-        <app-line-chart #chart [data]="content"></app-line-chart>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h2> Details </h2>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span>
+              This week
+            </button>
+          </div>
+        </div>
+        <app-line-chart [data]="content"></app-line-chart>
       </ng-container>
 
       <h2>Entries</h2>
@@ -32,7 +30,7 @@
           </tr>
           </thead>
           <tbody>
-          <ng-container *ngFor="let entry of content; let index = index">
+          <ng-container *ngFor="let entry of content | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
             <tr>
               <td>{{index + 1}}</td>
               <td>{{entry.content}}</td>
@@ -52,6 +50,7 @@
           <button class="btn btn-primary" role="button" (click)="openAddModal()">New &raquo;</button>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
       </div>
     </main>
   </div>

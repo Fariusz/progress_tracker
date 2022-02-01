@@ -8,6 +8,7 @@ import {ContentDto} from "../../../models/ContentDto";
 import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
+import {BaseChartDirective} from "angular-bootstrap-md";
 
 @Component({
   selector: 'app-activity-details',
@@ -18,8 +19,8 @@ export class ActivityDetailsComponent implements OnInit {
   @ViewChild('addModal') private addModalComponent: ModalComponent;
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
-  @ViewChild('chart') private chart;
 
+  page: number = 1;
   id: number;
   content: ContentDto[] = [];
   selectedContent: ContentDto;
