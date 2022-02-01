@@ -34,6 +34,8 @@
                         <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
                       </ng-container>
                       <td>
+
+
                         <button routerLink="/details/{{activity.id}}" class="btn btn-sm btn-info">
                           <i class="fa fa-search"> Details</i>
                         </button>
@@ -43,6 +45,8 @@
                         <button class="btn btn-sm btn-danger" (click)="openDeleteModal(activity)">
                           <i class="fa fa-trash"> Delete</i>
                         </button>
+
+                        
                       </td>
                     </tr>
                   </ng-container>
@@ -67,15 +71,22 @@
 <app-modal #addModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onAddSubmit()">
     <div class="form-group">
-      <input
-        class="form-control"
-        formControlName="activityName"
-        type="text"
-        placeholder="Name"
-        required minlength="2"
-        maxlength="50">
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="activityName"
+          type="text"
+          placeholder="Name"
+          required minlength="2"
+          maxlength="50"
+          id="addActivityName"
+        >
+        <label for="editActivityName">Name</label>
+      </div>
+
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>
@@ -83,7 +94,7 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
+  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Cancel</button>
   <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
   </button>
 </app-modal>
@@ -91,16 +102,21 @@
 <app-modal #editModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
     <div class="form-group">
-      <input
-        class="form-control"
-        formControlName="activityName"
-        type="text"
-        placeholder="Name"
-        required minlength="2"
-        maxlength="50"
-      >
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="activityName"
+          type="text"
+          placeholder="Name"
+          required minlength="2"
+          maxlength="50"
+          id="editActivityName"
+        >
+        <label for="editActivityName">Name</label>
+      </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>

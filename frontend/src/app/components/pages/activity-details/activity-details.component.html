@@ -82,6 +82,8 @@
 <app-modal #addModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onAddSubmit()">
     <div class="form-group">
+
+      <div class="form-floating">
       <input
         class="form-control"
         type="number"
@@ -89,14 +91,21 @@
         placeholder="content"
         required minlength="1"
         maxlength="50"
+        id="addContent"
       >
-      <input
+        <label for="addContent">Entry</label>
+      </div>
+      <div class="form-floating">
+        <input
         class="form-control"
         type="datetime-local"
         formControlName="created"
+        id="addDate"
       >
+        <label for="addDate">Date</label>
+      </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>
@@ -104,7 +113,7 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Dissmis</button>
+  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Cancel</button>
   <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
   </button>
 </app-modal>
@@ -112,15 +121,20 @@
 <app-modal #editModal [modalConfig]="modalConfig">
   <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
     <div class="form-group">
-      <input
-        class="form-control"
-        formControlName="content"
-        type="text"
-        placeholder="Entry"
-        required minlength="1"
-        maxlength="50">
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="content"
+          type="text"
+          placeholder="Entry"
+          required minlength="1"
+          maxlength="50"
+          id="editContent"
+        >
+        <label for="editContent">Entry</label>
+      </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Dissmis</button>
+        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Cancel</button>
         <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
       </div>
     </div>
