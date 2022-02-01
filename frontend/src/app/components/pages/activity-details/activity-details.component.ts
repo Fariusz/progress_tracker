@@ -141,7 +141,14 @@ export class ActivityDetailsComponent implements OnInit {
   onEditSubmit() {
     this.isLoading = true;
     this.contentService.editContent(this.form.value).subscribe(content => {
-      this.content.find(item => item.id == content.id).content = content.content;
+      //Workaround to get new array to trigger ngOnChanges in chart component
+      let temp = this.content;
+      temp.find(item => item.id == content.id).content = content.content;
+      this.content = [];
+      this.content = this.content.concat(temp);
+      /*
+            this.content.find(item => item.id == content.id).content = content.content;
+      */
       this.showSuccess(content.content, 'Successfully edited');
     });
     this.editModalComponent.close();
