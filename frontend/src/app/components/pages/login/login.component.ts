@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       resData => {
         if (this.isLoginMode) {
           this.isLoading = false;
+          this.showSuccess( 'Enjoy progress tracking', 'Logged in');
           this.router.navigate(['/home']);
         } else {
           this.isLoading = false;
