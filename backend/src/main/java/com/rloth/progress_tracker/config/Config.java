@@ -13,7 +13,7 @@ public class Config {
     @Autowired
     private ObjectMapper objectMapper;
 
-    void customizeObjectMapper(){
+    void customizeObjectMapper() {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 }

@@ -15,17 +15,21 @@ public class ContentService {
 
     private final ContentRepository contentRepository;
 
-    public List<Content> getContent(){
+    public List<Content> getContent() {
         return contentRepository.findAll();
     }
 
-    public List<Content> getActivityContent(Long id){
+    public List<Content> getActivityContent(Long id) {
         return contentRepository.findAllByActivityIdIn(Collections.singletonList(id));
     }
 
-    public Content addContent(Content content) { return contentRepository.save(content); }
+    public Content addContent(Content content) {
+        return contentRepository.save(content);
+    }
 
-    public void deleteContent(long id) {contentRepository.deleteById(id);}
+    public void deleteContent(long id) {
+        contentRepository.deleteById(id);
+    }
 
     @Transactional
     public Content editContent(Content content) {

@@ -21,11 +21,11 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        try{
+        try {
             BufferedReader reader = request.getReader();
             StringBuilder sb = new StringBuilder();
             String line;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 sb.append(line);
             }
             LoginCredentials authRequest = objectMapper.readValue(sb.toString(), LoginCredentials.class);
@@ -35,7 +35,7 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
             );
             setDetails(request, token);
             return this.getAuthenticationManager().authenticate(token);
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
