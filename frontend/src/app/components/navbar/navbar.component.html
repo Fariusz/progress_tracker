@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
   <div class="container-fluid">
     <a routerLink="/" class="navbar-brand">Progress tracker</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -9,18 +10,18 @@
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a routerLink="/home" routerLinkActive="active" class="nav-link" >Home</a>
+          <a routerLink="/home" routerLinkActive="active" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
           <a routerLink="/activities" routerLinkActive="active" class="nav-link">Activities</a>
         </li>
-<!--        <li routerLink="/activities" routerLinkActive="active" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Activities </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/activities">List activities</a></li>
-            <li><a class="dropdown-item" >Add activity</a></li>
-          </ul>
-        </li>-->
+        <!--        <li routerLink="/activities" routerLinkActive="active" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Activities </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" routerLink="/activities">List activities</a></li>
+                    <li><a class="dropdown-item" >Add activity</a></li>
+                  </ul>
+                </li>-->
       </ul>
       <form class="form-inline my-2 my-md-0">
         <input class="form-control" type="text" placeholder="Search">
@@ -40,7 +41,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item text-nowrap">
               <a routerLink="/" class="nav-link" (click)="onLogout()">Logout
-              <fa-icon [icon]="faSignOut"></fa-icon>
+                <fa-icon [icon]="faSignOut"></fa-icon>
               </a>
             </li>
           </ul>

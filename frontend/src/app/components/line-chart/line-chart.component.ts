@@ -16,11 +16,11 @@ export class LineChartComponent implements OnInit, OnChanges {
   private dataSetContent = [];
   private dataSetLabel = [];
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     this.setDataToChart();
   }
 
-  setDataToChart(){
+  setDataToChart() {
     this.dataSetContent = [];
     this.data.forEach(data => {
       this.dataSetContent.push(data.content);
@@ -37,7 +37,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.data){
+    if (changes.data) {
       this.reloadChart();
     }
   }

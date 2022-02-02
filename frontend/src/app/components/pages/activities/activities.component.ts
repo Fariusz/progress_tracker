@@ -102,7 +102,7 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
-      this.showSuccess(activity.activityName,'Successfully added')
+      this.showSuccess(activity.activityName, 'Successfully added')
     });
     this.addModalComponent.close();
     this.isLoading = false;
@@ -111,7 +111,11 @@ export class ActivitiesComponent implements OnInit {
   async openEditModal(activity: ActivityDto) {
     this.createForm(activity);
     this.modalConfig = {
-      modalTitle: "Edit activity", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      modalTitle: "Edit activity", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
     };
     return await this.editModalComponent.open();
   }
@@ -120,7 +124,7 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.editActivity(this.form.value).subscribe(activity => {
       this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
-      this.showSuccess(activity.activityName,'Successfully edited');
+      this.showSuccess(activity.activityName, 'Successfully edited');
     });
     this.editModalComponent.close();
     this.isLoading = false;
@@ -129,7 +133,11 @@ export class ActivitiesComponent implements OnInit {
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
     this.modalConfig = {
-      modalTitle: "Are you sure to delete?", hideCloseButton() {return true;}, hideDismissButton() {return true;}
+      modalTitle: "Are you sure to delete?", hideCloseButton() {
+        return true;
+      }, hideDismissButton() {
+        return true;
+      }
     };
     return await this.deleteModalComponent.open();
   }
@@ -137,7 +145,7 @@ export class ActivitiesComponent implements OnInit {
   onDelete() {
     this.isLoading = true;
     this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
-      this.showSuccess(this.selectedActivity.activityName,'Successfully deleted');
+      this.showSuccess(this.selectedActivity.activityName, 'Successfully deleted');
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
     this.deleteModalComponent.close();

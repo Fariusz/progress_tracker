@@ -23,6 +23,7 @@ import {ModalComponent} from './components/modal/modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from "@angular/common";
 import {ToastrModule} from "ngx-toastr";
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {ToastrModule} from "ngx-toastr";
     LoginComponent,
     ActivityDetailsComponent,
     LineChartComponent,
-    ModalComponent
+    ModalComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import {ToastrModule} from "ngx-toastr";
       useClass: AuthInterceptorService,
       multi: true
     }
-    ],
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

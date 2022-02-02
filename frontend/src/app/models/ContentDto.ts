@@ -1,4 +1,4 @@
-export class ContentDto{
+export class ContentDto {
 
   private _id: bigint;
   private _activityId: bigint;

@@ -3,7 +3,7 @@
     <main>
       <div class="container pt-4">
         <section class="mb-4">
-          <div class="card">
+          <div class="card shadow-lg">
             <div class="card-header text-center py-3">
               <h5 class="mb-0 text-center"><strong>Activities</strong></h5>
             </div>
@@ -35,7 +35,8 @@
                       </ng-container>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                  data-bs-toggle="dropdown" aria-expanded="false">
                             Action
                           </button>
                           <ul class="dropdown-menu">
@@ -49,7 +50,7 @@
                               <a class="dropdown-item" (click)="openEditModal(activity)">
                                 Edit
                                 <i class="fa fa-pen float-end"></i>
-                            </a>
+                              </a>
                             </li>
                             <li>
                               <a class="dropdown-item" (click)="openDeleteModal(activity)">
@@ -64,7 +65,7 @@
                   </ng-container>
                   </tbody>
                   <tbody>
-                  <button class="btn btn-secondary" role="button" (click)="openAddModal()">
+                  <button class="btn btn-primary" role="button" (click)="openAddModal()">
                     <i class="fa fa-plus float-end"></i>
                   </button>
                   </tbody>

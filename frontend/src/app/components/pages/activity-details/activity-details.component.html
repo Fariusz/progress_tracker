@@ -5,27 +5,27 @@
 
         <section class="mb-4">
           <ng-container *ngIf="content.length > 0">
-          <div class="card">
-            <div class="card-header py-3">
-              <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
-            </div>
-            <div class="card-body">
-              <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <div class="card shadow-lg">
+              <div class="card-header py-3">
+                <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
               </div>
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
-            </div>
+              <div class="card-body">
+                <div class="btn-group me-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                  <span data-feather="calendar"></span>
+                  This week
+                </button>
+              </div>
               <app-line-chart [data]="content"></app-line-chart>
-          </div>
+            </div>
           </ng-container>
         </section>
 
         <section class="mb-4">
-          <div class="card">
+          <div class="card shadow-lg">
             <div class="card-header text-center py-3">
               <h5 class="mb-0 text-center">
                 <strong>Entries</strong>
@@ -54,19 +54,20 @@
                       <td>{{entry.created | date: 'fullDate'}}</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                  data-bs-toggle="dropdown" aria-expanded="false">
                             Action
                           </button>
                           <ul class="dropdown-menu">
                             <li>
                               <a class="dropdown-item" (click)="openEditModal(entry)">
-                                  Edit
+                                Edit
                                 <i class="fa fa-pen float-end"></i>
                               </a>
                             </li>
                             <li>
                               <a class="dropdown-item" (click)="openDeleteModal(entry)">
-                                  Delete
+                                Delete
                                 <i class="fa fa-trash float-end"></i>
                               </a>
                             </li>
@@ -77,7 +78,7 @@
                   </ng-container>
                   </tbody>
                   <tbody>
-                  <button class="btn btn-secondary" role="button" (click)="openAddModal()">
+                  <button class="btn btn-primary" role="button" (click)="openAddModal()">
                     <i class="fa fa-plus float-end"></i>
                   </button>
                   </tbody>
@@ -99,24 +100,24 @@
     <div class="form-group">
 
       <div class="form-floating">
-      <input
-        class="form-control"
-        type="number"
-        formControlName="content"
-        placeholder="content"
-        required minlength="1"
-        maxlength="50"
-        id="addContent"
-      >
+        <input
+          class="form-control"
+          type="number"
+          formControlName="content"
+          placeholder="content"
+          required minlength="1"
+          maxlength="50"
+          id="addContent"
+        >
         <label for="addContent">Entry</label>
       </div>
       <div class="form-floating">
         <input
-        class="form-control"
-        type="datetime-local"
-        formControlName="created"
-        id="addDate"
-      >
+          class="form-control"
+          type="datetime-local"
+          formControlName="created"
+          id="addDate"
+        >
         <label for="addDate">Date</label>
       </div>
       <div class="modal-footer">

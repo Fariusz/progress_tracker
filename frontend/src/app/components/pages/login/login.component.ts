@@ -22,20 +22,23 @@ export class LoginComponent implements OnInit {
   isLoginMode: boolean = true;
   isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
+  }
 
-  onSwitchMode(){
+  onSwitchMode() {
     this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
       : this.authService.toggleLoginMode(true);
   }
 
   ngOnInit(): void {
-    this.authService.changeLoginMode.subscribe(isLoginMode => {this.isLoginMode = isLoginMode;});
+    this.authService.changeLoginMode.subscribe(isLoginMode => {
+      this.isLoginMode = isLoginMode;
+    });
   }
 
-  onSubmit(form: NgForm){
-    if (!form.valid){
-      this.showError('Try again','Form invalid')
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      this.showError('Try again', 'Form invalid')
       return;
     }
 
@@ -52,10 +55,10 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        if(this.isLoginMode){
+        if (this.isLoginMode) {
           this.isLoading = false;
           this.router.navigate(['/home']);
-        }else {
+        } else {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
