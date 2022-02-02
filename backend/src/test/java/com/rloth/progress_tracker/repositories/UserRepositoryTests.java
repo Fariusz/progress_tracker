@@ -1,7 +1,5 @@
 package com.rloth.progress_tracker.repositories;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.rloth.progress_tracker.models.User;
 import com.rloth.progress_tracker.repos.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -10,10 +8,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

@@ -22,11 +22,11 @@ public class LoginService {
     AuthorityRepository authorityRepository;
 
     public boolean emailExist(UserDto user) {
-        return (userRepository.findByEmail(user.getEmail()) != null) ? true : false;
+        return userRepository.findByEmail(user.getEmail()) != null;
     }
 
     public boolean usernameExist(UserDto user) {
-        return (userRepository.findByUsername(user.getUsername()) != null) ? true : false;
+        return userRepository.findByUsername(user.getUsername()) != null;
     }
 
     public User register(UserDto accountDto) {

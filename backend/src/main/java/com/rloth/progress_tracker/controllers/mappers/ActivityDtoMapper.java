@@ -11,8 +11,6 @@ public class ActivityDtoMapper {
     private ActivityDtoMapper() {
     }
 
-    ;
-
     public static List<ActivityDto> mapToActivityDto(List<Activity> activities) {
         return activities.stream()
                 .map(activity -> mapToActivityDto(activity))
