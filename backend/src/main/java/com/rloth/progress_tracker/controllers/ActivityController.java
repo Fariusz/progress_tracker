@@ -64,7 +64,6 @@ public class ActivityController {
     @PostMapping("/activities")
     public Activity addActivity(@RequestBody Activity activity, @AuthenticationPrincipal String username) {
         return activityService.addActivity(activity, username);
-
     }
 
     @PutMapping("/activities")
