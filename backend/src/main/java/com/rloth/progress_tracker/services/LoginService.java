@@ -21,15 +21,15 @@ public class LoginService {
     @Autowired
     AuthorityRepository authorityRepository;
 
-    public boolean emailExist(UserDto user){
-        return (userRepository.findByEmail(user.getEmail()) != null) ? true : false;
+    public boolean emailExist(UserDto user) {
+        return userRepository.findByEmail(user.getEmail()) != null;
     }
 
-    public boolean usernameExist(UserDto user){
-        return (userRepository.findByUsername(user.getUsername()) != null) ? true : false;
+    public boolean usernameExist(UserDto user) {
+        return userRepository.findByUsername(user.getUsername()) != null;
     }
 
-    public User register(UserDto accountDto){
+    public User register(UserDto accountDto) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         User user = new User();
@@ -54,7 +54,7 @@ public class LoginService {
         return userRepository.findAll();
     }
 
-    public Long getUserId(String username){
-      return userRepository.findByUsername(username).getId();
+    public Long getUserId(String username) {
+        return userRepository.findByUsername(username).getId();
     }
 }

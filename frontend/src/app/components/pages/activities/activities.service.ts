@@ -9,25 +9,26 @@ import {environment} from "../../../../environments/environment";
 })
 export class ActivitiesService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  getActivities() : Observable<ActivityDto[]> {
+  getActivities(): Observable<ActivityDto[]> {
     return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivities`);
   }
 
-  getActivity(id: number) : Observable<ActivityDto>{
+  getActivity(id: number): Observable<ActivityDto> {
     return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 
-  editActivity(activity: ActivityDto) : Observable<ActivityDto> {
+  editActivity(activity: ActivityDto): Observable<ActivityDto> {
     return this.httpClient.put<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  addActivity(activity: ActivityDto) : Observable<ActivityDto> {
+  addActivity(activity: ActivityDto): Observable<ActivityDto> {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  deleteActivity(id: bigint) : Observable<ActivityDto> {
+  deleteActivity(id: bigint): Observable<ActivityDto> {
     return this.httpClient.delete<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
 }

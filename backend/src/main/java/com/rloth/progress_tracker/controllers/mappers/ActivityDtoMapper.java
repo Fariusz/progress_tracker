@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 
 public class ActivityDtoMapper {
 
-    private ActivityDtoMapper(){};
+    private ActivityDtoMapper() {
+    }
 
     public static List<ActivityDto> mapToActivityDto(List<Activity> activities) {
         return activities.stream()
@@ -16,7 +17,7 @@ public class ActivityDtoMapper {
                 .collect(Collectors.toList());
     }
 
-    public static ActivityDto mapToActivityDto(Activity activity){
+    public static ActivityDto mapToActivityDto(Activity activity) {
         return ActivityDto.builder()
                 .id(activity.getId())
                 .activityName(activity.getActivityName())

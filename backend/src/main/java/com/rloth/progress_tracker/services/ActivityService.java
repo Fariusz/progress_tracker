@@ -5,12 +5,12 @@ import com.rloth.progress_tracker.models.Content;
 import com.rloth.progress_tracker.repos.ActivityRepository;
 import com.rloth.progress_tracker.repos.ContentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -27,11 +27,11 @@ public class ActivityService {
     private final LoginService loginService;
 
 
-    public List<Activity> getUserActivities(String username){
+    public List<Activity> getUserActivities(String username) {
         return activityRepository.findActivitiesByUserId(loginService.getUserId(username));
     }
 
-    public List<Activity> getUserActivitiesPageable(String username, int page, int pageSize, Sort.Direction sort){
+    public List<Activity> getUserActivitiesPageable(String username, int page, int pageSize, Sort.Direction sort) {
         return activityRepository.findActivitiesByUserIdPageable
                 (loginService.getUserId(username), PageRequest.of(page, pageSize, Sort.by(sort, "id")
                         /* Sort.by(Sort.Order.asc("id"), Sort.Order.desc(("created"))) */));
@@ -98,7 +98,7 @@ public class ActivityService {
     }
 
     @CacheEvict(cacheNames = "Activities")
-    public void clearActivities(){
+    public void clearActivities() {
         //Ta metoda czyści Cache
     }
 }

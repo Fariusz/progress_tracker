@@ -1,5 +1,5 @@
 import {Component, Injectable, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ModalConfig} from "./modal.config";
 
 @Component({
@@ -14,9 +14,11 @@ export class ModalComponent implements OnInit {
   @ViewChild('modal') private modalContent: TemplateRef<ModalComponent>
   private modalRef: NgbModalRef
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   open(): Promise<boolean> {
     return new Promise<boolean>(resolve => {

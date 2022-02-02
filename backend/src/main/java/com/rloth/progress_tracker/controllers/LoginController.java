@@ -23,34 +23,31 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginCredentials credentials){
+    public void login(@RequestBody LoginCredentials credentials) {
     }
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> processRegister(@RequestBody UserDto accountDto){
+    public ResponseEntity<String> processRegister(@RequestBody UserDto accountDto) {
 
         if (loginService.emailExist(accountDto)) {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"EMAIL_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
-        }
-        else if (loginService.usernameExist(accountDto)) {
+        } else if (loginService.usernameExist(accountDto)) {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"USERNAME_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
-        }
-        else if (!loginService.emailExist(accountDto) || !loginService.usernameExist(accountDto)){
+        } else if (!loginService.emailExist(accountDto) || !loginService.usernameExist(accountDto)) {
             loginService.register(accountDto);
             return new ResponseEntity<>("{\n" + "  \"message\" : \"REGISTER_SUCCESS\"\n" + "}\n", HttpStatus.CREATED);
-        }
-        else {
+        } else {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"UNKNOWN\"\n" + "}\n", HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
     @GetMapping("/user")
-    public String getUser(@AuthenticationPrincipal String user){
+    public String getUser(@AuthenticationPrincipal String user) {
         return user;
     }
 
     @GetMapping("/id")
-    public Long getUserId(@AuthenticationPrincipal String user){
+    public Long getUserId(@AuthenticationPrincipal String user) {
         return loginService.getUserId(user);
     }
 

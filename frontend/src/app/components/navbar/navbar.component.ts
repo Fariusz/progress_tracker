@@ -8,30 +8,31 @@ import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy{
+export class NavbarComponent implements OnInit, OnDestroy {
 
   faSignOut = faSignOutAlt;
 
   isAuthenticated = false;
   private userSub!: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe( user => {
-    this.isAuthenticated = !!user;
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
     });
   }
 
-  onRegister(){
+  onRegister() {
     this.authService.toggleLoginMode(false);
   }
 
-  onLogin(){
+  onLogin() {
     this.authService.toggleLoginMode(true);
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
   }
 

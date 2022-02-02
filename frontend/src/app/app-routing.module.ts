@@ -9,11 +9,13 @@ import {ActivityDetailsComponent} from "./components/pages/activity-details/acti
 
 const routes: Routes = [
   {path: '', component: MainComponent},
-  {path: 'activities', children: [
+  {
+    path: 'activities', children: [
       {path: '', component: ActivitiesComponent, canActivate: [AuthGuardService]}
     ]
   },
-  {path: 'details', children: [
+  {
+    path: 'details', children: [
       {path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}
     ]
   },
@@ -25,4 +27,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

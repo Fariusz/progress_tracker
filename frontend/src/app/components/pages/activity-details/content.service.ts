@@ -9,25 +9,26 @@ import {Observable} from "rxjs";
 })
 export class ContentService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  getContent(){
+  getContent() {
     return this.httpClient.get<ContentDto[]>(`${environment.APIEndpoint}/content`);
   }
 
-  getActivityContent(id: number){
+  getActivityContent(id: number) {
     return this.httpClient.get<ContentDto[]>(`${environment.APIEndpoint}/content/${id}`);
   }
 
-  editContent(content: ContentDto):Observable<ContentDto> {
+  editContent(content: ContentDto): Observable<ContentDto> {
     return this.httpClient.put<ContentDto>(`${environment.APIEndpoint}/content`, content);
   }
 
-  addContent(content: ContentDto):Observable<ContentDto> {
+  addContent(content: ContentDto): Observable<ContentDto> {
     return this.httpClient.post<ContentDto>(`${environment.APIEndpoint}/content`, content);
   }
 
-  deleteContent(id: bigint) : Observable<ContentDto> {
+  deleteContent(id: bigint): Observable<ContentDto> {
     return this.httpClient.delete<ContentDto>(`${environment.APIEndpoint}/content/${id}`);
   }
 }

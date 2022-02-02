@@ -4,7 +4,6 @@ import com.rloth.progress_tracker.controllers.dtos.ActivityDto;
 import com.rloth.progress_tracker.controllers.mappers.ActivityDtoMapper;
 import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.services.ActivityService;
-import com.rloth.progress_tracker.services.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,34 +19,34 @@ public class ActivityController {
     private final ActivityService activityService;
 
     @GetMapping("/userActivities")
-    public List<Activity> getUserActivities(@AuthenticationPrincipal String username){
+    public List<Activity> getUserActivities(@AuthenticationPrincipal String username) {
         return activityService.getUserActivities(username);
     }
 
     @GetMapping("/userActivities/pageable")
-    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize, Sort.Direction sort){
+    public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize, Sort.Direction sort) {
 
-        int pageNumber = page != null && page > 0 ? page: 1;
+        int pageNumber = page != null && page > 0 ? page : 1;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         return activityService.getUserActivitiesPageable(username, pageNumber - 1, pageSize, sortDirection);
 
     }
-    
+
     @GetMapping("/activities")
-    public List<Activity> getAllActivities(@AuthenticationPrincipal UsernamePasswordAuthenticationToken user){
+    public List<Activity> getAllActivities(@AuthenticationPrincipal UsernamePasswordAuthenticationToken user) {
         return activityService.getActivities();
     }
 
     @GetMapping("/activities/pageable")
-    public List<ActivityDto> getActivitiesPageable(@RequestParam(required = false) Integer page, Sort.Direction sort){
-        int pageNumber = page != null && page > 0 ? page: 1;
+    public List<ActivityDto> getActivitiesPageable(@RequestParam(required = false) Integer page, Sort.Direction sort) {
+        int pageNumber = page != null && page > 0 ? page : 1;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
-        return ActivityDtoMapper.mapToActivityDto (activityService.getActivitiesPageable(pageNumber - 1, sortDirection));
+        return ActivityDtoMapper.mapToActivityDto(activityService.getActivitiesPageable(pageNumber - 1, sortDirection));
     }
 
     @GetMapping("/activities/pageable/content")
-    public List<Activity> getActivitiesPageableWithContent(@RequestParam(required = false) Integer page, Sort.Direction sort){
-        int pageNumber = page != null && page > 0 ? page: 1;
+    public List<Activity> getActivitiesPageableWithContent(@RequestParam(required = false) Integer page, Sort.Direction sort) {
+        int pageNumber = page != null && page > 0 ? page : 1;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         return activityService.getActivitiesWithContent(pageNumber - 1, sortDirection);
     }
@@ -63,18 +62,17 @@ public class ActivityController {
     }
 
     @PostMapping("/activities")
-    public Activity addActivity(@RequestBody Activity activity, @AuthenticationPrincipal String username){
+    public Activity addActivity(@RequestBody Activity activity, @AuthenticationPrincipal String username) {
         return activityService.addActivity(activity, username);
-
     }
 
     @PutMapping("/activities")
-    public Activity editActivity(@RequestBody Activity activity){
+    public Activity editActivity(@RequestBody Activity activity) {
         return activityService.editActivity(activity);
     }
 
     @DeleteMapping("/activities/{id}")
-    public void deleteActivity(@PathVariable long id){
+    public void deleteActivity(@PathVariable long id) {
         activityService.deleteActivity(id);
     }
 

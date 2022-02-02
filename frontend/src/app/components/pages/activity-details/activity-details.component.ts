@@ -16,10 +16,6 @@ import {ActivityDto} from "../../../models/ActivityDto";
   styleUrls: ['./activity-details.component.css']
 })
 export class ActivityDetailsComponent implements OnInit {
-  @ViewChild('addModal') private addModalComponent: ModalComponent;
-  @ViewChild('editModal') private editModalComponent: ModalComponent;
-  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
-
   page: number = 1;
   id: number;
   activity: ActivityDto;
@@ -47,6 +43,9 @@ export class ActivityDetailsComponent implements OnInit {
       return true;
     }
   };
+  @ViewChild('addModal') private addModalComponent: ModalComponent;
+  @ViewChild('editModal') private editModalComponent: ModalComponent;
+  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
@@ -70,22 +69,6 @@ export class ActivityDetailsComponent implements OnInit {
         this.activity = activity;
       }
     );
-  }
-
-  private createForm(content: ContentDto) {
-    if (content != null) {
-      this.form = this.fb.group({
-        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-        created: new FormControl(content.created),
-        id: new FormControl(content.id)
-      });
-    } else {
-      this.form = this.fb.group({
-        activityId: new FormControl(this.id),
-        content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-        created: new FormControl(new Date())
-      });
-    }
   }
 
   onDismiss(modal: string) {
@@ -180,5 +163,21 @@ export class ActivityDetailsComponent implements OnInit {
 
   showSuccess(message: string, title: string) {
     this.toastr.success(message, title);
+  }
+
+  private createForm(content: ContentDto) {
+    if (content != null) {
+      this.form = this.fb.group({
+        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+        created: new FormControl(content.created),
+        id: new FormControl(content.id)
+      });
+    } else {
+      this.form = this.fb.group({
+        activityId: new FormControl(this.id),
+        content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+        created: new FormControl(new Date())
+      });
+    }
   }
 }

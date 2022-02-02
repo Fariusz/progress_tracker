@@ -14,7 +14,7 @@ class ActivityServiceTest {
     private ActivityService activityService;
 
     @Test
-    void shouldGetSingleActivity(){
+    void shouldGetSingleActivity() {
         // given
         // when
         Activity singleActivity = activityService.getActivity(1L);

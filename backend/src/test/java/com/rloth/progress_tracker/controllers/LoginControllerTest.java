@@ -24,9 +24,9 @@ class LoginControllerTest {
     void shouldLoginAndGetContent() throws Exception {
         MvcResult login = mockMvc.perform(post("/login")
                         .content("{\"username\": \"test\", \"password\": \"test\"}"))
-                            .andDo(print())
-                            .andExpect(status().is(200))
-                            .andReturn();
+                .andDo(print())
+                .andExpect(status().is(200))
+                .andReturn();
         String token = login.getResponse().getHeader("Authorization");
 
         mockMvc.perform(get("/secured")
