@@ -19,10 +19,9 @@ export interface LoginCredentials {
 export class AuthService {
 
   user = new BehaviorSubject<User>(null);
-  private tokenExpirationTimer: any;
-
   isLoginMode: boolean = true;
   @Output() changeLoginMode: BehaviorSubject<boolean> = new BehaviorSubject(this.isLoginMode);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
   }

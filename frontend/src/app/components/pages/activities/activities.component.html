@@ -35,8 +35,8 @@
                       </ng-container>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-outline-secondary dropdown-toggle"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
+                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
+                                  data-bs-toggle="dropdown" type="button">
                             Action
                           </button>
                           <ul class="dropdown-menu">
@@ -47,13 +47,13 @@
                               </a>
                             </li>
                             <li>
-                              <a class="dropdown-item" (click)="openEditModal(activity)">
+                              <a (click)="openEditModal(activity)" class="dropdown-item">
                                 Edit
                                 <i class="fa fa-pen float-end"></i>
                               </a>
                             </li>
                             <li>
-                              <a class="dropdown-item" (click)="openDeleteModal(activity)">
+                              <a (click)="openDeleteModal(activity)" class="dropdown-item">
                                 Delete
                                 <i class="fa fa-trash float-end"></i>
                               </a>
@@ -65,7 +65,7 @@
                   </ng-container>
                   </tbody>
                   <tbody>
-                  <button class="btn btn-primary" role="button" (click)="openAddModal()">
+                  <button (click)="openAddModal()" class="btn btn-primary" role="button">
                     <i class="fa fa-plus float-end"></i>
                   </button>
                   </tbody>
@@ -83,55 +83,55 @@
 <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
 
 <app-modal #addModal [modalConfig]="modalConfig">
-  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onAddSubmit()">
+  <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
     <div class="form-group">
 
       <div class="form-floating">
         <input
           class="form-control"
           formControlName="activityName"
-          type="text"
-          placeholder="Name"
-          required minlength="2"
-          maxlength="50"
           id="addActivityName"
+          maxlength="50"
+          minlength="2" placeholder="Name"
+          required
+          type="text"
         >
         <label for="editActivityName">Name</label>
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('addModal')" type="reset">Cancel</button>
-        <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
   </form>
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button type="reset" class="btn btn-outline-secondary" (click)="onDismiss('deleteModal')">Cancel</button>
-  <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteModal.close()" (click)="onDelete()">Ok
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+  <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
   </button>
 </app-modal>
 
 <app-modal #editModal [modalConfig]="modalConfig">
-  <form class="needs-validation" novalidate *ngIf="form != null" [formGroup]="form" (ngSubmit)="onEditSubmit()">
+  <form (ngSubmit)="onEditSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
     <div class="form-group">
 
       <div class="form-floating">
         <input
           class="form-control"
           formControlName="activityName"
-          type="text"
-          placeholder="Name"
-          required minlength="2"
-          maxlength="50"
           id="editActivityName"
+          maxlength="50"
+          minlength="2" placeholder="Name"
+          required
+          type="text"
         >
         <label for="editActivityName">Name</label>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-secondary" (click)="onDismiss('editModal')" type="reset">Cancel</button>
-        <button class="btn btn-outline-primary" [disabled]="form.invalid" type="submit">Ok</button>
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
   </form>

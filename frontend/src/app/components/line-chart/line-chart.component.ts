@@ -9,10 +9,27 @@ import {formatDate} from "@angular/common";
   styleUrls: ['./line-chart.component.css']
 })
 export class LineChartComponent implements OnInit, OnChanges {
-  @ViewChild('baseChart') private chart: ChartsModule;
-
   @Input() data: ContentDto[];
   @Input() activityName: string;
+  public chartDatasets: Array<any> = [{data: []}];
+  public chartType: string = 'line';
+  public chartLabels: Array<any> = [];
+  public chartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(105, 0, 132, .2)',
+      borderColor: 'rgba(200, 99, 132, .7)',
+      borderWidth: 2,
+    },
+    {
+      backgroundColor: 'rgba(0, 137, 132, .2)',
+      borderColor: 'rgba(0, 10, 130, .7)',
+      borderWidth: 2,
+    }
+  ];
+  public chartOptions: any = {
+    responsive: true
+  };
+  @ViewChild('baseChart') private chart: ChartsModule;
   private dataSetContent = [];
   private dataSetLabel = [];
 
@@ -47,29 +64,6 @@ export class LineChartComponent implements OnInit, OnChanges {
       this.setDataToChart();
     }
   }
-
-  public chartDatasets: Array<any> = [{data: []}];
-
-  public chartType: string = 'line';
-
-  public chartLabels: Array<any> = [];
-
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 2,
-    },
-    {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
-      borderWidth: 2,
-    }
-  ];
-
-  public chartOptions: any = {
-    responsive: true
-  };
 
   public chartClicked(e: any): void {
   }

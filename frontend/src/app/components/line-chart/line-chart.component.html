@@ -1,14 +1,14 @@
 <ng-container *ngIf="chartDatasets[0].data.length > 0">
   <div style="display: block">
-    <canvas mdbChart #baseChart height="60px"
+    <canvas #baseChart (chartClick)="chartClicked($event)" (chartHover)="chartHovered($event)"
             [chartType]="chartType"
+            [colors]="chartColors"
             [datasets]="chartDatasets"
             [labels]="chartLabels"
-            [colors]="chartColors"
-            [options]="chartOptions"
             [legend]="false"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"
+            [options]="chartOptions"
+            height="60px"
+            mdbChart
     >
     </canvas>
   </div>

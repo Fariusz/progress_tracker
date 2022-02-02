@@ -5,48 +5,48 @@
         <div class="row justify-content-center">
           <div class="col-xl-5 col-md-8">
 
-            <form #authForm="ngForm" class="bg-white  rounded-5 shadow-5-strong p-5" (ngSubmit)="onSubmit(authForm)">
+            <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="bg-white  rounded-5 shadow-5-strong p-5">
 
               <div class="form-floating mb-3">
                 <input *ngIf="!isLoginMode"
-                       type="email"
-                       id="inputEmail"
-                       class="form-control"
-                       ngModel
-                       name="email"
-                       required
                        autofocus
+                       class="form-control"
                        email
+                       id="inputEmail"
+                       name="email"
+                       ngModel
                        placeholder="name@example.com"
+                       required
+                       type="email"
                 >
                 <label for="inputEmail">Email address</label>
               </div>
 
               <div class="form-floating">
                 <input
-                  type="username"
-                  id="inputUsername"
+                  autofocus
                   class="form-control"
-                  ngModel
+                  id="inputUsername"
+                  minlength="3"
                   name="username"
+                  ngModel
                   placeholder="username"
                   required
-                  autofocus
-                  minlength="3"
+                  type="username"
                 >
                 <label for="inputUsername">Username</label>
               </div>
 
               <div class="form-floating">
                 <input
-                  type="password"
-                  id="inputPassword"
                   class="form-control"
-                  ngModel
-                  name="password"
+                  id="inputPassword"
                   minlength="3"
+                  name="password"
+                  ngModel
                   placeholder="password"
                   required
+                  type="password"
                 >
                 <label for="inputPassword">Password</label>
               </div>
@@ -56,7 +56,7 @@
                 <div class="col d-flex justify-content-center">
                   <!-- Checkbox -->
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked/>
+                    <input checked class="form-check-input" id="rememberMe" type="checkbox" value=""/>
                     <label class="form-check-label" for="rememberMe">
                       Remember me
                     </label>
@@ -71,15 +71,15 @@
 
               <!-- Submit button -->
               <button
-                type="submit"
+                [disabled]="!authForm.valid"
                 class="btn btn-lg btn-primary btn-block"
-                [disabled]="!authForm.valid">{{ isLoginMode ? 'Sign in' : 'Sign Up' }}
+                type="submit">{{ isLoginMode ? 'Sign in' : 'Sign Up' }}
               </button>
               or
               <button
-                type="button"
+                (click)="onSwitchMode()"
                 class="btn btn-secondary btn-block"
-                (click)="onSwitchMode()">{{ !isLoginMode ? 'Sign in' : 'Sign Up' }}
+                type="button">{{ !isLoginMode ? 'Sign in' : 'Sign Up' }}
               </button>
             </form>
           </div>

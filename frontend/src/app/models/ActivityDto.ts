@@ -2,17 +2,14 @@ import {ContentDto} from "./ContentDto";
 
 export class ActivityDto {
 
-  private _id: bigint;
-  private _activityName: string;
-  private _created: Date;
-  private _content: Array<ContentDto>
-
   constructor(id: bigint, activityName: string, created: Date, content: Array<ContentDto>) {
     this._id = id;
     this._activityName = activityName;
     this._created = created;
     this._content = content;
   }
+
+  private _id: bigint;
 
   get id(): bigint {
     return this._id;
@@ -22,6 +19,8 @@ export class ActivityDto {
     this._id = value;
   }
 
+  private _activityName: string;
+
   get activityName(): string {
     return this._activityName;
   }
@@ -30,6 +29,8 @@ export class ActivityDto {
     this._activityName = value;
   }
 
+  private _created: Date;
+
   get created(): Date {
     return this._created;
   }
@@ -37,6 +38,8 @@ export class ActivityDto {
   set created(value: Date) {
     this._created = value;
   }
+
+  private _content: Array<ContentDto>
 
   get content(): Array<ContentDto> {
     return this._content;

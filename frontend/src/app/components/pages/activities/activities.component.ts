@@ -14,10 +14,6 @@ import {ContentDto} from "../../../models/ContentDto";
 })
 export class ActivitiesComponent implements OnInit {
   @Input() activity: ActivityDto;
-  @ViewChild('addModal') private addModalComponent: ModalComponent;
-  @ViewChild('editModal') private editModalComponent: ModalComponent;
-  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
-
   page: number = 1;
   isLoading = false;
   selectedActivity: ActivityDto;
@@ -43,6 +39,9 @@ export class ActivitiesComponent implements OnInit {
       return true;
     }
   };
+  @ViewChild('addModal') private addModalComponent: ModalComponent;
+  @ViewChild('editModal') private editModalComponent: ModalComponent;
+  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
   constructor(private activitiesService: ActivitiesService,
               private fb: FormBuilder,
@@ -56,25 +55,6 @@ export class ActivitiesComponent implements OnInit {
         this.activities = activities;
         this.isLoading = false;
       });
-  }
-
-  private createForm(activity: ActivityDto) {
-    const content: ContentDto[] = [];
-
-    if (activity != null) {
-      this.form = this.fb.group({
-        activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-        content: new FormControl(content),
-        created: new FormControl(activity.created),
-        id: new FormControl(activity.id)
-      });
-    } else {
-      this.form = this.fb.group({
-        activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-        content: new FormControl(content),
-        created: new FormControl(new Date())
-      });
-    }
   }
 
   onDismiss(modal: string) {
@@ -154,5 +134,24 @@ export class ActivitiesComponent implements OnInit {
 
   showSuccess(message: string, title: string) {
     this.toastr.success(message, title);
+  }
+
+  private createForm(activity: ActivityDto) {
+    const content: ContentDto[] = [];
+
+    if (activity != null) {
+      this.form = this.fb.group({
+        activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
+        created: new FormControl(activity.created),
+        id: new FormControl(activity.id)
+      });
+    } else {
+      this.form = this.fb.group({
+        activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        content: new FormControl(content),
+        created: new FormControl(new Date())
+      });
+    }
   }
 }
