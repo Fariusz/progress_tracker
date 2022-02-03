@@ -37,7 +37,7 @@ import {FooterComponent} from './components/footer/footer.component';
     ActivityDetailsComponent,
     LineChartComponent,
     ModalComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

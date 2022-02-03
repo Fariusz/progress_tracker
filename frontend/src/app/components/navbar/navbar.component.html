@@ -1,52 +1,54 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Progress tracker</a>
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-            data-bs-target="#navbarContent" data-bs-toggle="collapse" type="button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">Progress tracker</a>
+      <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+              data-bs-target="#navbarContent" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarContent">
+      <div class="collapse navbar-collapse" id="navbarContent">
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/activities" routerLinkActive="active">Activities</a>
-        </li>
-        <!--        <li routerLink="/activities" routerLinkActive="active" class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Activities </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" routerLink="/activities">List activities</a></li>
-                    <li><a class="dropdown-item" >Add activity</a></li>
-                  </ul>
-                </li>-->
-      </ul>
-      <form class="form-inline my-2 my-md-0">
-        <input class="form-control" placeholder="Search" type="text">
-      </form>
-      <ul class="navbar-nav">
-        <div *ngIf="!isAuthenticated">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item text-nowrap">
-              <a (click)="onLogin()" class="nav-link" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item text-nowrap">
-              <a (click)="onRegister()" class="nav-link" routerLink="/login">Register</a>
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="isAuthenticated">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item text-nowrap">
-              <a (click)="onLogout()" class="nav-link" routerLink="/">Logout
-                <fa-icon [icon]="faSignOut"></fa-icon>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/activities" routerLinkActive="active">Activities</a>
+          </li>
+          <!--        <li routerLink="/activities" routerLinkActive="active" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Activities </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" routerLink="/activities">List activities</a></li>
+                      <li><a class="dropdown-item" >Add activity</a></li>
+                    </ul>
+                  </li>-->
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" placeholder="Search" type="text">
+        </form>
+        <ul class="navbar-nav">
+          <div *ngIf="!isAuthenticated">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item text-nowrap">
+                <a (click)="onLogin()" class="nav-link" routerLink="/login">Login</a>
+              </li>
+              <li class="nav-item text-nowrap">
+                <a (click)="onRegister()" class="nav-link" routerLink="/login">Register</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="isAuthenticated">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item text-nowrap">
+                <a (click)="onLogout()" class="nav-link" routerLink="/">Logout
+                  <fa-icon [icon]="faSignOut"></fa-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
