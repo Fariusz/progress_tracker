@@ -24,6 +24,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from "@angular/common";
 import {ToastrModule} from "ngx-toastr";
 import {FooterComponent} from './components/footer/footer.component';
+import { MainComponentComponent } from './components/main-component/main-component.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {FooterComponent} from './components/footer/footer.component';
     LineChartComponent,
     ModalComponent,
     FooterComponent,
+    MainComponentComponent,
   ],
   imports: [
     BrowserModule,
