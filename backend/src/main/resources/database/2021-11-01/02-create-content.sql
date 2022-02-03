@@ -11,4 +11,4 @@ CREATE TABLE CONTENT
 
 ALTER TABLE CONTENT
     ADD CONSTRAINT content_activity_id
-        FOREIGN KEY (activity_id) REFERENCES activity (id);
+        FOREIGN KEY (activity_id) REFERENCES ACTIVITY (id);
