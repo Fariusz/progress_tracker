@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d18430c-0793-4ff7-860a-325379761304" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rloth/progress_tracker/controllers/ActivityControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rloth/progress_tracker/controllers/ActivityControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +33,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637915095355</updated>
       <workItem from="1637915106441" duration="22000" />
+      <workItem from="1644450043091" duration="3000" />
     </task>
     <servers />
   </component>

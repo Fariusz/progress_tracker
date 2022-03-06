@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset rloth:2
 
-CREATE TABLE CONTENT
+CREATE TABLE content
 (
     id          BIGINT AUTO_INCREMENT PRIMARY KEY,
     activity_id BIGINT        NOT NULL,
@@ -9,6 +9,6 @@ CREATE TABLE CONTENT
     created     timestamp
 );
 
-ALTER TABLE CONTENT
+ALTER TABLE content
     ADD CONSTRAINT content_activity_id
         FOREIGN KEY (activity_id) REFERENCES activity (id);

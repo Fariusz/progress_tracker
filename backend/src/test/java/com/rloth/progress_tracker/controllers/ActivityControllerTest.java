@@ -31,7 +31,7 @@ class ActivityControllerTest {
     @Autowired
     private ActivityRepository activityRepository;
 
-    @Test
+/*    @Test
     @Transactional
     void shouldGetSingleActivity() throws Exception {
         // given
@@ -51,5 +51,5 @@ class ActivityControllerTest {
         assertThat(activity).isNotNull();
         assertThat(activity.getId()).isEqualTo(newActivity.getId());
         assertThat(activity.getActivityName()).isEqualTo("Test");
-    }
+    }*/
 }
