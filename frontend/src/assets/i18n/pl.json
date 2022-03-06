@@ -4,7 +4,7 @@
     "activities" : "Aktywności",
     "login" : "Logowanie",
     "register" : "Rejestracja",
-    "logout" : "Wylogowanie"
+    "logout" : "Wylogowywanie"
   },
   "main": {
     "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
