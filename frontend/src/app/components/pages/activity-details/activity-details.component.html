@@ -28,7 +28,7 @@
           <div class="card shadow-lg">
             <div class="card-header text-center py-3">
               <h5 class="mb-0 text-center">
-                <strong>Entries</strong>
+                <strong>{{ "activity-details.entries" | translate }}</strong>
               </h5>
             </div>
             <div class="card-body">
@@ -37,8 +37,8 @@
                   <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Entry</th>
-                    <th scope="col">Created</th>
+                    <th scope="col">{{ "activity-details.entry" | translate}}</th>
+                    <th scope="col">{{ "activity-details.created" | translate}}</th>
                     <th scope="col"></th>
                   </tr>
                   </thead>
@@ -54,20 +54,19 @@
                       <td>{{entry.created | date: 'fullDate'}}</td>
                       <td>
                         <div class="btn-group">
-                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
-                                  data-bs-toggle="dropdown" type="button">
-                            Action
+                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+                            {{ "activity-details.action" | translate}}
                           </button>
                           <ul class="dropdown-menu">
                             <li>
                               <a (click)="openEditModal(entry)" class="dropdown-item">
-                                Edit
+                                {{ "activity-details.edit" | translate}}
                                 <i class="fa fa-pen float-end"></i>
                               </a>
                             </li>
                             <li>
                               <a (click)="openDeleteModal(entry)" class="dropdown-item">
-                                Delete
+                                {{ "activity-details.delete" | translate}}
                                 <i class="fa fa-trash float-end"></i>
                               </a>
                             </li>
@@ -109,7 +108,7 @@
           required
           type="number"
         >
-        <label for="addContent">Entry</label>
+        <label for="addContent"> {{ "activity-details.entry" | translate}}</label>
       </div>
       <div class="form-floating">
         <input
@@ -118,10 +117,10 @@
           id="addDate"
           type="datetime-local"
         >
-        <label for="addDate">Date</label>
+        <label for="addDate">{{ "activity-details.date" | translate}}</label>
       </div>
       <div class="modal-footer">
-        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
@@ -129,7 +128,7 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
   <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
   </button>
 </app-modal>
@@ -147,10 +146,10 @@
           required
           type="text"
         >
-        <label for="editContent">Entry</label>
+        <label for="editContent">{{ "activity-details.entry" | translate}}</label>
       </div>
       <div class="modal-footer">
-        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">Cancel</button>
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
