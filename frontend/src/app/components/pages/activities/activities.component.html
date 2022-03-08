@@ -29,9 +29,9 @@
                       <td>{{index + 1}}</td>
                       <td>{{activity.activityName}}</td>
                       <td>{{activity.content.length}}</td>
-                      <td *ngIf="activity.content.length == 0">never</td>
+                      <td *ngIf="activity.content.length == 0">{{"activities.never" | translate}}</td>
                       <ng-container *ngFor="let content of activity.content let last = last; ">
-                        <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
+                        <td *ngIf="last">{{content.created | date: 'shortDate'}}</td>
                       </ng-container>
                       <td>
                         <div class="btn-group">
@@ -70,7 +70,7 @@
                   </button>
                   </tbody>
                 </table>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                <pagination-controls previousLabel=" {{ 'pagination.previous' | translate }} " nextLabel=" {{ 'pagination.next' | translate }} " (pageChange)="page = $event"></pagination-controls>
               </div>
             </div>
           </div>

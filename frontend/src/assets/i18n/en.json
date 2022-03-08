@@ -4,7 +4,8 @@
     "activities" : "Activities",
     "login" : "Login",
     "register" : "Register",
-    "logout" : "Logout"
+    "logout" : "Logout",
+    "searchbar_placeholder" : "Search"
   },
   "main" : {
     "h1" : "Manage your activities in one tool",
@@ -43,6 +44,16 @@
     "details" : "Details",
     "edit" : "Edit",
     "delete" : "Delete",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "never" : "Never"
+  },
+  "pagination" : {
+    "previous": "Previous",
+    "next" : "Next"
+  },
+  "chart" : {
+    "share" : "Share",
+    "export" : "Export",
+    "this_week" : "This week"
   }
 }

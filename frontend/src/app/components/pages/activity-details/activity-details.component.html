@@ -11,12 +11,16 @@
               </div>
               <div class="card-body">
                 <div class="btn-group me-2">
-                  <button class="btn btn-sm btn-outline-secondary" type="button">Share</button>
-                  <button class="btn btn-sm btn-outline-secondary" type="button">Export</button>
+                  <button class="btn btn-sm btn-outline-secondary" type="button">
+                    {{ 'chart.share' | translate }}
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary" type="button">
+                    {{ 'chart.export' | translate }}
+                  </button>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
                   <span data-feather="calendar"></span>
-                  This week
+                  {{ 'chart.this_week' | translate }}
                 </button>
               </div>
               <app-line-chart [data]="content"></app-line-chart>
@@ -51,7 +55,7 @@
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
-                      <td>{{entry.created | date: 'fullDate'}}</td>
+                      <td>{{entry.created | date: 'shortDate'}}</td>
                       <td>
                         <div class="btn-group">
                           <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
@@ -82,7 +86,7 @@
                   </button>
                   </tbody>
                 </table>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                <pagination-controls previousLabel=" {{ 'pagination.previous' | translate }} " nextLabel=" {{ 'pagination.next' | translate }} " (pageChange)="page = $event"></pagination-controls>
               </div>
             </div>
           </div>

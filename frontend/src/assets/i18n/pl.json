@@ -4,7 +4,9 @@
     "activities" : "Aktywności",
     "login" : "Logowanie",
     "register" : "Rejestracja",
-    "logout" : "Wylogowywanie"
+    "logout" : "Wylogowywanie",
+    "searchbar_placeholder" : "Wyszukaj"
+
   },
   "main": {
     "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
@@ -43,6 +45,16 @@
     "details": "Szczegóły",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "never" : "Nigdy"
+  },
+  "pagination" : {
+    "previous": "Poprzednia strona",
+    "next" : "Następna strona"
+  },
+  "chart" : {
+    "share" : "Udostępnij",
+    "export" : "Wyeksportuj",
+    "this_week" : "Ten tydzień"
   }
 }
