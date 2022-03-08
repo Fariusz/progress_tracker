@@ -1,12 +1,11 @@
 {
-  "navbar" : {
-    "home" : "Początek",
-    "activities" : "Aktywności",
-    "login" : "Logowanie",
-    "register" : "Rejestracja",
-    "logout" : "Wylogowywanie",
-    "searchbar_placeholder" : "Wyszukaj"
-
+  "navbar": {
+    "home": "Początek",
+    "activities": "Aktywności",
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "logout": "Wylogowywanie",
+    "searchbar_placeholder": "Wyszukaj"
   },
   "main": {
     "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
@@ -19,8 +18,8 @@
     "remember_me": "Zapamiętaj mnie",
     "forgot_password": "Zapomniałeś hasła?",
     "or": "lub",
-    "sign_in" : "Zaloguj",
-    "sign_up" : "Zarejestruj"
+    "sign_in": "Zaloguj",
+    "sign_up": "Zarejestruj"
   },
   "home": {
     "h1": "zacznijmy śledzić postępy!",
@@ -46,15 +45,15 @@
     "edit": "Edytuj",
     "delete": "Usuń",
     "cancel": "Anuluj",
-    "never" : "Nigdy"
+    "never": "Nigdy"
   },
-  "pagination" : {
+  "pagination": {
     "previous": "Poprzednia strona",
-    "next" : "Następna strona"
+    "next": "Następna strona"
   },
-  "chart" : {
-    "share" : "Udostępnij",
-    "export" : "Wyeksportuj",
-    "this_week" : "Ten tydzień"
+  "chart": {
+    "share": "Udostępnij",
+    "export": "Wyeksportuj",
+    "this_week": "Ten tydzień"
   }
 }

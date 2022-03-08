@@ -14,8 +14,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   faSignOut = faSignOutAlt;
 
   isAuthenticated = false;
-  private userSub!: Subscription;
   language = 'en';
+  private userSub!: Subscription;
 
   constructor(private authService: AuthService, private translate: TranslateService) {
     translate.setDefaultLang('en');
