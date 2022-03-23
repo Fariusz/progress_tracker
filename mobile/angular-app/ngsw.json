@@ -1,0 +1,85 @@
+{
+  "configVersion": 1,
+  "timestamp": 1647376538610,
+  "index": "http://localhost:8080/angular-app/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "http://localhost:8080/angular-app/favicon.ico",
+        "http://localhost:8080/angular-app/index.html",
+        "http://localhost:8080/angular-app/main.bdd08ae18bff78f0.js",
+        "http://localhost:8080/angular-app/manifest.webmanifest",
+        "http://localhost:8080/angular-app/polyfills.afbc2a12a1f6ed21.js",
+        "http://localhost:8080/angular-app/runtime.7d7284d5a3ab545f.js",
+        "http://localhost:8080/angular-app/styles.ef46db3751d8e999.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "http://localhost:8080/angular-app/assets/i18n/en.json",
+        "http://localhost:8080/angular-app/assets/i18n/pl.json",
+        "http://localhost:8080/angular-app/assets/icons/icon-128x128.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-144x144.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-152x152.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-192x192.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-384x384.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-512x512.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-72x72.png",
+        "http://localhost:8080/angular-app/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "http://localhost:8080/angular-app/assets/i18n/en.json": "23c32d907ef3e9a50b11dc6a728adc94681b9f72",
+    "http://localhost:8080/angular-app/assets/i18n/pl.json": "e1b626f04678a9958ccfa0f5253188246b7f0ff7",
+    "http://localhost:8080/angular-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "http://localhost:8080/angular-app/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "http://localhost:8080/angular-app/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "http://localhost:8080/angular-app/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "http://localhost:8080/angular-app/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "http://localhost:8080/angular-app/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "http://localhost:8080/angular-app/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "http://localhost:8080/angular-app/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "http://localhost:8080/angular-app/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "http://localhost:8080/angular-app/index.html": "bbf8d89156bffd035d6fac7c0c2345a28bb62b98",
+    "http://localhost:8080/angular-app/main.bdd08ae18bff78f0.js": "feb35c6fc34361abaf14af2601a410f6f24b0b9b",
+    "http://localhost:8080/angular-app/manifest.webmanifest": "0d0b1780d219fd3ebcdd65e3da961d3671727a33",
+    "http://localhost:8080/angular-app/polyfills.afbc2a12a1f6ed21.js": "2165ad8eadfb6e75158bf362c7154b27773daf8e",
+    "http://localhost:8080/angular-app/runtime.7d7284d5a3ab545f.js": "82dd6a02881e66273bc8747db5eff329b6357ad7",
+    "http://localhost:8080/angular-app/styles.ef46db3751d8e999.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

@@ -1,0 +1,71 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">Progress tracker</a>
+      <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+              class="navbar-toggler"
+              data-bs-target="#navbarContent" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">{{ "navbar.home" | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/activities"
+               routerLinkActive="active">{{ "navbar.activities" | translate}}</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" placeholder=" {{ 'navbar.searchbar_placeholder' | translate }} " type="text">
+        </form>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">
+              <i *ngIf="language == 'en'" class="flag-icon flag-icon-gb"></i>
+              <i *ngIf="language == 'pl'" class="flag-icon flag-icon-pl"></i>
+            </a>
+            <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+              <li>
+                <a (click)="useLanguage('en')" class="dropdown-item">
+                  <i class="flag-icon flag-icon-gb"></i>
+                  English
+                  <i *ngIf="language == 'en'" class="fa fa-check text-success ms-2"></i>
+                </a>
+              </li>
+              <li>
+                <a (click)="useLanguage('pl')" class="dropdown-item">
+                  <i class="flag-icon flag-icon-pl"></i>
+                  Polski
+                  <i *ngIf="language == 'pl'" class="fa fa-check text-success ms-2"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <div *ngIf="!isAuthenticated">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item text-nowrap">
+                <a (click)="onLogin()" class="nav-link" routerLink="/login">{{ "navbar.login" | translate}}</a>
+              </li>
+              <li class="nav-item text-nowrap">
+                <a (click)="onRegister()" class="nav-link" routerLink="/login">{{ "navbar.register" | translate}}</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="isAuthenticated">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item text-nowrap">
+                <a (click)="onLogout()" class="nav-link" routerLink="/">{{ "navbar.logout" | translate}}
+                  <fa-icon [icon]="faSignOut"></fa-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

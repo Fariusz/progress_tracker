@@ -1,0 +1,104 @@
+<div class="text-center">
+    <ng-container *ngIf="!isLoading">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-md-8">
+  
+              <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="bg-white  rounded-5 shadow-5-strong p-5">
+  
+                <div class="form-floating mb-3">
+                  <input *ngIf="!isLoginMode"
+                         autofocus
+                         class="form-control"
+                         email
+                         id="inputEmail"
+                         name="email"
+                         ngModel
+                         placeholder="name@example.com"
+                         required
+                         type="email"
+                  >
+                  <label for="inputEmail">{{ "login.email" | translate }}</label>
+                </div>
+  
+                <div class="form-floating">
+                  <input
+                    autofocus
+                    class="form-control"
+                    id="inputUsername"
+                    minlength="3"
+                    name="username"
+                    ngModel
+                    placeholder="username"
+                    required
+                    type="username"
+                  >
+                  <label for="inputUsername">{{ "login.username" | translate }}</label>
+                </div>
+  
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="inputPassword"
+                    minlength="3"
+                    name="password"
+                    ngModel
+                    placeholder="password"
+                    required
+                    type="password"
+                  >
+                  <label for="inputPassword">{{ "login.password" | translate }}</label>
+                </div>
+  
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                  <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input checked class="form-check-input" id="rememberMe" type="checkbox" value=""/>
+                      <label class="form-check-label" for="rememberMe">{{ "login.remember_me" | translate }}</label>
+                    </div>
+                  </div>
+  
+                  <div class="col text-center">
+                    <a href="#!">{{ "login.forgot_password" | translate }}</a>
+                  </div>
+                </div>
+  
+                <!-- Submit button -->
+                <button
+                  [disabled]="!authForm.valid"
+                  class="btn btn-lg btn-primary btn-block"
+                  translate
+                  type="submit">
+                  <ng-container *ngIf="isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
+                  <ng-container *ngIf="!isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
+                  <!--
+                                  {{ isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+                  -->
+                </button>
+                {{ "login.or" | translate }}
+                <button
+                  (click)="onSwitchMode()"
+                  class="btn btn-secondary btn-block"
+                  translate
+                  type="button">
+                  <ng-container *ngIf="!isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
+                  <ng-container *ngIf="isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
+                  <!--
+                                  {{ !isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+                  -->
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+    </ng-container>
+  </div>
+  

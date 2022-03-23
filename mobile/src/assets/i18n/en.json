@@ -1,0 +1,63 @@
+{
+  "navbar": {
+    "home": "Home",
+    "activities": "Activities",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "searchbar_placeholder": "Search"
+  },
+  "main": {
+    "h1": "Manage your activities in one tool",
+    "p": "You do not need to use a notebook, spreadsheet or other tools to monitor your progress in the\n      intended activities.\n      Here you can add the exercises you do and their results. It will work just as well with resolutions.\n      Do you want to start reading more books? Maybe you want to increase the amount of water you consume.\n      Manage your activities and track their progress - from day one to the end. - in Progress tracker."
+  },
+  "login": {
+    "email": "Email address",
+    "username": "Username",
+    "password": "Password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "or": "or",
+    "sign_in": "Sign in",
+    "sign_up": "Sign Up"
+  },
+  "home": {
+    "h1": "let's start progress tracking!",
+    "p": "Go to activities"
+  },
+  "activity-details": {
+    "entries": "Entries",
+    "entry": "Entry",
+    "created": "Created",
+    "action": "Action",
+    "edit": "Edit",
+    "delete": "Delete",
+    "date": "Date",
+    "cancel": "Cancel"
+  },
+  "activities": {
+    "activities": "Activities",
+    "name": "Name",
+    "entries": "Entries",
+    "updated": "Updated",
+    "action": "Action",
+    "details": "Details",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "never": "Never"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "chart": {
+    "share": "Share",
+    "export": "Export",
+    "this_week": "This week"
+  },
+  "modal": {
+    "add" : "Add activity"
+
+  }
+}

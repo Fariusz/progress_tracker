@@ -1,0 +1,59 @@
+{
+  "navbar": {
+    "home": "Początek",
+    "activities": "Aktywności",
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "logout": "Wylogowywanie",
+    "searchbar_placeholder": "Wyszukaj"
+  },
+  "main": {
+    "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
+    "p": "Nie musisz używać notatnika, arkusza kalkulacyjnego ani innych narzędzi do monitorowania postępów w realizacji\n      zamierzonych działań.\n      Tutaj możesz dodawać ćwiczenia, które wykonujesz, i ich wyniki. Równie dobrze sprawdzi się to w przypadku postanowień.\n      Czy chcesz zacząć czytać więcej książek? Może chcesz zwiększyć ilość spożywanej wody.\n      Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia. - w aplikacji Progress tracker."
+  },
+  "login": {
+    "email": "Adres e-mail",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "remember_me": "Zapamiętaj mnie",
+    "forgot_password": "Zapomniałeś hasła?",
+    "or": "lub",
+    "sign_in": "Zaloguj",
+    "sign_up": "Zarejestruj"
+  },
+  "home": {
+    "h1": "zacznijmy śledzić postępy!",
+    "p": "Przejdź do aktywności"
+  },
+  "activity-details": {
+    "entries": "Wpisy",
+    "entry": "Wpis",
+    "created": "Utworzono",
+    "action": "Działanie",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "date": "Data",
+    "cancel": "Anuluj"
+  },
+  "activities": {
+    "activities": "Aktywności",
+    "name": "Nazwa",
+    "entries": "Wpisy",
+    "updated": "Aktualizowane",
+    "action": "Działanie",
+    "details": "Szczegóły",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "cancel": "Anuluj",
+    "never": "Nigdy"
+  },
+  "pagination": {
+    "previous": "Poprzednia strona",
+    "next": "Następna strona"
+  },
+  "chart": {
+    "share": "Udostępnij",
+    "export": "Wyeksportuj",
+    "this_week": "Ten tydzień"
+  }
+}
