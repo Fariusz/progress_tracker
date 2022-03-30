@@ -1,1 +1,157 @@
-<p>activity-details works!</p>
+<ng-container *ngIf="!isLoading">
+    <div class="container-fluid">
+      <main>
+        <div class="container pt-4">
+  
+          <section class="mb-4">
+            <ng-container *ngIf="content.length > 0">
+              <div class="card shadow-lg">
+                <div class="card-header py-3">
+                  <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
+                </div>
+                <div class="card-body">
+                  <div class="btn-group me-2">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">Share</button>
+                    <button class="btn btn-sm btn-outline-secondary" type="button">Export</button>
+                  </div>
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
+                    <span data-feather="calendar"></span>
+                    This week
+                  </button>
+                </div>
+                <app-line-chart [data]="content"></app-line-chart>
+              </div>
+            </ng-container>
+          </section>
+  
+          <section class="mb-4">
+            <div class="card shadow-lg">
+              <div class="card-header text-center py-3">
+                <h5 class="mb-0 text-center">
+                  <strong>{{ "activity-details.entries" | translate }}</strong>
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">{{ "activity-details.entry" | translate}}</th>
+                      <th scope="col">{{ "activity-details.created" | translate}}</th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ng-container
+                      *ngFor="let entry of content |
+                       paginate: {itemsPerPage: 10, currentPage: page};
+                      let index = index"
+                    >
+                      <tr>
+                        <td>{{index + 1}}</td>
+                        <td>{{entry.content}}</td>
+                        <td>{{entry.created | date: 'fullDate'}}</td>
+                        <td>
+                          <div class="btn-group">
+                            <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+                              {{ "activity-details.action" | translate}}
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a (click)="openEditModal(entry)" class="dropdown-item">
+                                  {{ "activity-details.edit" | translate}}
+                                  <i class="fa fa-pen float-end"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="openDeleteModal(entry)" class="dropdown-item">
+                                  {{ "activity-details.delete" | translate}}
+                                  <i class="fa fa-trash float-end"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    </tbody>
+                    <tbody>
+                    <button (click)="openAddModal()" class="btn btn-primary" role="button">
+                      <i class="fa fa-plus float-end"></i>
+                    </button>
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </ng-container>
+  
+  <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
+  
+  <app-modal #addModal [modalConfig]="modalConfig">
+    <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+      <div class="form-group">
+  
+        <div class="form-floating">
+          <input
+            class="form-control"
+            formControlName="content"
+            id="addContent"
+            maxlength="50"
+            minlength="1" placeholder="content"
+            required
+            type="number"
+          >
+          <label for="addContent"> {{ "activity-details.entry" | translate}}</label>
+        </div>
+        <div class="form-floating">
+          <input
+            class="form-control"
+            formControlName="created"
+            id="addDate"
+            type="datetime-local"
+          >
+          <label for="addDate">{{ "activity-details.date" | translate}}</label>
+        </div>
+        <div class="modal-footer">
+          <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+          <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+        </div>
+      </div>
+    </form>
+  </app-modal>
+  
+  <app-modal #deleteModal [modalConfig]="modalConfig">
+    <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+    <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
+    </button>
+  </app-modal>
+  
+  <app-modal #editModal [modalConfig]="modalConfig">
+    <form (ngSubmit)="onEditSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+      <div class="form-group">
+        <div class="form-floating">
+          <input
+            class="form-control"
+            formControlName="content"
+            id="editContent"
+            maxlength="50"
+            minlength="1" placeholder="Entry"
+            required
+            type="text"
+          >
+          <label for="editContent">{{ "activity-details.entry" | translate}}</label>
+        </div>
+        <div class="modal-footer">
+          <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+          <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+        </div>
+      </div>
+    </form>
+  </app-modal>

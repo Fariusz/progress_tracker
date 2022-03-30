@@ -39,6 +39,8 @@
               "node_modules/flag-icon-css/css/flag-icons.min.css",
               "node_modules/animate.css/animate.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "src/styles.css"
             ],
             "scripts": [ 
