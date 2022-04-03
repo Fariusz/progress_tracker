@@ -19,7 +19,7 @@
                        required
                        type="email"
                 >
-                <label for="inputEmail">Email address</label>
+                <label for="inputEmail">{{ "login.email" | translate }}</label>
               </div>
 
               <div class="form-floating">
@@ -34,7 +34,7 @@
                   required
                   type="username"
                 >
-                <label for="inputUsername">Username</label>
+                <label for="inputUsername">{{ "login.username" | translate }}</label>
               </div>
 
               <div class="form-floating">
@@ -48,7 +48,7 @@
                   required
                   type="password"
                 >
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">{{ "login.password" | translate }}</label>
               </div>
 
               <!-- 2 column grid layout for inline styling -->
@@ -57,15 +57,12 @@
                   <!-- Checkbox -->
                   <div class="form-check">
                     <input checked class="form-check-input" id="rememberMe" type="checkbox" value=""/>
-                    <label class="form-check-label" for="rememberMe">
-                      Remember me
-                    </label>
+                    <label class="form-check-label" for="rememberMe">{{ "login.remember_me" | translate }}</label>
                   </div>
                 </div>
 
                 <div class="col text-center">
-                  <!-- Simple link -->
-                  <a href="#!">Forgot password?</a>
+                  <a href="#!">{{ "login.forgot_password" | translate }}</a>
                 </div>
               </div>
 
@@ -73,13 +70,25 @@
               <button
                 [disabled]="!authForm.valid"
                 class="btn btn-lg btn-primary btn-block"
-                type="submit">{{ isLoginMode ? 'Sign in' : 'Sign Up' }}
+                type="submit"
+                translate>
+                <ng-container *ngIf="isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
+                <ng-container *ngIf="!isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
+<!--
+                {{ isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+-->
               </button>
-              or
+              {{ "login.or" | translate }}
               <button
                 (click)="onSwitchMode()"
                 class="btn btn-secondary btn-block"
-                type="button">{{ !isLoginMode ? 'Sign in' : 'Sign Up' }}
+                type="button"
+                translate>
+                <ng-container *ngIf="!isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
+                <ng-container *ngIf="isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
+<!--
+                {{ !isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+-->
               </button>
             </form>
           </div>

@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {ActivitiesComponent} from './components/pages/activities/activities.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeComponent} from './components/pages/home/home.component';
@@ -24,6 +24,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from "@angular/common";
 import {ToastrModule} from "ngx-toastr";
 import {FooterComponent} from './components/footer/footer.component';
+import {MainComponentComponent} from './components/main-component/main-component.component';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -37,7 +44,8 @@ import {FooterComponent} from './components/footer/footer.component';
     ActivityDetailsComponent,
     LineChartComponent,
     ModalComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,15 @@ import {FooterComponent} from './components/footer/footer.component';
     MDBBootstrapModule.forRoot(),
     NgbModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     ActivitiesService,
