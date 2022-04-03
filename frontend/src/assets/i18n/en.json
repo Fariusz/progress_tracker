@@ -55,5 +55,9 @@
     "share": "Share",
     "export": "Export",
     "this_week": "This week"
+  },
+  "modal": {
+    "add" : "Add activity"
+
   }
 }

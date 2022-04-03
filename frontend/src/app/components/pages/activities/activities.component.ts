@@ -67,7 +67,10 @@ export class ActivitiesComponent implements OnInit {
   async openAddModal() {
     this.createForm(null);
     this.modalConfig = {
-      modalTitle: "Add activity",
+/*
+      modalTitle: "Add",
+*/
+      modalTitle: "Dodaj",
       hideCloseButton() {
         return true;
       },
@@ -82,7 +85,10 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value).subscribe(activity => {
       this.activities.push(activity);
+/*
       this.showSuccess(activity.activityName, 'Successfully added')
+*/
+      this.showSuccess(activity.activityName, 'Pomyślnie dodano')
     });
     this.addModalComponent.close();
     this.isLoading = false;
@@ -91,7 +97,10 @@ export class ActivitiesComponent implements OnInit {
   async openEditModal(activity: ActivityDto) {
     this.createForm(activity);
     this.modalConfig = {
+/*
       modalTitle: "Edit activity", hideCloseButton() {
+*/
+      modalTitle: "Edycja", hideCloseButton() {
         return true;
       }, hideDismissButton() {
         return true;
@@ -104,7 +113,10 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.editActivity(this.form.value).subscribe(activity => {
       this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
+/*
       this.showSuccess(activity.activityName, 'Successfully edited');
+*/
+      this.showSuccess(activity.activityName, 'Edytowano pomyślnie');
     });
     this.editModalComponent.close();
     this.isLoading = false;
@@ -113,7 +125,10 @@ export class ActivitiesComponent implements OnInit {
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
     this.modalConfig = {
-      modalTitle: "Are you sure to delete?", hideCloseButton() {
+/*
+      modalTitle: "Are you sure want to delete?", hideCloseButton() {
+*/
+      modalTitle: "Czy napewno chcesz usunąć?", hideCloseButton() {
         return true;
       }, hideDismissButton() {
         return true;
@@ -125,7 +140,10 @@ export class ActivitiesComponent implements OnInit {
   onDelete() {
     this.isLoading = true;
     this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
+/*
       this.showSuccess(this.selectedActivity.activityName, 'Successfully deleted');
+*/
+      this.showSuccess(this.selectedActivity.activityName, 'Pomyślnie usunięto');
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
     this.deleteModalComponent.close();

@@ -60,7 +60,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgbModule,
     CommonModule,
     ToastrModule.forRoot(),
-    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
