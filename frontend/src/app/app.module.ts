@@ -27,6 +27,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {MainComponentComponent} from './components/main-component/main-component.component';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import { ActivitiesListsComponent } from './components/pages/activities-lists/activities-lists.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,8 +47,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalComponent,
     FooterComponent,
     MainComponentComponent,
+    ActivitiesListsComponent,
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -57,7 +60,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FontAwesomeModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule,
     CommonModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({

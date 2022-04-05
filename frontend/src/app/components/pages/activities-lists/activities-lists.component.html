@@ -1,0 +1,90 @@
+<ng-container *ngIf="!isLoading">
+  <div class="container-fluid">
+    <main>
+      <div class="container pt-4">
+        <section class="mb-4">
+          <div class="card shadow-lg">
+            <div class="card-header text-center py-3">
+              <h5 class="mb-0 text-center"><strong>{{ "activities.activities" | translate }}</strong></h5>
+            </div>
+            <div class="card-body">
+              <ng-container *ngFor = "let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
+                <ngb-accordion #acc="ngbAccordion" activeIds="{{'config-panel-one' + 0}}">
+                  <ngb-panel title="{{list.listName}}" id="{{'config-panel-one' + i}}">
+                    <ng-template ngbPanelHeader>
+                      <button ngbPanelToggle class="btn btn-link stretched-link">{{list.listName}}</button>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <div class="table-responsive">
+                        <table class="table table-hover text-nowrap">
+                          <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>{{ "activities.name" | translate }}</th>
+                            <th>{{ "activities.entries" | translate }}</th>
+                            <th>{{ "activities.updated" | translate }}</th>
+                            <th></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <ng-container *ngFor="let activity of list.activities | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
+                            <tr>
+                              <td>{{index + 1}}</td>
+                              <td>{{activity.activityName}}</td>
+                              <td>{{activity.content.length}}</td>
+                              <td *ngIf="activity.content.length == 0">{{"activities.never" | translate}}</td>
+                              <ng-container *ngFor="let content of activity.content let last = last; ">
+                                <td *ngIf="last">{{content.created | date: 'shortDate'}}</td>
+                              </ng-container>
+                              <td>
+                                <div class="btn-group">
+                                  <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
+                                          data-bs-toggle="dropdown" type="button">
+                                    {{ "activities.action" | translate }}
+                                  </button>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a class="dropdown-item" routerLink="/details/{{activity.id}}">
+                                        {{ "activities.details" | translate }}
+                                        <i class="fa fa-search float-end"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a class="dropdown-item">
+                                        {{ "activities.edit" | translate }}
+                                        <i class="fa fa-pen float-end"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a class="dropdown-item">
+                                        {{ "activities.delete" | translate }}
+                                        <i class="fa fa-trash float-end"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                          <tbody>
+                          <button class="btn btn-primary" role="button">
+                            <i class="fa fa-plus float-end"></i>
+                          </button>
+                          </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} " previousLabel=" {{ 'pagination.previous' | translate }}"></pagination-controls>
+                      </div>
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+              </ng-container>
+            </div>
+            <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} " previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</ng-container>
+<app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>

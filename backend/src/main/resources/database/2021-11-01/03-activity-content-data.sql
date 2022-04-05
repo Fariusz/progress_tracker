@@ -1,27 +1,34 @@
 --liquibase formatted sql
 --changeset rloth:3
-insert into activity (id, activity_name, author_id, created)
-values (1, 'Push ups', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (2, 'Bench press', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (3, 'Squad', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (4, 'Dead lift', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (5, 'Over head press', 1, '2020-04-20T13:14:05.724885500');
+
+insert into activities_list (id, list_name, author_id, created)
+values (1, 'Trainings', 1 ,'2020-04-20T13:14:05.724885500');
+
+insert into activities_list (id, list_name, author_id, created)
+values (2, 'Things', 2 ,'2020-04-20T13:14:05.724885500');
+
+insert into activity (id, list_id, activity_name, author_id, created)
+values (1, 1, 'Push ups', 1, '2020-04-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (2, 1, 'Bench press', 1, '2020-04-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (3, 1, 'Squad', 1, '2020-04-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (4, 1, 'Dead lift', 1, '2020-04-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (5, 1, 'Over head press', 1, '2020-04-20T13:14:05.724885500');
 
 
-insert into activity (id, activity_name, author_id, created)
-values (6, 'Books', 2, '2021-06-20T22:54:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (7, 'Water', 2, '2021-08-20T07:13:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (8, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (9, 'Cigarettes', 2, '2021-09-20T16:20:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (10, 'Coffees', 2, '2021-01-20T15:10:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (6, 2, 'Books', 2, '2021-06-20T22:54:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (7, 2, 'Water', 2, '2021-08-20T07:13:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (8, 2, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (9, 2, 'Cigarettes', 2, '2021-09-20T16:20:05.724885500');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (10, 2, 'Coffees', 2, '2021-01-20T15:10:05.724885500');
 --changeset rloth:4
 insert into content (id, activity_id, content, created)
 values (1, 1, '15', '2020-04-20T13:14:05.724885500');

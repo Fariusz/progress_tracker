@@ -27,7 +27,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
 
 /*
-    findAllByActivityName i findActivityWithContent działają w jednakowy sposób XDD
+    findAllByActivityName i findActivityWithContent działają w jednakowy sposób
 
     @Query("select a from Activity a" + " left join fetch a.content" + " where activity_name = :name")
     Activity findActivityWithContent(@Param("name") String name);

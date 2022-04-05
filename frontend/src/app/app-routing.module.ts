@@ -6,12 +6,13 @@ import {ActivitiesComponent} from "./components/pages/activities/activities.comp
 import {LoginComponent} from "./components/pages/login/login.component";
 import {AuthGuardService} from "./components/auth/auth-guard.service";
 import {ActivityDetailsComponent} from "./components/pages/activity-details/activity-details.component";
+import {ActivitiesListsComponent} from "./components/pages/activities-lists/activities-lists.component";
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {
     path: 'activities', children: [
-      {path: '', component: ActivitiesComponent, canActivate: [AuthGuardService]}
+      {path: '', component: ActivitiesListsComponent, canActivate: [AuthGuardService]}
     ]
   },
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     ]
   },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'lists', component: ActivitiesListsComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
