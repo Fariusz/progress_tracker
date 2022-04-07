@@ -3,9 +3,13 @@
 
 insert into activities_list (id, list_name, author_id, created)
 values (1, 'Trainings', 1 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, author_id, created)
+values (2, 'Measurements', 1 ,'2020-04-20T13:14:05.724885500');
 
 insert into activities_list (id, list_name, author_id, created)
-values (2, 'Things', 2 ,'2020-04-20T13:14:05.724885500');
+values (3, 'Activities', 2 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, author_id, created)
+values (4, 'Other things', 2 ,'2020-04-20T13:14:05.724885500');
 
 insert into activity (id, list_id, activity_name, author_id, created)
 values (1, 1, 'Push ups', 1, '2020-04-20T13:14:05.724885500');
@@ -20,15 +24,15 @@ values (5, 1, 'Over head press', 1, '2020-04-20T13:14:05.724885500');
 
 
 insert into activity (id, list_id, activity_name, author_id, created)
-values (6, 2, 'Books', 2, '2021-06-20T22:54:05.724885500');
+values (6, 3, 'Books', 2, '2021-06-20T22:54:05.724885500');
 insert into activity (id, list_id, activity_name, author_id, created)
-values (7, 2, 'Water', 2, '2021-08-20T07:13:05.724885500');
+values (7, 3, 'Water', 2, '2021-08-20T07:13:05.724885500');
 insert into activity (id, list_id, activity_name, author_id, created)
-values (8, 2, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
+values (8, 3, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
 insert into activity (id, list_id , activity_name, author_id, created)
-values (9, 2, 'Cigarettes', 2, '2021-09-20T16:20:05.724885500');
+values (9, 3, 'Cigarettes', 2, '2021-09-20T16:20:05.724885500');
 insert into activity (id, list_id , activity_name, author_id, created)
-values (10, 2, 'Coffees', 2, '2021-01-20T15:10:05.724885500');
+values (10, 3, 'Coffees', 2, '2021-01-20T15:10:05.724885500');
 --changeset rloth:4
 insert into content (id, activity_id, content, created)
 values (1, 1, '15', '2020-04-20T13:14:05.724885500');

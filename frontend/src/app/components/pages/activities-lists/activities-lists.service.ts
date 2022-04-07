@@ -11,6 +11,6 @@ export class ActivitiesListsService {
   constructor(private httpClient: HttpClient) { }
 
   getLists() {
-    return this.httpClient.get<ActivityListDto[]>(`${environment.APIEndpoint}/lists`);
+    return this.httpClient.get<ActivityListDto[]>(`${environment.APIEndpoint}/userLists`);
   }
 }

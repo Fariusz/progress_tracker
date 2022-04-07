@@ -13,8 +13,13 @@ import java.util.List;
 public class ListService {
 
     private final ListRepository listRepository;
+    private final LoginService loginService;
 
     public List<ActivitiesList> getLists() {
         return listRepository.findAll();
+    }
+
+    public List<ActivitiesList> getUserLists(String username) {
+        return listRepository.findListsByUserId(loginService.getUserId(username));
     }
 }

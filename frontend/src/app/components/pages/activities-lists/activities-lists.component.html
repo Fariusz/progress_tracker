@@ -10,10 +10,7 @@
             <div class="card-body">
               <ng-container *ngFor = "let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
                 <ngb-accordion #acc="ngbAccordion" activeIds="{{'config-panel-one' + 0}}">
-                  <ngb-panel title="{{list.listName}}" id="{{'config-panel-one' + i}}">
-                    <ng-template ngbPanelHeader>
-                      <button ngbPanelToggle class="btn btn-link stretched-link">{{list.listName}}</button>
-                    </ng-template>
+                  <ngb-panel class="customLink" title="{{list.listName}}" id="{{'config-panel-one' + i}}">
                     <ng-template ngbPanelContent>
                       <div class="table-responsive">
                         <table class="table table-hover text-nowrap">

@@ -19,10 +19,10 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     @Query("select distinct a from Activity a" + " left join fetch a.content")
     List<Activity> findAllActivitiesPageable(Pageable page);
 
-    @Query("select a from Activity a where author_id = ?1")
+    @Query("select a from Activity a where authorId = ?1")
     List<Activity> findActivitiesByUserId(Long id);
 
-    @Query("select a from Activity a where author_id = ?1")
+    @Query("select a from Activity a where authorId = ?1")
     List<Activity> findActivitiesByUserIdPageable(Long id, Pageable page);
 
 

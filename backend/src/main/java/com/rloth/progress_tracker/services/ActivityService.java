@@ -79,7 +79,7 @@ public class ActivityService {
     }
 
     public Activity addActivity(Activity activity, String username) {
-        activity.setAuthor_id(loginService.getUserId(username));
+        activity.setAuthorId(loginService.getUserId(username));
         return activityRepository.save(activity);
     }
 
