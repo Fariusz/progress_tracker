@@ -20,7 +20,6 @@ export class ActivitiesListsComponent implements OnInit {
     this.isLoading = true;
 
     this.listService.getLists().subscribe((lists: ActivityListDto[]) => {
-      console.log(lists);
       this.lists = lists;
       this.isLoading = false;
     });

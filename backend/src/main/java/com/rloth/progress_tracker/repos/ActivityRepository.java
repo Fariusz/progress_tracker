@@ -25,6 +25,9 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     @Query("select a from Activity a where authorId = ?1")
     List<Activity> findActivitiesByUserIdPageable(Long id, Pageable page);
 
+    @Query("select a from Activity a where listId = ?1")
+    List<Activity> findAllByListId(long id);
+
 
 /*
     findAllByActivityName i findActivityWithContent działają w jednakowy sposób

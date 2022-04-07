@@ -6,6 +6,7 @@ import {ModalConfig} from "../../modal/modal.config";
 import {ModalComponent} from "../../modal/modal.component";
 import {ToastrService} from "ngx-toastr";
 import {ContentDto} from "../../../models/ContentDto";
+import {ActivityListDto} from "../../../models/ActivityListDto";
 
 @Component({
   selector: 'app-activity',
@@ -14,6 +15,7 @@ import {ContentDto} from "../../../models/ContentDto";
 })
 export class ActivitiesComponent implements OnInit {
   @Input() activity: ActivityDto;
+  @Input() list: ActivityListDto;
   page: number = 1;
   isLoading = false;
   selectedActivity: ActivityDto;
@@ -50,7 +52,7 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.activitiesService.getActivities().subscribe(
+    this.activitiesService.getActivitiesByListId(this.list.id).subscribe(
       (activities: ActivityDto[]) => {
         this.activities = activities;
         this.isLoading = false;
@@ -83,7 +85,7 @@ export class ActivitiesComponent implements OnInit {
 
   onAddSubmit() {
     this.isLoading = true;
-    this.activitiesService.addActivity(this.form.value).subscribe(activity => {
+    this.activitiesService.addActivity(this.form.value, this.list.id).subscribe(activity => {
       this.activities.push(activity);
 /*
       this.showSuccess(activity.activityName, 'Successfully added')

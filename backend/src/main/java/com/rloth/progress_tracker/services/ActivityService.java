@@ -101,4 +101,8 @@ public class ActivityService {
     public void clearActivities() {
         //Ta metoda czyści Cache
     }
+
+    public List<Activity> userActivitiesByListId(long id) {
+        return activityRepository.findAllByListId(id);
+    }
 }
