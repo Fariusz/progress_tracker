@@ -5,12 +5,39 @@
         <section class="mb-4">
           <div class="card shadow-lg">
             <div class="card-header text-center py-3">
-              <h5 class="mb-0 text-center"><strong>{{ "activities.activities" | translate }}</strong></h5>
+              <h5 class="mb-0 text-center"><strong>{{ "activities.activities" | translate }}</strong>
+                <button (click)="openAddModal()" class="btn btn-primary float-end" role="button">
+                  <i class="fa fa-plus float-end"></i>
+                </button>
+              </h5>
             </div>
             <div class="card-body">
               <ng-container *ngFor = "let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
-                <ngb-accordion #acc="ngbAccordion" activeIds="{{'config-panel-one' + 0}}">
-                  <ngb-panel class="customLink" title="{{list.listName}}" id="{{'config-panel-one' + i}}">
+                <ngb-accordion #acc="ngbAccordion" [destroyOnHide]='false' [closeOthers]="true" activeIds="{{'config-panel-one' + 0}}">
+                  <ngb-panel id="{{'panel' + i}}">
+                    <ng-template ngbPanelTitle>
+                      <span>{{list.listName}}</span>
+                      <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
+                        <button aria-expanded="false" class="btn btn-outline-secondary"
+                                data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
+                          <fa-icon [icon]="faEllipsisV"></fa-icon>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a (click)="openEditModal(list)" class="dropdown-item">
+                              {{ "lists.edit" | translate }}
+                              <i class="fa fa-pen float-end"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="openDeleteModal(list)" class="dropdown-item">
+                              {{ "lists.delete" | translate }}
+                              <i class="fa fa-trash float-end"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-template>
                     <ng-template ngbPanelContent>
                       <app-activity [list]="list"></app-activity>
                     </ng-template>
@@ -25,4 +52,64 @@
     </main>
   </div>
 </ng-container>
+
 <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
+
+
+<app-modal #addModal [modalConfig]="modalConfig">
+  <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+    <div class="form-group">
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="listName"
+          id="addListName"
+          maxlength="50"
+          minlength="2" placeholder="Name"
+          required
+          type="text"
+        >
+        <label for="addListName">{{ "lists.name" | translate }}</label>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "lists.cancel" | translate }}</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal #deleteModal [modalConfig]="modalConfig">
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary"
+          type="reset">{{ "lists.cancel" | translate }}</button>
+  <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
+  </button>
+</app-modal>
+
+<app-modal #editModal [modalConfig]="modalConfig">
+  <form (ngSubmit)="onEditSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+    <div class="form-group">
+
+      <div class="form-floating">
+        <input
+          class="form-control"
+          formControlName="listName"
+          id="editListName"
+          maxlength="50"
+          minlength="2" placeholder="Name"
+          required
+          type="text"
+        >
+        <label for="editListName">{{ "lists.name" | translate }}</label>
+      </div>
+      <div class="modal-footer">
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "lists.cancel" | translate }}</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
+</app-modal>

@@ -18,9 +18,25 @@ export class ActivitiesComponent implements OnInit {
   @Input() list: ActivityListDto;
   page: number = 1;
   isLoading = false;
-  selectedActivity: ActivityDto;
   activities: ActivityDto[] = [];
+
+  constructor(private activitiesService: ActivitiesService,
+              private fb: FormBuilder,
+              private toastr: ToastrService) {
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.activitiesService.getActivitiesByListId(this.list.id).subscribe(
+      (activities: ActivityDto[]) => {
+        this.activities = activities;
+        this.isLoading = false;
+      });
+  }
+
+  //Modal
   form: FormGroup;
+  selectedActivity: ActivityDto;
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
     disableCloseButton() {
@@ -45,20 +61,6 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
-  constructor(private activitiesService: ActivitiesService,
-              private fb: FormBuilder,
-              private toastr: ToastrService) {
-  }
-
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.activitiesService.getActivitiesByListId(this.list.id).subscribe(
-      (activities: ActivityDto[]) => {
-        this.activities = activities;
-        this.isLoading = false;
-      });
-  }
-
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
       : (modal == 'editModal') ? this.editModalComponent.dismiss()
@@ -72,7 +74,7 @@ export class ActivitiesComponent implements OnInit {
 /*
       modalTitle: "Add",
 */
-      modalTitle: "Dodaj",
+      modalTitle: "Dodaj nową aktywność",
       hideCloseButton() {
         return true;
       },
@@ -152,10 +154,6 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = false;
   }
 
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
-  }
-
   private createForm(activity: ActivityDto) {
     const content: ContentDto[] = [];
 
@@ -173,5 +171,10 @@ export class ActivitiesComponent implements OnInit {
         created: new FormControl(new Date())
       });
     }
+  }
+
+  //Toaster
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
   }
 }

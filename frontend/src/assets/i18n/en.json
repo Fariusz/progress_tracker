@@ -47,6 +47,12 @@
     "cancel": "Cancel",
     "never": "Never"
   },
+  "lists": {
+    "name": "Name",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "pagination": {
     "previous": "Previous",
     "next": "Next"

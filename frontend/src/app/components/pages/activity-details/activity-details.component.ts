@@ -83,7 +83,10 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
+/*
       modalTitle: "Add entry", hideCloseButton() {
+*/
+      modalTitle: "Dodaj nowy wpis", hideCloseButton() {
         return true;
       }, hideDismissButton() {
         return true;
@@ -101,7 +104,10 @@ export class ActivityDetailsComponent implements OnInit {
       //Concat to create new array to get onChanges in chart works.
       this.content = this.content.concat([content]);
 
+/*
       this.showSuccess(content.content, 'Successfully added');
+*/
+      this.showSuccess(content.content, 'Dodano pomyślnie');
     });
     this.addModalComponent.close();
     this.isLoading = false;
