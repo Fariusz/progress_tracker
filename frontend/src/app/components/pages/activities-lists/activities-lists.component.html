@@ -20,7 +20,7 @@
                       <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
                         <a aria-expanded="false" class="btn btn-outline-secondary"
                                 data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
-                          <mat-icon>more_vert</mat-icon>
+                          <fa-icon [icon]="faEllipsisV"></fa-icon>
                         </a>
                         <ul class="dropdown-menu">
                           <li>

@@ -51,7 +51,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     NgbModule,
-    MatIconModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
