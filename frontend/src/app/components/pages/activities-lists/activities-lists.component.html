@@ -5,7 +5,7 @@
         <section class="mb-4">
           <div class="card shadow-lg">
             <div class="card-header text-center py-3">
-              <h5 class="mb-0 text-center"><strong>{{ "activities.activities" | translate }}</strong>
+              <h5 class="mb-0 text-center"><strong>{{ "lists.header" | translate }}</strong>
                 <button (click)="openAddModal()" class="btn btn-primary float-end" role="button">
                   <i class="fa fa-plus float-end"></i>
                 </button>
@@ -18,10 +18,10 @@
                     <ng-template ngbPanelTitle>
                       <span>{{list.listName}}</span>
                       <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
-                        <button aria-expanded="false" class="btn btn-outline-secondary"
+                        <a aria-expanded="false" class="btn btn-outline-secondary"
                                 data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
-                          <fa-icon [icon]="faEllipsisV"></fa-icon>
-                        </button>
+                          <mat-icon>more_vert</mat-icon>
+                        </a>
                         <ul class="dropdown-menu">
                           <li>
                             <a (click)="openEditModal(list)" class="dropdown-item">
@@ -45,7 +45,9 @@
                 </ngb-accordion>
               </ng-container>
             </div>
-            <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} " previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+            <ng-container *ngIf="lists.length > 10">
+              <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} " previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+            </ng-container>
           </div>
         </section>
       </div>

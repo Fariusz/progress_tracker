@@ -48,6 +48,7 @@
     "never": "Never"
   },
   "lists": {
+    "header" : "Lists of activities",
     "name": "Name",
     "cancel": "Cancel",
     "edit": "Edit",
@@ -64,6 +65,5 @@
   },
   "modal": {
     "add" : "Add activity"
-
   }
 }

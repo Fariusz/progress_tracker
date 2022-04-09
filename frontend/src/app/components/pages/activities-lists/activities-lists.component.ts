@@ -5,7 +5,7 @@ import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {faEllipsisH, faEllipsisV, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-activities-lists',

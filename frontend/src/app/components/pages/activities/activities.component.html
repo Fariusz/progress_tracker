@@ -13,7 +13,7 @@
       <tbody>
       <ng-container
         *ngFor="let activity of activities | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
-        <tr>
+        <tr (click)="navigateTo(activity.id)">
           <td>{{index + 1}}</td>
           <td>{{activity.activityName}}</td>
           <td>{{activity.content.length}}</td>
@@ -23,8 +23,12 @@
           </ng-container>
           <td>
             <div class="btn-group">
+              <a aria-expanded="false" class="btn btn-outline-secondary"
+                 data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
+                <fa-icon [icon]="faEllipsisV"></fa-icon>
+              </a>
               <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
-                      data-bs-toggle="dropdown" type="button">
+                      data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
                 {{ "activities.action" | translate }}
               </button>
               <ul class="dropdown-menu">
@@ -52,14 +56,14 @@
         </tr>
       </ng-container>
       </tbody>
-      <tbody>
-      <button (click)="openAddModal()" class="btn btn-primary" role="button">
-        <i class="fa fa-plus float-end"></i>
-      </button>
-      </tbody>
     </table>
-    <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} "
-                         previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+    <button (click)="openAddModal()" class="btn btn-primary" role="button">
+      <i class="fa fa-plus float-end"></i>
+    </button>
+    <ng-container *ngIf="activities.length > 10">
+      <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} "
+                           previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+    </ng-container>
   </div>
 </ng-container>
 

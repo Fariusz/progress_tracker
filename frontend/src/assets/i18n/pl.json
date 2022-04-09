@@ -48,6 +48,7 @@
     "never": "Nigdy"
   },
   "lists": {
+    "header" : "Listy aktywności",
     "name": "Nazwa",
     "cancel": "Anuluj",
     "edit": "Edytuj",

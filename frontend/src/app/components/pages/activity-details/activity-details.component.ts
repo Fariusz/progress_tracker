@@ -22,30 +22,6 @@ export class ActivityDetailsComponent implements OnInit {
   content: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
-  form: FormGroup;
-  modalConfig: ModalConfig = {
-    modalTitle: "undefined",
-    disableCloseButton() {
-      return true;
-    }, disableDismissButton() {
-      return true;
-    }, hideCloseButton() {
-      return true;
-    }, hideDismissButton() {
-      return true;
-    }, onClose() {
-      return true;
-    }, onDismiss() {
-      return true;
-    }, shouldClose() {
-      return true;
-    }, shouldDismiss() {
-      return true;
-    }
-  };
-  @ViewChild('addModal') private addModalComponent: ModalComponent;
-  @ViewChild('editModal') private editModalComponent: ModalComponent;
-  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
 
   constructor(private modalService: NgbModal,
               private fb: FormBuilder,
@@ -71,6 +47,36 @@ export class ActivityDetailsComponent implements OnInit {
     );
   }
 
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
+
+  //Modal
+  modalConfig: ModalConfig = {
+    modalTitle: "undefined",
+    disableCloseButton() {
+      return true;
+    }, disableDismissButton() {
+      return true;
+    }, hideCloseButton() {
+      return true;
+    }, hideDismissButton() {
+      return true;
+    }, onClose() {
+      return true;
+    }, onDismiss() {
+      return true;
+    }, shouldClose() {
+      return true;
+    }, shouldDismiss() {
+      return true;
+    }
+  };
+  @ViewChild('addModal') private addModalComponent: ModalComponent;
+  @ViewChild('editModal') private editModalComponent: ModalComponent;
+  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
+
+
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
       : (modal == 'editModal') ? this.editModalComponent.dismiss()
@@ -83,9 +89,9 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-/*
-      modalTitle: "Add entry", hideCloseButton() {
-*/
+      /*
+            modalTitle: "Add entry", hideCloseButton() {
+      */
       modalTitle: "Dodaj nowy wpis", hideCloseButton() {
         return true;
       }, hideDismissButton() {
@@ -104,9 +110,9 @@ export class ActivityDetailsComponent implements OnInit {
       //Concat to create new array to get onChanges in chart works.
       this.content = this.content.concat([content]);
 
-/*
-      this.showSuccess(content.content, 'Successfully added');
-*/
+      /*
+            this.showSuccess(content.content, 'Successfully added');
+      */
       this.showSuccess(content.content, 'Dodano pomyślnie');
     });
     this.addModalComponent.close();
@@ -147,9 +153,9 @@ export class ActivityDetailsComponent implements OnInit {
   async openDeleteModal(content: ContentDto) {
     this.selectedContent = content;
     this.modalConfig = {
-/*
-      modalTitle: "Are you sure want to delete?",
-*/
+      /*
+            modalTitle: "Are you sure want to delete?",
+      */
       modalTitle: "Czy napewno chcesz usunąć?",
       hideCloseButton() {
         return true;
@@ -170,9 +176,8 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
-  }
+  //Form
+  form: FormGroup;
 
   private createForm(content: ContentDto) {
     if (content != null) {

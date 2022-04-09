@@ -7,7 +7,7 @@
           <ng-container *ngIf="content.length > 0">
             <div class="card shadow-lg">
               <div class="card-header py-3">
-                <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
+                <h5 class="mb-0 text-center"><strong>{{activity.activityName}}</strong></h5>
               </div>
               <div class="card-body">
                 <div class="btn-group me-2">
@@ -33,6 +33,9 @@
             <div class="card-header text-center py-3">
               <h5 class="mb-0 text-center">
                 <strong>{{ "activity-details.entries" | translate }}</strong>
+                <button (click)="openAddModal()" class="btn btn-primary float-end" role="button">
+                  <i class="fa fa-plus float-end"></i>
+                </button>
               </h5>
             </div>
             <div class="card-body">
@@ -79,16 +82,13 @@
                     </tr>
                   </ng-container>
                   </tbody>
-                  <tbody>
-                  <button (click)="openAddModal()" class="btn btn-primary" role="button">
-                    <i class="fa fa-plus float-end"></i>
-                  </button>
-                  </tbody>
                 </table>
-                <pagination-controls (pageChange)="page = $event"
-                                     nextLabel=" {{ 'pagination.next' | translate }} "
-                                     previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
-              </div>
+                <ng-container *ngIf="content.length > 10">
+                  <pagination-controls (pageChange)="page = $event"
+                                       nextLabel=" {{ 'pagination.next' | translate }} "
+                                       previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+                </ng-container>
+               </div>
             </div>
           </div>
         </section>

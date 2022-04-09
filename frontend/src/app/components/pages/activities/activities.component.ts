@@ -7,6 +7,8 @@ import {ModalComponent} from "../../modal/modal.component";
 import {ToastrService} from "ngx-toastr";
 import {ContentDto} from "../../../models/ContentDto";
 import {ActivityListDto} from "../../../models/ActivityListDto";
+import {Router} from "@angular/router";
+import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-activity',
@@ -19,10 +21,12 @@ export class ActivitiesComponent implements OnInit {
   page: number = 1;
   isLoading = false;
   activities: ActivityDto[] = [];
+  faEllipsisV = faEllipsisV;
 
   constructor(private activitiesService: ActivitiesService,
               private fb: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,6 +36,14 @@ export class ActivitiesComponent implements OnInit {
         this.activities = activities;
         this.isLoading = false;
       });
+  }
+
+  navigateTo(id: bigint) {
+    this.router.navigateByUrl("/details/" + id);
+  }
+
+  stopPropagation(event){
+    event.stopPropagation();
   }
 
   //Modal
