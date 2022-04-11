@@ -9,3 +9,5 @@
   float: left;
   color: black;
 }
+
+.up { bottom:100% !important; top:auto !important; }

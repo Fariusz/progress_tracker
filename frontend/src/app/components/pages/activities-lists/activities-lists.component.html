@@ -18,9 +18,9 @@
                     <ng-template ngbPanelTitle>
                       <span>{{list.listName}}</span>
                       <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
-                        <a aria-expanded="false" class="btn btn-outline-secondary"
+                        <a aria-expanded="false" class="btn btn-outline-secondary dropdown up"
                                 data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
-                          <fa-icon [icon]="faEllipsisV"></fa-icon>
+                          <fa-icon [icon]="faEllipsisV" style="color: black"></fa-icon>
                         </a>
                         <ul class="dropdown-menu">
                           <li>
@@ -56,7 +56,6 @@
 </ng-container>
 
 <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
-
 
 <app-modal #addModal [modalConfig]="modalConfig">
   <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
