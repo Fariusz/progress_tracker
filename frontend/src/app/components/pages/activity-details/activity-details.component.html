@@ -33,19 +33,17 @@
             <div class="card-header text-center py-3">
               <h5 class="mb-0 text-center">
                 <strong>{{ "activity-details.entries" | translate }}</strong>
-                <button (click)="openAddModal()" class="btn btn-primary float-end" role="button">
-                  <i class="fa fa-plus float-end"></i>
-                </button>
               </h5>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover text-nowrap">
                   <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">{{ "activity-details.entry" | translate}}</th>
-                    <th scope="col">{{ "activity-details.created" | translate}}</th>
+                  <tr style="cursor: pointer">
+                    <th scope="col" (click)="sort('id')">ID</th>
+                    <th scope="col" (click)="sort('entry')">{{ "activity-details.entry" | translate}}</th>
+                    <th scope="col" (click)="sort('repetitions')">{{ "activity-details.repetitions" | translate}}</th>
+                    <th scope="col" (click)="sort('created')">{{ "activity-details.created" | translate}}</th>
                     <th scope="col"></th>
                   </tr>
                   </thead>
@@ -56,6 +54,7 @@
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
+                      <td>{{entry.repetitions}}</td>
                       <td>{{entry.created | date: 'shortDate'}}</td>
                       <td>
                         <div class="btn-group">
@@ -83,6 +82,9 @@
                   </ng-container>
                   </tbody>
                 </table>
+                <button (click)="openAddModal()" class="btn btn-primary" role="button">
+                  <i class="fa fa-plus float-end"></i>
+                </button>
                 <ng-container *ngIf="content.length > 10">
                   <pagination-controls (pageChange)="page = $event"
                                        nextLabel=" {{ 'pagination.next' | translate }} "

@@ -28,6 +28,7 @@
   "activity-details": {
     "entries": "Entries",
     "entry": "Entry",
+    "repetitions" : "Repetitions",
     "created": "Created",
     "action": "Action",
     "edit": "Edit",

@@ -51,6 +51,11 @@ export class ActivityDetailsComponent implements OnInit {
     this.toastr.success(message, title);
   }
 
+  sort(type: string) {
+    console.log("sortowanie");
+    this.content.sort((a,b) =>(a.content, b.content) ? 1 : -1);
+  }
+
   //Modal
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
