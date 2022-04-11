@@ -39,11 +39,11 @@
               <div class="table-responsive">
                 <table class="table table-hover text-nowrap">
                   <thead>
-                  <tr style="cursor: pointer">
+                  <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">{{ "activity-details.entry" | translate}}</th>
-                    <th scope="col">{{ "activity-details.repetitions" | translate}}</th>
-                    <th scope="col">{{ "activity-details.created" | translate}}</th>
+                    <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="content">{{ "activity-details.entry" | translate}}</th>
+                    <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}</th>
+                    <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="created" data-type="date">{{ "activity-details.created" | translate}}</th>
                     <th scope="col"></th>
                   </tr>
                   </thead>

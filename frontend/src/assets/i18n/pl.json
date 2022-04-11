@@ -2,6 +2,7 @@
   "navbar": {
     "home": "Początek",
     "activities": "Aktywności",
+    "trainings": "Treningi",
     "login": "Logowanie",
     "register": "Rejestracja",
     "logout": "Wylogowywanie",

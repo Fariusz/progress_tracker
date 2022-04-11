@@ -16,6 +16,7 @@ import {ActivityDto} from "../../../models/ActivityDto";
   styleUrls: ['./activity-details.component.css']
 })
 export class ActivityDetailsComponent implements OnInit {
+  isTraining: boolean;
   page: number = 1;
   id: number;
   activity: ActivityDto;
@@ -45,6 +46,8 @@ export class ActivityDetailsComponent implements OnInit {
         this.activity = activity;
       }
     );
+
+
   }
 
   showSuccess(message: string, title: string) {

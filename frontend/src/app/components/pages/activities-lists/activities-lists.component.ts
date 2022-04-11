@@ -6,6 +6,7 @@ import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-activities-lists',
@@ -20,7 +21,8 @@ export class ActivitiesListsComponent implements OnInit {
 
   constructor(private listService: ActivitiesListsService,
               private fb: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {

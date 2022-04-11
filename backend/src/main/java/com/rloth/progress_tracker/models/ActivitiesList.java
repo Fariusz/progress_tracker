@@ -15,6 +15,7 @@ public class ActivitiesList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String listName;
+    private boolean isTraining;
     private long authorId;
     private LocalDateTime created;
 

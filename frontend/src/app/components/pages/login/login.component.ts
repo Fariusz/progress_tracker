@@ -25,15 +25,15 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
   }
 
-  onSwitchMode() {
-    this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
-      : this.authService.toggleLoginMode(true);
-  }
-
   ngOnInit(): void {
     this.authService.changeLoginMode.subscribe(isLoginMode => {
       this.isLoginMode = isLoginMode;
     });
+  }
+
+  onSwitchMode() {
+    this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
+      : this.authService.toggleLoginMode(true);
   }
 
   onSubmit(form: NgForm) {

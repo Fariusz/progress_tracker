@@ -1,15 +1,15 @@
 --liquibase formatted sql
 --changeset rloth:3
 
-insert into activities_list (id, list_name, author_id, created)
-values (1, 'Trainings', 1 ,'2020-04-20T13:14:05.724885500');
-insert into activities_list (id, list_name, author_id, created)
-values (2, 'Measurements', 1 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (1, 'Trainings', true, 1 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (2, 'Measurements', false, 1 ,'2020-04-20T13:14:05.724885500');
 
-insert into activities_list (id, list_name, author_id, created)
-values (3, 'Activities', 2 ,'2020-04-20T13:14:05.724885500');
-insert into activities_list (id, list_name, author_id, created)
-values (4, 'Other things', 2 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (3, 'Activities', false, 2 ,'2020-04-20T13:14:05.724885500');
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (4, 'Other things', false, 2 ,'2020-04-20T13:14:05.724885500');
 
 insert into activity (id, list_id, activity_name, author_id, created)
 values (1, 1, 'Push ups', 1, '2020-04-20T13:14:05.724885500');

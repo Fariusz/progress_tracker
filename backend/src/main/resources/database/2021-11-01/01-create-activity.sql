@@ -5,6 +5,7 @@ CREATE TABLE activities_list
 (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     list_name     VARCHAR(400) NOT NULL,
+    is_training   BOOLEAN NOT NULL,
     author_id     BIGINT,
     created       timestamp
 );
