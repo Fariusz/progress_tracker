@@ -1,6 +1,7 @@
 {
   "navbar": {
     "home": "Home",
+    "measurements": "Measurements",
     "activities": "Activities",
     "trainings": "Trainings",
     "login": "Login",
@@ -24,7 +25,7 @@
   },
   "home": {
     "h1": "let's start progress tracking!",
-    "p": "Go to activities"
+    "p": "Get started"
   },
   "activity-details": {
     "entries": "Entries",
@@ -39,6 +40,7 @@
   },
   "activities": {
     "activities": "Activities",
+    "measurements": "Measurements",
     "name": "Name",
     "entries": "Entries",
     "updated": "Updated",
@@ -50,7 +52,7 @@
     "never": "Never"
   },
   "lists": {
-    "header" : "Lists of activities",
+    "header" : "Lists",
     "name": "Name",
     "cancel": "Cancel",
     "edit": "Edit",

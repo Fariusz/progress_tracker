@@ -111,7 +111,11 @@ export class ActivitiesListsComponent implements OnInit {
 
   onAddSubmit() {
     this.isLoading = true;
-    this.listService.addList(this.form.value).subscribe(list => {
+    let tmpList: ActivityListDto = this.form.value;
+    if(this.router.url.includes('trainings')){
+      tmpList.training = true;
+    }
+    this.listService.addList(tmpList).subscribe(list => {
       this.lists.push(list);
       /*
             this.showSuccess(activity.activityName, 'Successfully added')

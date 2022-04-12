@@ -1,6 +1,7 @@
 {
   "navbar": {
     "home": "Początek",
+    "measurements": "Pomiary",
     "activities": "Aktywności",
     "trainings": "Treningi",
     "login": "Logowanie",
@@ -24,7 +25,7 @@
   },
   "home": {
     "h1": "zacznijmy śledzić postępy!",
-    "p": "Przejdź do aktywności"
+    "p": "Rozpocznij"
   },
   "activity-details": {
     "entries": "Wpisy",
@@ -39,6 +40,7 @@
   },
   "activities": {
     "activities": "Aktywności",
+    "measurements": "Pomiary",
     "name": "Nazwa",
     "entries": "Wpisy",
     "updated": "Aktualizowane",
@@ -50,7 +52,7 @@
     "never": "Nigdy"
   },
   "lists": {
-    "header" : "Listy aktywności",
+    "header" : "Listy",
     "name": "Nazwa",
     "cancel": "Anuluj",
     "edit": "Edytuj",

@@ -86,7 +86,7 @@ export class ActivitiesComponent implements OnInit {
 /*
       modalTitle: "Add",
 */
-      modalTitle: "Dodaj nową aktywność",
+      modalTitle: "Dodaj nową pozycję",
       hideCloseButton() {
         return true;
       },

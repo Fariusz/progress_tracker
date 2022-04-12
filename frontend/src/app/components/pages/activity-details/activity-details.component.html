@@ -42,7 +42,7 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="content">{{ "activity-details.entry" | translate}}</th>
-                    <th *ngIf="this.router.url.split('/').pop() === 'trainings'" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}</th>
+                    <th *ngIf="isTraining" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}</th>
                     <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="created" data-type="date">{{ "activity-details.created" | translate}}</th>
                     <th scope="col"></th>
                   </tr>
@@ -54,7 +54,7 @@
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
-                      <td *ngIf="this.router.url.split('/').pop() === 'trainings'">{{entry.repetitions}}</td>
+                      <td *ngIf="isTraining">{{entry.repetitions}}</td>
                       <td>{{entry.created | date: 'shortDate'}}</td>
                       <td>
                         <div class="btn-group">
@@ -117,6 +117,18 @@
         >
         <label for="addContent"> {{ "activity-details.entry" | translate}}</label>
       </div>
+      <div *ngIf="isTraining" class="form-floating">
+        <input
+          class="form-control"
+          formControlName="repetitions"
+          id="addRepetitions"
+          maxlength="50"
+          minlength="1" placeholder="repetitions"
+          required
+          type="number"
+        >
+        <label for="addContent"> {{ "activity-details.repetitions" | translate}}</label>
+      </div>
       <div class="form-floating">
         <input
           class="form-control"
@@ -153,9 +165,21 @@
           maxlength="50"
           minlength="1" placeholder="Entry"
           required
-          type="text"
+          type="number"
         >
         <label for="editContent">{{ "activity-details.entry" | translate}}</label>
+      </div>
+      <div *ngIf="isTraining" class="form-floating">
+        <input
+          class="form-control"
+          formControlName="repetitions"
+          id="editRepetitions"
+          maxlength="50"
+          minlength="1" placeholder="repetitions"
+          required
+          type="number"
+        >
+        <label for="addContent"> {{ "activity-details.repetitions" | translate}}</label>
       </div>
       <div class="modal-footer">
         <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"

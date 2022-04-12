@@ -34,6 +34,7 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isTraining = Boolean(this.router.url.includes('trainings'));
     this.isLoading = true;
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
@@ -126,7 +127,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.modalConfig = {
       closeButtonLabel: "Ok",
       dismissButtonLabel: "Dismiss",
-      modalTitle: "Edit entry", hideCloseButton() {
+      modalTitle: "Edytuj wpis", hideCloseButton() {
         return true;
       }, hideDismissButton() {
         return true;
@@ -141,6 +142,7 @@ export class ActivityDetailsComponent implements OnInit {
       //Workaround to get new array to trigger ngOnChanges in chart component
       let temp = this.content;
       temp.find(item => item.id == content.id).content = content.content;
+      temp.find(item => item.id == content.id).repetitions = content.repetitions;
       this.content = [];
       this.content = this.content.concat(temp);
       /*
@@ -182,18 +184,39 @@ export class ActivityDetailsComponent implements OnInit {
   form: FormGroup;
 
   private createForm(content: ContentDto) {
-    if (content != null) {
-      this.form = this.fb.group({
-        content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-        created: new FormControl(content.created),
-        id: new FormControl(content.id)
-      });
-    } else {
-      this.form = this.fb.group({
-        activityId: new FormControl(this.id),
-        content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-        created: new FormControl(new Date())
-      });
+    if(this.isTraining){
+      if (content != null) {
+        this.form = this.fb.group({
+          content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          repetitions: new FormControl(content.repetitions, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          created: new FormControl(content.created),
+          id: new FormControl(content.id)
+        });
+      }
+      else {
+        this.form = this.fb.group({
+          activityId: new FormControl(this.id),
+          content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          repetitions: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          created: new FormControl(new Date())
+        });
+      }
     }
-  }
+    else if(!this.isTraining){
+      if (content != null) {
+        this.form = this.fb.group({
+          content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          created: new FormControl(content.created),
+          id: new FormControl(content.id)
+        });
+      }
+      else {
+        this.form = this.fb.group({
+          activityId: new FormControl(this.id),
+          content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          created: new FormControl(new Date())
+        });
+      }
+    }
+    }
 }
