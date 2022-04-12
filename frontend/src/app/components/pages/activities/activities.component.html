@@ -27,7 +27,7 @@
                       data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
                 {{ "activities.action" | translate }}
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" (click)="stopPropagation($event)">
                 <li>
                   <a class="dropdown-item" routerLink="/{{this.router.url.split('/').pop()}}/details/{{activity.id}}">
                     {{ "activities.details" | translate }}

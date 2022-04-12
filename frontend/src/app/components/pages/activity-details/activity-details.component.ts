@@ -148,7 +148,7 @@ export class ActivityDetailsComponent implements OnInit {
       /*
             this.content.find(item => item.id == content.id).content = content.content;
       */
-      this.showSuccess(content.content, 'Successfully edited');
+      this.showSuccess(content.content, 'Edytowano pomyślnie');
     });
     this.editModalComponent.close();
     this.isLoading = false;
@@ -174,7 +174,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
       this.content = this.content.filter(item => item !== this.selectedContent);
-      this.showSuccess(this.selectedContent.content, 'Successfully deleted');
+      this.showSuccess(this.selectedContent.content, 'Usunięto pomyślnie');
     });
     this.deleteModalComponent.close();
     this.isLoading = false;
