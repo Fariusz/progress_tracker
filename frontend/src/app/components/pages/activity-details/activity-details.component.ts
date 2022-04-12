@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivitiesService} from "../activities/activities.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -29,6 +29,7 @@ export class ActivityDetailsComponent implements OnInit {
               private contentService: ContentService,
               private activitiesService: ActivitiesService,
               private route: ActivatedRoute,
+              private router: Router,
               private toastr: ToastrService) {
   }
 
@@ -46,8 +47,6 @@ export class ActivityDetailsComponent implements OnInit {
         this.activity = activity;
       }
     );
-
-
   }
 
   showSuccess(message: string, title: string) {

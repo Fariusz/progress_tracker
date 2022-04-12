@@ -39,7 +39,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   navigateTo(id: bigint) {
-    this.router.navigateByUrl("/details/" + id);
+    this.router.navigateByUrl(this.router.url.split('/').pop() + '/details/' + id);
   }
 
   stopPropagation(event){

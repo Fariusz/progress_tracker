@@ -29,7 +29,7 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" routerLink="/details/{{activity.id}}">
+                  <a class="dropdown-item" routerLink="/{{this.router.url.split('/').pop()}}/details/{{activity.id}}">
                     {{ "activities.details" | translate }}
                     <i class="fa fa-search float-end"></i>
                   </a>

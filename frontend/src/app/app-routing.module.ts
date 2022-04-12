@@ -12,14 +12,9 @@ import {PageNotFoundComponent} from "./components/pages/page-not-found/page-not-
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'activities', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
-  {path: 'trainings', component: ActivitiesListsComponent, canActivate: [AuthGuardService], children: [
-
-    ]},
-  {
-    path: 'details', children: [
-      {path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}
-    ]
-  },
+  {path: 'trainings', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
+  {path: 'trainings/details', children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]},
+  {path: 'activities/details', children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'lists', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
