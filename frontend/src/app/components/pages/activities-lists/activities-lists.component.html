@@ -47,7 +47,7 @@
               </ng-container>
             </div>
 
-            <div *ngIf="this.router.url.split('/').pop() === 'activities'" class="card-body">
+            <div *ngIf="this.router.url.split('/').pop() === 'measurements'" class="card-body">
               <ng-container *ngFor = "let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
                 <ngb-accordion *ngIf="!list.training" #acc="ngbAccordion" [destroyOnHide]='false' [closeOthers]="true" activeIds="{{'config-panel-one' + 0}}">
                   <ngb-panel id="{{'panel' + i}}">
@@ -81,7 +81,6 @@
                 </ngb-accordion>
               </ng-container>
             </div>
-
 
             <ng-container *ngIf="lists.length > 10">
               <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} " previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>

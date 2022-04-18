@@ -2,12 +2,12 @@
 --changeset rloth:3
 
 insert into activities_list (id, list_name, is_training, author_id, created)
-values (1, 'Trening siłowy A', true, 1 ,'2020-04-20T13:14:05.724885500');
+values (1, 'Trening siłowy A', true, 1 ,'2020-01-01T08:00:00');
 insert into activities_list (id, list_name, is_training, author_id, created)
-values (2, 'Trening siłowy B', true, 1 ,'2020-04-20T13:14:05.724885500');
+values (2, 'Trening siłowy B', true, 1 ,'2020-01-01T08:00:00');
 
 insert into activities_list (id, list_name, is_training, author_id, created)
-values (3, 'Pomiary ciała', false, 1 ,'2020-04-20T13:14:05.724885500');
+values (3, 'Pomiary ciała', false, 1 ,'2020-01-01T08:00:00');
 
 insert into activity (id, list_id, activity_name, author_id, created)
 values (1, 1, 'Przysiad klasyczny ze sztangą trzymaną z tyłu - 4 serie', 1, '2020-01-01T08:00:00');
