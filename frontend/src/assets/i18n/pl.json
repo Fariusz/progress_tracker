@@ -11,6 +11,7 @@
   },
   "main": {
     "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
+    "button": "Rozpocznij!",
     "p": "Nie musisz używać notatnika, arkusza kalkulacyjnego ani innych narzędzi do monitorowania postępów w realizacji\n      zamierzonych działań.\n      Tutaj możesz dodawać ćwiczenia, które wykonujesz, i ich wyniki. Równie dobrze sprawdzi się to w przypadku postanowień.\n      Czy chcesz zacząć czytać więcej książek? Może chcesz zwiększyć ilość spożywanej wody.\n      Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia. - w aplikacji Progress tracker."
   },
   "login": {
