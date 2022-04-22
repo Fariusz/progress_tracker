@@ -1,4 +1,11 @@
 {
+  "error": {
+    "required": "Pole jest wymagane.",
+    "minlength": "To powinno być dłuższe.",
+    "maxlength": "To powinno być krótsze.",
+    "min": "Ta liczba jest zbyt mała.",
+    "max" : "Ta liczba jest zbyt duża."
+  },
   "navbar": {
     "home": "Początek",
     "measurements": "Pomiary",

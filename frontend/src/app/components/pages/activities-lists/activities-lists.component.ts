@@ -41,17 +41,25 @@ export class ActivitiesListsComponent implements OnInit {
   //Form
   form: FormGroup;
 
+  get input(){return this.form.get('listName');}
+
   private createForm(list: ActivityListDto) {
 
     if (list != null) {
       this.form = this.fb.group({
-        listName: new FormControl(list.listName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        listName: new FormControl(list.listName, [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50)]),
         created: new FormControl(list.created),
         id: new FormControl(list.id)
       });
     } else {
       this.form = this.fb.group({
-        listName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        listName: new FormControl("", [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50)]),
         created: new FormControl(new Date())
       });
     }

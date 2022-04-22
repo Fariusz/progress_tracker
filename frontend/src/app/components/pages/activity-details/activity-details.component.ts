@@ -183,12 +183,21 @@ export class ActivityDetailsComponent implements OnInit {
   //Form
   form: FormGroup;
 
+  get inputContent() { return this.form.get('content'); }
+  get inputRepetitions() { return this.form.get('repetitions'); }
+
   private createForm(content: ContentDto) {
     if(this.isTraining){
       if (content != null) {
         this.form = this.fb.group({
-          content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-          repetitions: new FormControl(content.repetitions, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          content: new FormControl(content.content, [
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
+          repetitions: new FormControl(content.repetitions,[
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
           created: new FormControl(content.created),
           id: new FormControl(content.id)
         });
@@ -196,8 +205,14 @@ export class ActivityDetailsComponent implements OnInit {
       else {
         this.form = this.fb.group({
           activityId: new FormControl(this.id),
-          content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
-          repetitions: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          content: new FormControl(null, [
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
+          repetitions: new FormControl(null, [
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
           created: new FormControl(new Date())
         });
       }
@@ -205,7 +220,10 @@ export class ActivityDetailsComponent implements OnInit {
     else if(!this.isTraining){
       if (content != null) {
         this.form = this.fb.group({
-          content: new FormControl(content.content, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          content: new FormControl(content.content, [
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
           created: new FormControl(content.created),
           id: new FormControl(content.id)
         });
@@ -213,10 +231,13 @@ export class ActivityDetailsComponent implements OnInit {
       else {
         this.form = this.fb.group({
           activityId: new FormControl(this.id),
-          content: new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+          content: new FormControl(null, [
+            Validators.required,
+            Validators.min(0.1),
+            Validators.max(1000)]),
           created: new FormControl(new Date())
         });
       }
     }
-    }
+  }
 }

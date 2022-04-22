@@ -1,4 +1,11 @@
 {
+  "error": {
+    "required": "Field is required.",
+    "minlength": "It must be longer.",
+    "maxlength": "It must be shorter.",
+    "min": "This number is too small.",
+    "max" : "This number is too great."
+  },
   "navbar": {
     "home": "Home",
     "measurements": "Measurements",

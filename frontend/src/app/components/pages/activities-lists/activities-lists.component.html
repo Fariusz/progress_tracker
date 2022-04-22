@@ -100,15 +100,22 @@
 
       <div class="form-floating">
         <input
+          mdbInput mdbValidate
           class="form-control"
           formControlName="listName"
           id="addListName"
-          maxlength="50"
-          minlength="2" placeholder="Name"
+          placeholder="Name"
           required
           type="text"
         >
         <label for="addListName">{{ "lists.name" | translate }}</label>
+        <div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="input.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="input.errors?.['minlength']">{{"error.minlength" | translate }}</div>
+          <div *ngIf="input.errors?.['maxlength']">{{"error.maxlength" | translate }}</div>
+        </div>
       </div>
 
       <div class="modal-footer">
@@ -133,15 +140,22 @@
 
       <div class="form-floating">
         <input
+          mdbInput mdbValidate
           class="form-control"
           formControlName="listName"
           id="editListName"
-          maxlength="50"
-          minlength="2" placeholder="Name"
+          placeholder="Name"
           required
           type="text"
         >
         <label for="editListName">{{ "lists.name" | translate }}</label>
+        <div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="input.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="input.errors?.['minlength']">{{"error.minlength" | translate }}</div>
+          <div *ngIf="input.errors?.['maxlength']">{{"error.maxlength" | translate }}</div>
+        </div>
       </div>
       <div class="modal-footer">
         <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"

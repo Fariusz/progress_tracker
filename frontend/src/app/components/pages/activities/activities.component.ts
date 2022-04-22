@@ -47,7 +47,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   //Modal
-  form: FormGroup;
   selectedActivity: ActivityDto;
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
@@ -166,19 +165,30 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = false;
   }
 
+  //Form
+  form: FormGroup;
+
+  get input(){return this.form.get('activityName');}
+
   private createForm(activity: ActivityDto) {
     const content: ContentDto[] = [];
 
     if (activity != null) {
       this.form = this.fb.group({
-        activityName: new FormControl(activity.activityName, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        activityName: new FormControl(activity.activityName, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)]),
         content: new FormControl(content),
         created: new FormControl(activity.created),
         id: new FormControl(activity.id)
       });
     } else {
       this.form = this.fb.group({
-        activityName: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
+        activityName: new FormControl("", [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50)]),
         content: new FormControl(content),
         created: new FormControl(new Date())
       });
