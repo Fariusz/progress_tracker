@@ -1,4 +1,12 @@
 {
+  "date": {
+    "week": "1 tydzień",
+    "month": "1 miesiąc",
+    "3month" : "3 miesiące",
+    "6months" : "6 miesięcy",
+    "year" : "1 rok",
+    "all" : "Od początku"
+  },
   "error": {
     "required": "Pole jest wymagane.",
     "minlength": "To powinno być dłuższe.",
@@ -73,6 +81,6 @@
   "chart": {
     "share": "Udostępnij",
     "export": "Wyeksportuj",
-    "this_week": "Ten tydzień"
+    "timeRange": "Zakres czasowy"
   }
 }

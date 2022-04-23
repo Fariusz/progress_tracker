@@ -1,4 +1,12 @@
 {
+  "date": {
+    "week": "1 week",
+    "month": "1 month",
+    "3month" : "3 months",
+    "6months" : "6 months",
+    "year" : "1 year",
+    "all" : "all"
+  },
   "error": {
     "required": "Field is required.",
     "minlength": "It must be longer.",
@@ -73,7 +81,7 @@
   "chart": {
     "share": "Share",
     "export": "Export",
-    "this_week": "This week"
+    "timeRange": "Time range"
   },
   "modal": {
     "add" : "Add activity"

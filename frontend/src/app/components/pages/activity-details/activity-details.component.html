@@ -10,20 +10,22 @@
                 <h5 class="mb-0 text-center"><strong>{{activity.activityName}}</strong></h5>
               </div>
               <div class="card-body">
-                <div class="btn-group me-2">
-                  <button class="btn btn-sm btn-outline-secondary" type="button">
-                    {{ 'chart.share' | translate }}
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                    <span data-feather="calendar"></span>
+                    {{ 'chart.timeRange' | translate }}
                   </button>
-                  <button class="btn btn-sm btn-outline-secondary" type="button">
-                    {{ 'chart.export' | translate }}
-                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="setDataRange(7)">{{ 'date.week' | translate }}</a></li>
+                    <li><a class="dropdown-item" (click)="setDataRange(30)">{{ 'date.month' | translate }}</a></li>
+                    <li><a class="dropdown-item" (click)="setDataRange(90)">{{ 'date.3month' | translate }}</a></li>
+                    <li><a class="dropdown-item" (click)="setDataRange(180)">{{ 'date.6months' | translate }}</a></li>
+                    <li><a class="dropdown-item" (click)="setDataRange(365)">{{ 'date.year' | translate }}</a></li>
+                    <li><a class="dropdown-item" (click)="setDataRange(-1)">{{ 'date.all' | translate }}</a></li>
+                  </ul>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
-                  <span data-feather="calendar"></span>
-                  {{ 'chart.this_week' | translate }}
-                </button>
               </div>
-              <app-line-chart [data]="content"></app-line-chart>
+              <app-line-chart [data]="editedContent"></app-line-chart>
             </div>
           </ng-container>
         </section>
@@ -35,6 +37,7 @@
                 <strong>{{ "activity-details.entries" | translate }}</strong>
               </h5>
             </div>
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover text-nowrap">

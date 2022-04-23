@@ -50,7 +50,7 @@ export class ActivitiesListsComponent implements OnInit {
         listName: new FormControl(list.listName, [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(50)]),
+          Validators.maxLength(100)]),
         created: new FormControl(list.created),
         id: new FormControl(list.id)
       });
@@ -59,7 +59,7 @@ export class ActivitiesListsComponent implements OnInit {
         listName: new FormControl("", [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(50)]),
+          Validators.maxLength(100)]),
         created: new FormControl(new Date())
       });
     }

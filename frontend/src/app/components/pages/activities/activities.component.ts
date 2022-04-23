@@ -178,7 +178,7 @@ export class ActivitiesComponent implements OnInit {
         activityName: new FormControl(activity.activityName, [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(50)]),
+          Validators.maxLength(100)]),
         content: new FormControl(content),
         created: new FormControl(activity.created),
         id: new FormControl(activity.id)
@@ -188,7 +188,7 @@ export class ActivitiesComponent implements OnInit {
         activityName: new FormControl("", [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(50)]),
+          Validators.maxLength(100)]),
         content: new FormControl(content),
         created: new FormControl(new Date())
       });

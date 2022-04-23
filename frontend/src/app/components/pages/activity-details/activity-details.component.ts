@@ -21,6 +21,7 @@ export class ActivityDetailsComponent implements OnInit {
   id: number;
   activity: ActivityDto;
   content: ContentDto[] = [];
+  editedContent: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
 
@@ -40,6 +41,7 @@ export class ActivityDetailsComponent implements OnInit {
 
     this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
       this.content = content;
+      this.editedContent = content;
       this.isLoading = false;
     });
 
@@ -48,10 +50,42 @@ export class ActivityDetailsComponent implements OnInit {
         this.activity = activity;
       }
     );
+
   }
 
+  //Toaster
   showSuccess(message: string, title: string) {
     this.toastr.success(message, title);
+  }
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
+  }
+
+  //Chart data
+  setDataRange(range: number){
+    if(range == -1) {
+      this.editedContent = this.content;
+    }
+    else if(range > 0) {
+
+      var date = new Date();
+      date.setDate(date.getDate() - range);
+
+      this.editedContent = this.content.filter(item => {
+        if(new Date(item.created) > date){
+          return item;
+        }
+      })
+    }
+    else{
+      this.showError('Spróbuj ponownie później.', 'Nieznany błąd');
+    }
+    if(this.editedContent.length < 1){
+      this.showError('Brak wpisów w podanym zakresie.', 'Ups');
+    }
+    else{
+      window.location.reload();
+    }
   }
 
   //Modal
@@ -75,10 +109,10 @@ export class ActivityDetailsComponent implements OnInit {
       return true;
     }
   };
+
   @ViewChild('addModal') private addModalComponent: ModalComponent;
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
-
 
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
@@ -112,7 +146,7 @@ export class ActivityDetailsComponent implements OnInit {
       */
       //Concat to create new array to get onChanges in chart works.
       this.content = this.content.concat([content]);
-
+      this.editedContent = this.content;
       /*
             this.showSuccess(content.content, 'Successfully added');
       */
@@ -145,6 +179,7 @@ export class ActivityDetailsComponent implements OnInit {
       temp.find(item => item.id == content.id).repetitions = content.repetitions;
       this.content = [];
       this.content = this.content.concat(temp);
+      this.editedContent = this.content;
       /*
             this.content.find(item => item.id == content.id).content = content.content;
       */
@@ -174,6 +209,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contentService.deleteContent(this.selectedContent.id).subscribe(() => {
       this.content = this.content.filter(item => item !== this.selectedContent);
+      this.editedContent = this.content;
       this.showSuccess(this.selectedContent.content, 'Usunięto pomyślnie');
     });
     this.deleteModalComponent.close();
@@ -197,7 +233,7 @@ export class ActivityDetailsComponent implements OnInit {
           repetitions: new FormControl(content.repetitions,[
             Validators.required,
             Validators.min(0.1),
-            Validators.max(1000)]),
+            Validators.max(100)]),
           created: new FormControl(content.created),
           id: new FormControl(content.id)
         });
@@ -212,7 +248,7 @@ export class ActivityDetailsComponent implements OnInit {
           repetitions: new FormControl(null, [
             Validators.required,
             Validators.min(0.1),
-            Validators.max(1000)]),
+            Validators.max(100)]),
           created: new FormControl(new Date())
         });
       }
