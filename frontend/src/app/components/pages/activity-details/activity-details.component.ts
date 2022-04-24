@@ -9,6 +9,7 @@ import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
 import {ActivityDto} from "../../../models/ActivityDto";
+import { faArrowDown, faArrowAltCircleDown, faArrowAltCircleLeft, faArrowAltCircleRight, faArrowCircleDown,faArrowCircleLeft, faArrowCircleRight , faArrowCircleUp , faArrowUp, faArrowsAlt ,  faArrowsAltH, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-activity-details',
@@ -16,6 +17,12 @@ import {ActivityDto} from "../../../models/ActivityDto";
   styleUrls: ['./activity-details.component.css']
 })
 export class ActivityDetailsComponent implements OnInit {
+
+  //Icons
+  faArrowDown = faArrowDown;
+  faArrowUp = faArrowUp;
+
+  //Fields
   isTraining: boolean;
   page: number = 1;
   id: number;
@@ -40,7 +47,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
 
     this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
-      this.content = content;
+      this.content = content.sort((a,b) => a.created > b.created ? -1 : 1 );
       this.editedContent = content;
       this.isLoading = false;
     });
@@ -82,9 +89,7 @@ export class ActivityDetailsComponent implements OnInit {
     }
     if(this.editedContent.length < 1){
       this.showError('Brak wpisów w podanym zakresie.', 'Ups');
-    }
-    else{
-      window.location.reload();
+      this.editedContent = this.content;
     }
   }
 
@@ -274,6 +279,29 @@ export class ActivityDetailsComponent implements OnInit {
           created: new FormControl(new Date())
         });
       }
+    }
+  }
+
+  //Arrows in table flags
+  isClickedContent: boolean = false;
+  isClickedRepetitions: boolean = false;
+  isClickedCreated: boolean = false;
+
+  clickedSort(thing: string){
+    if(thing === 'content'){
+      this.isClickedContent = !this.isClickedContent;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = false;
+    }
+    else if(thing === 'repetitions'){
+      this.isClickedContent = false;
+      this.isClickedRepetitions = !this.isClickedRepetitions;
+      this.isClickedCreated = false;
+    }
+    else if(thing === 'created'){
+      this.isClickedContent = false;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = !this.isClickedCreated;
     }
   }
 }

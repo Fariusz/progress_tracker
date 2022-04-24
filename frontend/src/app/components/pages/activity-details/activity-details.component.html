@@ -44,9 +44,18 @@
                   <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="content">{{ "activity-details.entry" | translate}}</th>
-                    <th *ngIf="isTraining" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}</th>
-                    <th style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="created" data-type="date">{{ "activity-details.created" | translate}}</th>
+                    <th (click)="clickedSort('content')" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="content">{{ "activity-details.entry" | translate}}
+                      <fa-icon *ngIf="!isClickedContent" [icon]="faArrowDown"></fa-icon>
+                      <fa-icon *ngIf="isClickedContent" [icon]="faArrowUp"></fa-icon>
+                    </th>
+                    <th (click)="clickedSort('repetitions')" *ngIf="isTraining" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}
+                      <fa-icon *ngIf="!isClickedRepetitions" [icon]="faArrowDown"></fa-icon>
+                      <fa-icon *ngIf="isClickedRepetitions" [icon]="faArrowUp"></fa-icon>
+                    </th>
+                    <th (click)="clickedSort('created')" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="created" data-type="date">{{ "activity-details.created" | translate}}
+                      <fa-icon *ngIf="!isClickedCreated" [icon]="faArrowDown"></fa-icon>
+                      <fa-icon *ngIf="isClickedCreated" [icon]="faArrowUp"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                   </tr>
                   </thead>
