@@ -60,9 +60,8 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <ng-container
-                    *ngFor="let entry of content | paginate: {itemsPerPage: 10, currentPage: page}; let index = index"
-                  >
+
+                  <ng-container *ngFor="let entry of content.slice().reverse() | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
