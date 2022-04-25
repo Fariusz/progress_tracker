@@ -10,9 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-
-  faSignOut = faSignOutAlt;
-
+  
   isAuthenticated = false;
   language = 'pl';
   private userSub!: Subscription;
