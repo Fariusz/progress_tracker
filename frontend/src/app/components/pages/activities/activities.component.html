@@ -50,12 +50,17 @@
             </div>
           </td>
         </tr>
+
       </ng-container>
       </tbody>
     </table>
     <button (click)="openAddModal()" class="btn btn-primary" role="button">
       <i class="fa fa-plus float-end"></i>
     </button>
+    <br>
+    <br>
+    <br>
+    <br>
     <ng-container *ngIf="activities.length > 10">
       <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} "
                            previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>

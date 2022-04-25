@@ -41,8 +41,16 @@
     "sign_up": "Zarejestruj"
   },
   "home": {
-    "h1": "zacznijmy śledzić postępy!",
-    "p": "Rozpocznij"
+    "amountOfLists" : "Wszystkich list",
+    "amountOfActivities" : "Elementów",
+    "amountOfEntries" : "Wszystkich wpisów",
+    "amountOfTrainingLists" : "List treningowych",
+    "amountOfTrainingActivities" : "Ćwiczeń",
+    "amountOfTrainingEntries" : "Wpisów do ćwiczeń",
+    "amountOfMeasurementLists" : "List pomiarowych",
+    "amountOfMeasurementActivities" : "Pomiarów",
+    "amountOfMeasurementEntries" : "Wpisów do pomiarów",
+    "progress" : "Postęp"
   },
   "activity-details": {
     "entries": "Wpisy",

@@ -41,8 +41,16 @@
     "sign_up": "Sign Up"
   },
   "home": {
-    "h1": "let's start progress tracking!",
-    "p": "Get started"
+    "amountOfLists" : "All lists",
+    "amountOfActivities" : "All measurements",
+    "amountOfEntries" : "All entries",
+    "amountOfTrainingLists" : "Excercises lists",
+    "amountOfTrainingActivities" : "Excercises",
+    "amountOfTrainingEntries" : "Excercise entries",
+    "amountOfMeasurementLists" : "Measurements lists",
+    "amountOfMeasurementActivities" : "Body measurements",
+    "amountOfMeasurementEntries" : "Measurements entries",
+    "progress" : "Progress"
   },
   "activity-details": {
     "entries": "Entries",
