@@ -1,7 +1,6 @@
 package com.rloth.progress_tracker.controllers;
 
 import com.rloth.progress_tracker.models.ActivitiesList;
-import com.rloth.progress_tracker.models.Activity;
 import com.rloth.progress_tracker.services.ListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +15,7 @@ public class ListController {
     private final ListService listService;
 
     @GetMapping("/lists")
-    public List<ActivitiesList> getLists(){
+    public List<ActivitiesList> getLists() {
         return listService.getLists();
     }
 

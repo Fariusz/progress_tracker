@@ -5,7 +5,6 @@ import {ModalComponent} from "../../modal/modal.component";
 import {ModalConfig} from "../../modal/modal.config";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,60 +16,10 @@ export class ActivitiesListsComponent implements OnInit {
   page: number = 1;
   isLoading = false;
   lists: ActivityListDto[] = [];
-
-  constructor(private listService: ActivitiesListsService,
-              private fb: FormBuilder,
-              private toastr: ToastrService,
-              private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.isLoading = true;
-
-    this.listService.getLists().subscribe((lists: ActivityListDto[]) => {
-      this.lists = lists;
-      this.isLoading = false;
-    });
-  }
-
-  stopPropagation(event){
-    event.stopPropagation();
-  }
-
   //Form
   form: FormGroup;
-
-  get input(){return this.form.get('listName');}
-
-  private createForm(list: ActivityListDto) {
-
-    if (list != null) {
-      this.form = this.fb.group({
-        listName: new FormControl(list.listName, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100)]),
-        created: new FormControl(list.created),
-        id: new FormControl(list.id)
-      });
-    } else {
-      this.form = this.fb.group({
-        listName: new FormControl("", [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100)]),
-        created: new FormControl(new Date())
-      });
-    }
-  }
-
   //Modal
   selectedList: ActivityListDto;
-
-  @ViewChild('addModal') private addModalComponent: ModalComponent;
-  @ViewChild('editModal') private editModalComponent: ModalComponent;
-  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
-
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
     disableCloseButton() {
@@ -91,6 +40,32 @@ export class ActivitiesListsComponent implements OnInit {
       return true;
     }
   };
+  @ViewChild('addModal') private addModalComponent: ModalComponent;
+  @ViewChild('editModal') private editModalComponent: ModalComponent;
+  @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
+
+  constructor(private listService: ActivitiesListsService,
+              private fb: FormBuilder,
+              private toastr: ToastrService,
+              private router: Router) {
+  }
+
+  get input() {
+    return this.form.get('listName');
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true;
+
+    this.listService.getLists().subscribe((lists: ActivityListDto[]) => {
+      this.lists = lists;
+      this.isLoading = false;
+    });
+  }
+
+  stopPropagation(event) {
+    event.stopPropagation();
+  }
 
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
@@ -119,7 +94,7 @@ export class ActivitiesListsComponent implements OnInit {
   onAddSubmit() {
     this.isLoading = true;
     let tmpList: ActivityListDto = this.form.value;
-    if(this.router.url.includes('trainings')){
+    if (this.router.url.includes('trainings')) {
       tmpList.training = true;
     }
     this.listService.addList(tmpList).subscribe(list => {
@@ -192,5 +167,27 @@ export class ActivitiesListsComponent implements OnInit {
   //Toaster
   showSuccess(message: string, title: string) {
     this.toastr.success(message, title);
+  }
+
+  private createForm(list: ActivityListDto) {
+
+    if (list != null) {
+      this.form = this.fb.group({
+        listName: new FormControl(list.listName, [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)]),
+        created: new FormControl(list.created),
+        id: new FormControl(list.id)
+      });
+    } else {
+      this.form = this.fb.group({
+        listName: new FormControl("", [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)]),
+        created: new FormControl(new Date())
+      });
+    }
   }
 }

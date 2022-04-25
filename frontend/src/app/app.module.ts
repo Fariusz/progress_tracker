@@ -27,9 +27,9 @@ import {FooterComponent} from './components/footer/footer.component';
 import {MainComponentComponent} from './components/main-component/main-component.component';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import { ActivitiesListsComponent } from './components/pages/activities-lists/activities-lists.component';
-import { SortDirective } from './util/sort.directive';
-import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import {ActivitiesListsComponent} from './components/pages/activities-lists/activities-lists.component';
+import {SortDirective} from './util/sort.directive';
+import {PageNotFoundComponent} from './components/pages/page-not-found/page-not-found.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

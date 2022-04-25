@@ -1,7 +1,6 @@
 package com.rloth.progress_tracker.repos;
 
 import com.rloth.progress_tracker.models.ActivitiesList;
-import com.rloth.progress_tracker.models.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

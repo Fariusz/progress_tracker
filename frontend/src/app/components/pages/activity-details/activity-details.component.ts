@@ -26,68 +26,6 @@ export class ActivityDetailsComponent implements OnInit {
   editedContent: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
-
-  constructor(private modalService: NgbModal,
-              private fb: FormBuilder,
-              private contentService: ContentService,
-              private activitiesService: ActivitiesService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toastr: ToastrService) {
-  }
-
-  ngOnInit(): void {
-    this.isTraining = Boolean(this.router.url.includes('trainings'));
-    this.isLoading = true;
-    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-
-    this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
-      this.content = content.sort((a,b) => a.created > b.created ? -1 : 1 );
-      this.editedContent = content;
-      this.isLoading = false;
-    });
-
-    this.activitiesService.getActivity(this.id).subscribe(
-      activity => {
-        this.activity = activity;
-      }
-    );
-
-  }
-
-  //Toaster
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
-  }
-  showError(message: string, title: string) {
-    this.toastr.error(message, title);
-  }
-
-  //Chart data
-  setDataRange(range: number){
-    if(range == -1) {
-      this.editedContent = this.content;
-    }
-    else if(range > 0) {
-
-      var date = new Date();
-      date.setDate(date.getDate() - range);
-
-      this.editedContent = this.content.filter(item => {
-        if(new Date(item.created) > date){
-          return item;
-        }
-      })
-    }
-    else{
-      this.showError('Spróbuj ponownie później.', 'Nieznany błąd');
-    }
-    if(this.editedContent.length < 1){
-      this.showError('Brak wpisów w podanym zakresie.', 'Ups');
-      this.editedContent = this.content;
-    }
-  }
-
   //Modal
   modalConfig: ModalConfig = {
     modalTitle: "undefined",
@@ -109,10 +47,83 @@ export class ActivityDetailsComponent implements OnInit {
       return true;
     }
   };
-
+  //Form
+  form: FormGroup;
+  //Arrows in table flags
+  isClickedContent: boolean = false;
+  isClickedRepetitions: boolean = false;
+  isClickedCreated: boolean = false;
   @ViewChild('addModal') private addModalComponent: ModalComponent;
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
+
+  constructor(private modalService: NgbModal,
+              private fb: FormBuilder,
+              private contentService: ContentService,
+              private activitiesService: ActivitiesService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private toastr: ToastrService) {
+  }
+
+  get inputContent() {
+    return this.form.get('content');
+  }
+
+  get inputRepetitions() {
+    return this.form.get('repetitions');
+  }
+
+  ngOnInit(): void {
+    this.isTraining = Boolean(this.router.url.includes('trainings'));
+    this.isLoading = true;
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+
+    this.contentService.getActivityContent(this.id).subscribe((content: ContentDto[]) => {
+      this.content = content.sort((a, b) => a.created > b.created ? -1 : 1);
+      this.editedContent = content;
+      this.isLoading = false;
+    });
+
+    this.activitiesService.getActivity(this.id).subscribe(
+      activity => {
+        this.activity = activity;
+      }
+    );
+
+  }
+
+  //Toaster
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
+
+  showError(message: string, title: string) {
+    this.toastr.error(message, title);
+  }
+
+  //Chart data
+  setDataRange(range: number) {
+    if (range == -1) {
+      this.editedContent = this.content;
+    } else if (range > 0) {
+
+      var date = new Date();
+      date.setDate(date.getDate() - range);
+
+      this.editedContent = this.content.filter(item => {
+        if (new Date(item.created) > date) {
+          return item;
+        }
+      })
+    } else {
+      this.showError('Spróbuj ponownie później.', 'Nieznany błąd');
+    }
+    if (this.editedContent.length < 1) {
+      this.showError('Brak wpisów w podanym zakresie.', 'Ups');
+      this.editedContent = this.content;
+    }
+  }
 
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
@@ -216,29 +227,38 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  //Form
-  form: FormGroup;
-
-  get inputContent() { return this.form.get('content'); }
-  get inputRepetitions() { return this.form.get('repetitions'); }
+  clickedSort(thing: string) {
+    if (thing === 'content') {
+      this.isClickedContent = !this.isClickedContent;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = false;
+    } else if (thing === 'repetitions') {
+      this.isClickedContent = false;
+      this.isClickedRepetitions = !this.isClickedRepetitions;
+      this.isClickedCreated = false;
+    } else if (thing === 'created') {
+      this.isClickedContent = false;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = !this.isClickedCreated;
+    }
+  }
 
   private createForm(content: ContentDto) {
-    if(this.isTraining){
+    if (this.isTraining) {
       if (content != null) {
         this.form = this.fb.group({
           content: new FormControl(content.content, [
             Validators.required,
             Validators.min(0.1),
             Validators.max(1000)]),
-          repetitions: new FormControl(content.repetitions,[
+          repetitions: new FormControl(content.repetitions, [
             Validators.required,
             Validators.min(0.1),
             Validators.max(100)]),
           created: new FormControl(content.created),
           id: new FormControl(content.id)
         });
-      }
-      else {
+      } else {
         this.form = this.fb.group({
           activityId: new FormControl(this.id),
           content: new FormControl(null, [
@@ -252,8 +272,7 @@ export class ActivityDetailsComponent implements OnInit {
           created: new FormControl(new Date())
         });
       }
-    }
-    else if(!this.isTraining){
+    } else if (!this.isTraining) {
       if (content != null) {
         this.form = this.fb.group({
           content: new FormControl(content.content, [
@@ -263,8 +282,7 @@ export class ActivityDetailsComponent implements OnInit {
           created: new FormControl(content.created),
           id: new FormControl(content.id)
         });
-      }
-      else {
+      } else {
         this.form = this.fb.group({
           activityId: new FormControl(this.id),
           content: new FormControl(null, [
@@ -274,29 +292,6 @@ export class ActivityDetailsComponent implements OnInit {
           created: new FormControl(new Date())
         });
       }
-    }
-  }
-
-  //Arrows in table flags
-  isClickedContent: boolean = false;
-  isClickedRepetitions: boolean = false;
-  isClickedCreated: boolean = false;
-
-  clickedSort(thing: string){
-    if(thing === 'content'){
-      this.isClickedContent = !this.isClickedContent;
-      this.isClickedRepetitions = false;
-      this.isClickedCreated = false;
-    }
-    else if(thing === 'repetitions'){
-      this.isClickedContent = false;
-      this.isClickedRepetitions = !this.isClickedRepetitions;
-      this.isClickedCreated = false;
-    }
-    else if(thing === 'created'){
-      this.isClickedContent = false;
-      this.isClickedRepetitions = false;
-      this.isClickedCreated = !this.isClickedCreated;
     }
   }
 }

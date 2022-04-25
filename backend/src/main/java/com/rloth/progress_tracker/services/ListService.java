@@ -1,12 +1,8 @@
 package com.rloth.progress_tracker.services;
 
 import com.rloth.progress_tracker.models.ActivitiesList;
-import com.rloth.progress_tracker.models.Activity;
-import com.rloth.progress_tracker.repos.ActivityRepository;
 import com.rloth.progress_tracker.repos.ListRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

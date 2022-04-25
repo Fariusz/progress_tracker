@@ -71,8 +71,8 @@ export class LineChartComponent implements OnInit, OnChanges {
   public chartHovered(e: any): void {
   }
 
-  prepareData(){
-    this.data.sort((a,b) => a.created > b.created ? 1 : -1);
+  prepareData() {
+    this.data.sort((a, b) => a.created > b.created ? 1 : -1);
     this.setDataToChart();
   }
 }

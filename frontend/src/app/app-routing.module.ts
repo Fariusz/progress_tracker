@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./components/pages/home/home.component";
 import {MainComponent} from "./components/pages/main/main.component";
-import {ActivitiesComponent} from "./components/pages/activities/activities.component";
 import {LoginComponent} from "./components/pages/login/login.component";
 import {AuthGuardService} from "./components/auth/auth-guard.service";
 import {ActivityDetailsComponent} from "./components/pages/activity-details/activity-details.component";
@@ -13,12 +12,18 @@ const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'trainings', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
   {path: 'measurements', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
-  {path: 'trainings/details', children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]},
-  {path: 'measurements/details', children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]},
+  {
+    path: 'trainings/details',
+    children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]
+  },
+  {
+    path: 'measurements/details',
+    children: [{path: ':id', component: ActivityDetailsComponent, canActivate: [AuthGuardService]}]
+  },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'lists', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
-  { path: '**', component: PageNotFoundComponent }
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

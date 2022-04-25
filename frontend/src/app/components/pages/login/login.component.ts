@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
-/*
-      this.showError('Try again', 'Form invalid')
-*/
+      /*
+            this.showError('Try again', 'Form invalid')
+      */
       this.showError('Spróbuj ponownie', 'Błędny formularz')
       return;
     }
@@ -60,25 +60,25 @@ export class LoginComponent implements OnInit {
       resData => {
         if (this.isLoginMode) {
           this.isLoading = false;
-/*
-          this.showSuccess('Enjoy progress tracking', 'Logged in');
-*/
+          /*
+                    this.showSuccess('Enjoy progress tracking', 'Logged in');
+          */
           this.showSuccess('Gratulacje', 'Zalogowano pomyślnie');
           this.router.navigate(['/home']);
         } else {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
-/*
-          this.showSuccess('Proceed to login', 'Register success');
-*/
+          /*
+                    this.showSuccess('Proceed to login', 'Register success');
+          */
           this.showSuccess('Przejdź do logowania', 'Konto zostało zarejestrowane');
         }
       },
       errorMessage => {
-/*
-        this.showError('Please check your email', errorMessage);
-*/
+        /*
+                this.showError('Please check your email', errorMessage);
+        */
         this.showError('Błędne dane logowania', errorMessage);
         this.isLoading = false;
       }

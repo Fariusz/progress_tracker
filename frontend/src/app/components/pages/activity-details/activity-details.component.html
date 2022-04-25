@@ -11,17 +11,18 @@
               </div>
               <div class="card-body">
                 <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                  <button aria-expanded="false" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown" type="button">
                     <span data-feather="calendar"></span>
                     {{ 'chart.timeRange' | translate }}
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" (click)="setDataRange(7)">{{ 'date.week' | translate }}</a></li>
-                    <li><a class="dropdown-item" (click)="setDataRange(30)">{{ 'date.month' | translate }}</a></li>
-                    <li><a class="dropdown-item" (click)="setDataRange(90)">{{ 'date.3month' | translate }}</a></li>
-                    <li><a class="dropdown-item" (click)="setDataRange(180)">{{ 'date.6months' | translate }}</a></li>
-                    <li><a class="dropdown-item" (click)="setDataRange(365)">{{ 'date.year' | translate }}</a></li>
-                    <li><a class="dropdown-item" (click)="setDataRange(-1)">{{ 'date.all' | translate }}</a></li>
+                    <li><a (click)="setDataRange(7)" class="dropdown-item">{{ 'date.week' | translate }}</a></li>
+                    <li><a (click)="setDataRange(30)" class="dropdown-item">{{ 'date.month' | translate }}</a></li>
+                    <li><a (click)="setDataRange(90)" class="dropdown-item">{{ 'date.3month' | translate }}</a></li>
+                    <li><a (click)="setDataRange(180)" class="dropdown-item">{{ 'date.6months' | translate }}</a></li>
+                    <li><a (click)="setDataRange(365)" class="dropdown-item">{{ 'date.year' | translate }}</a></li>
+                    <li><a (click)="setDataRange(-1)" class="dropdown-item">{{ 'date.all' | translate }}</a></li>
                   </ul>
                 </div>
               </div>
@@ -44,15 +45,20 @@
                   <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th (click)="clickedSort('content')" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="content">{{ "activity-details.entry" | translate}}
+                    <th (click)="clickedSort('content')" [appSort]="content" data-name="content" data-order="desc"
+                        scope="col" style="cursor: pointer">{{ "activity-details.entry" | translate}}
                       <i *ngIf="!isClickedContent" class="fas fa-sort-amount-down"></i>
                       <i *ngIf="isClickedContent" class="fas fa-sort-amount-up-alt"></i>
                     </th>
-                    <th (click)="clickedSort('repetitions')" *ngIf="isTraining" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="repetitions">{{ "activity-details.repetitions" | translate}}
+                    <th (click)="clickedSort('repetitions')" *ngIf="isTraining" [appSort]="content" data-name="repetitions"
+                        data-order="desc" scope="col"
+                        style="cursor: pointer">{{ "activity-details.repetitions" | translate}}
                       <i *ngIf="!isClickedRepetitions" class="fas fa-sort-amount-down"></i>
                       <i *ngIf="isClickedRepetitions" class="fas fa-sort-amount-up-alt"></i>
                     </th>
-                    <th (click)="clickedSort('created')" style="cursor: pointer" scope="col" [appSort]="content" data-order="desc" data-name="created" data-type="date">{{ "activity-details.created" | translate}}
+                    <th (click)="clickedSort('created')" [appSort]="content" data-name="created" data-order="desc"
+                        data-type="date" scope="col"
+                        style="cursor: pointer">{{ "activity-details.created" | translate}}
                       <i *ngIf="!isClickedCreated" class="fas fa-sort-amount-down"></i>
                       <i *ngIf="isClickedCreated" class="fas fa-sort-amount-up-alt"></i>
                     </th>
@@ -61,7 +67,8 @@
                   </thead>
                   <tbody>
 
-                  <ng-container *ngFor="let entry of content.slice().reverse() | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
+                  <ng-container
+                    *ngFor="let entry of content.slice().reverse() | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
@@ -103,7 +110,7 @@
                                        nextLabel=" {{ 'pagination.next' | translate }} "
                                        previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
                 </ng-container>
-               </div>
+              </div>
             </div>
           </div>
         </section>
@@ -119,10 +126,10 @@
     <div class="form-group">
       <div class="form-floating">
         <input
-          mdbInput mdbValidate
-          class="form-control"
-          formControlName="content"
+          class="form-control" formControlName="content"
           id="addContent"
+          mdbInput
+          mdbValidate
           placeholder="content"
           required
           type="number"
@@ -138,16 +145,17 @@
       </div>
       <div *ngIf="isTraining" class="form-floating">
         <input
-          mdbInput mdbValidate
-          class="form-control"
-          formControlName="repetitions"
+          class="form-control" formControlName="repetitions"
           id="addRepetitions"
+          mdbInput
+          mdbValidate
           placeholder="repetitions"
           required
           type="number"
         >
         <label for="addRepetitions"> {{ "activity-details.repetitions" | translate}}</label>
-        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)" class="alert alert-danger">
+        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)"
+             class="alert alert-danger">
           <mdb-error></mdb-error>
           <mdb-success></mdb-success>
           <div *ngIf="inputRepetitions.errors?.['required']">{{"error.required" | translate }}</div>
@@ -185,10 +193,10 @@
     <div class="form-group">
       <div class="form-floating">
         <input
-          mdbInput mdbValidate
-          class="form-control"
-          formControlName="content"
+          class="form-control" formControlName="content"
           id="editContent"
+          mdbInput
+          mdbValidate
           placeholder="Entry"
           required
           type="number"
@@ -204,16 +212,17 @@
       </div>
       <div *ngIf="isTraining" class="form-floating">
         <input
-          mdbInput mdbValidate
-          class="form-control"
-          formControlName="repetitions"
+          class="form-control" formControlName="repetitions"
           id="editRepetitions"
+          mdbInput
+          mdbValidate
           placeholder="Repetitions"
           required
           type="number"
         >
         <label for="editRepetitions"> {{ "activity-details.repetitions" | translate}}</label>
-        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)" class="alert alert-danger">
+        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)"
+             class="alert alert-danger">
           <mdb-error></mdb-error>
           <mdb-success></mdb-success>
           <div *ngIf="inputRepetitions.errors?.['required']">{{"error.required" | translate }}</div>

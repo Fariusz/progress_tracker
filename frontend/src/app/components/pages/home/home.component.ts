@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivitiesListsService} from "../activities-lists/activities-lists.service";
 import {ActivityListDto} from "../../../models/ActivityListDto";
 import {ActivityDto} from "../../../models/ActivityDto";
-import {Content} from "@angular/compiler/src/render3/r3_ast";
 import {ContentDto} from "../../../models/ContentDto";
 import {ActivitiesService} from "../activities/activities.service";
 import {ContentService} from "../activity-details/content.service";
@@ -41,10 +40,9 @@ export class HomeComponent implements OnInit {
       this.lists = lists;
 
       this.lists.forEach(item => {
-        if(item.training){
+        if (item.training) {
           this.trainingLists.push(item);
-        }
-        else if(!item.training){
+        } else if (!item.training) {
           this.measurementLists.push(item);
         }
       })
@@ -88,13 +86,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getProgress(){
-
-
+  getProgress() {
 
 
     var tablica = this.trainingContent.filter(item => {
-      if(item.created < new Date()){
+      if (item.created < new Date()) {
         return item.content;
       }
     })

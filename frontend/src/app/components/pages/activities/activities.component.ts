@@ -8,7 +8,6 @@ import {ToastrService} from "ngx-toastr";
 import {ContentDto} from "../../../models/ContentDto";
 import {ActivityListDto} from "../../../models/ActivityListDto";
 import {Router} from "@angular/router";
-import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-activity',
@@ -21,30 +20,6 @@ export class ActivitiesComponent implements OnInit {
   page: number = 1;
   isLoading = false;
   activities: ActivityDto[] = [];
-
-  constructor(private activitiesService: ActivitiesService,
-              private fb: FormBuilder,
-              private toastr: ToastrService,
-              private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.activitiesService.getActivitiesByListId(this.list.id).subscribe(
-      (activities: ActivityDto[]) => {
-        this.activities = activities;
-        this.isLoading = false;
-      });
-  }
-
-  navigateTo(id: bigint) {
-    this.router.navigateByUrl(this.router.url.split('/').pop() + '/details/' + id);
-  }
-
-  stopPropagation(event){
-    event.stopPropagation();
-  }
-
   //Modal
   selectedActivity: ActivityDto;
   modalConfig: ModalConfig = {
@@ -67,9 +42,38 @@ export class ActivitiesComponent implements OnInit {
       return true;
     }
   };
+  //Form
+  form: FormGroup;
   @ViewChild('addModal') private addModalComponent: ModalComponent;
   @ViewChild('editModal') private editModalComponent: ModalComponent;
   @ViewChild('deleteModal') private deleteModalComponent: ModalComponent;
+
+  constructor(private activitiesService: ActivitiesService,
+              private fb: FormBuilder,
+              private toastr: ToastrService,
+              private router: Router) {
+  }
+
+  get input() {
+    return this.form.get('activityName');
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.activitiesService.getActivitiesByListId(this.list.id).subscribe(
+      (activities: ActivityDto[]) => {
+        this.activities = activities;
+        this.isLoading = false;
+      });
+  }
+
+  navigateTo(id: bigint) {
+    this.router.navigateByUrl(this.router.url.split('/').pop() + '/details/' + id);
+  }
+
+  stopPropagation(event) {
+    event.stopPropagation();
+  }
 
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
@@ -81,9 +85,9 @@ export class ActivitiesComponent implements OnInit {
   async openAddModal() {
     this.createForm(null);
     this.modalConfig = {
-/*
-      modalTitle: "Add",
-*/
+      /*
+            modalTitle: "Add",
+      */
       modalTitle: "Dodaj nową pozycję",
       hideCloseButton() {
         return true;
@@ -99,9 +103,9 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.addActivity(this.form.value, this.list.id).subscribe(activity => {
       this.activities.push(activity);
-/*
-      this.showSuccess(activity.activityName, 'Successfully added')
-*/
+      /*
+            this.showSuccess(activity.activityName, 'Successfully added')
+      */
       this.showSuccess(activity.activityName, 'Pomyślnie dodano')
     });
     this.addModalComponent.close();
@@ -111,9 +115,9 @@ export class ActivitiesComponent implements OnInit {
   async openEditModal(activity: ActivityDto) {
     this.createForm(activity);
     this.modalConfig = {
-/*
-      modalTitle: "Edit activity", hideCloseButton() {
-*/
+      /*
+            modalTitle: "Edit activity", hideCloseButton() {
+      */
       modalTitle: "Edycja", hideCloseButton() {
         return true;
       }, hideDismissButton() {
@@ -127,9 +131,9 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = true;
     this.activitiesService.editActivity(this.form.value).subscribe(activity => {
       this.activities.find(item => item.id == activity.id).activityName = activity.activityName;
-/*
-      this.showSuccess(activity.activityName, 'Successfully edited');
-*/
+      /*
+            this.showSuccess(activity.activityName, 'Successfully edited');
+      */
       this.showSuccess(activity.activityName, 'Edytowano pomyślnie');
     });
     this.editModalComponent.close();
@@ -139,9 +143,9 @@ export class ActivitiesComponent implements OnInit {
   async openDeleteModal(activity: ActivityDto) {
     this.selectedActivity = activity;
     this.modalConfig = {
-/*
-      modalTitle: "Are you sure want to delete?", hideCloseButton() {
-*/
+      /*
+            modalTitle: "Are you sure want to delete?", hideCloseButton() {
+      */
       modalTitle: "Czy napewno chcesz usunąć?", hideCloseButton() {
         return true;
       }, hideDismissButton() {
@@ -154,9 +158,9 @@ export class ActivitiesComponent implements OnInit {
   onDelete() {
     this.isLoading = true;
     this.activitiesService.deleteActivity(this.selectedActivity.id).subscribe(() => {
-/*
-      this.showSuccess(this.selectedActivity.activityName, 'Successfully deleted');
-*/
+      /*
+            this.showSuccess(this.selectedActivity.activityName, 'Successfully deleted');
+      */
       this.showSuccess(this.selectedActivity.activityName, 'Pomyślnie usunięto');
     });
     this.activities = this.activities.filter(item => item !== this.selectedActivity);
@@ -164,10 +168,10 @@ export class ActivitiesComponent implements OnInit {
     this.isLoading = false;
   }
 
-  //Form
-  form: FormGroup;
-
-  get input(){return this.form.get('activityName');}
+  //Toaster
+  showSuccess(message: string, title: string) {
+    this.toastr.success(message, title);
+  }
 
   private createForm(activity: ActivityDto) {
     const content: ContentDto[] = [];
@@ -192,10 +196,5 @@ export class ActivitiesComponent implements OnInit {
         created: new FormControl(new Date())
       });
     }
-  }
-
-  //Toaster
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
   }
 }
