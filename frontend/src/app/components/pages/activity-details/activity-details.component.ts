@@ -9,7 +9,6 @@ import {ContentService} from "./content.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
 import {ActivityDto} from "../../../models/ActivityDto";
-import { faArrowDown, faArrowAltCircleDown, faArrowAltCircleLeft, faArrowAltCircleRight, faArrowCircleDown,faArrowCircleLeft, faArrowCircleRight , faArrowCircleUp , faArrowUp, faArrowsAlt ,  faArrowsAltH, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-activity-details',
@@ -17,10 +16,6 @@ import { faArrowDown, faArrowAltCircleDown, faArrowAltCircleLeft, faArrowAltCirc
   styleUrls: ['./activity-details.component.css']
 })
 export class ActivityDetailsComponent implements OnInit {
-
-  //Icons
-  faArrowDown = faArrowDown;
-  faArrowUp = faArrowUp;
 
   //Fields
   isTraining: boolean;

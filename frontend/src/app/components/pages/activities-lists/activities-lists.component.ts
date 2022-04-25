@@ -14,7 +14,6 @@ import {Router} from "@angular/router";
   styleUrls: ['./activities-lists.component.css']
 })
 export class ActivitiesListsComponent implements OnInit {
-  faEllipsisV = faEllipsisV;
   page: number = 1;
   isLoading = false;
   lists: ActivityListDto[] = [];

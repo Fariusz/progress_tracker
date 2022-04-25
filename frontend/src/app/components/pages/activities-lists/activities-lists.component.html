@@ -21,7 +21,7 @@
                         <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
                           <a aria-expanded="false" class="btn btn-outline-secondary dropdown up"
                              data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
-                            <fa-icon [icon]="faEllipsisV" style="color: black"></fa-icon>
+                            <i class="fas fa-ellipsis-v text-black"></i>
                           </a>
                           <ul class="dropdown-menu">
                             <li>
@@ -56,7 +56,8 @@
                       <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
                         <a aria-expanded="false" class="btn btn-outline-secondary dropdown up"
                            data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
-                          <fa-icon [icon]="faEllipsisV" style="color: black"></fa-icon>
+                          <i class="fas fa-ellipsis-v text-black"></i>
+
                         </a>
                         <ul class="dropdown-menu">
                           <li>

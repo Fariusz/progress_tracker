@@ -21,7 +21,6 @@ export class ActivitiesComponent implements OnInit {
   page: number = 1;
   isLoading = false;
   activities: ActivityDto[] = [];
-  faEllipsisV = faEllipsisV;
 
   constructor(private activitiesService: ActivitiesService,
               private fb: FormBuilder,
