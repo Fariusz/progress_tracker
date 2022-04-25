@@ -1,13 +1,33 @@
 {
-  "navbar" : {
-    "home" : "Początek",
-    "activities" : "Aktywności",
-    "login" : "Logowanie",
-    "register" : "Rejestracja",
-    "logout" : "Wylogowywanie"
+  "date": {
+    "week": "1 tydzień",
+    "month": "1 miesiąc",
+    "3month" : "3 miesiące",
+    "6months" : "6 miesięcy",
+    "year" : "1 rok",
+    "all" : "Od początku"
+  },
+  "error": {
+    "required": "Pole jest wymagane.",
+    "minlength": "To powinno być dłuższe.",
+    "maxlength": "To powinno być krótsze.",
+    "min": "Ta liczba jest zbyt mała.",
+    "max" : "Ta liczba jest zbyt duża."
+  },
+  "navbar": {
+    "name" : "Dziennik treningowy",
+    "home": "Początek",
+    "measurements": "Pomiary",
+    "activities": "Aktywności",
+    "trainings": "Treningi",
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "logout": "Wylogowywanie",
+    "searchbar_placeholder": "Wyszukaj"
   },
   "main": {
     "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
+    "button": "Rozpocznij!",
     "p": "Nie musisz używać notatnika, arkusza kalkulacyjnego ani innych narzędzi do monitorowania postępów w realizacji\n      zamierzonych działań.\n      Tutaj możesz dodawać ćwiczenia, które wykonujesz, i ich wyniki. Równie dobrze sprawdzi się to w przypadku postanowień.\n      Czy chcesz zacząć czytać więcej książek? Może chcesz zwiększyć ilość spożywanej wody.\n      Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia. - w aplikacji Progress tracker."
   },
   "login": {
@@ -17,16 +37,25 @@
     "remember_me": "Zapamiętaj mnie",
     "forgot_password": "Zapomniałeś hasła?",
     "or": "lub",
-    "sign_in" : "Zaloguj",
-    "sign_up" : "Zarejestruj"
+    "sign_in": "Zaloguj",
+    "sign_up": "Zarejestruj"
   },
   "home": {
-    "h1": "zacznijmy śledzić postępy!",
-    "p": "Przejdź do aktywności"
+    "amountOfLists" : "Wszystkich list",
+    "amountOfActivities" : "Elementów",
+    "amountOfEntries" : "Wszystkich wpisów",
+    "amountOfTrainingLists" : "List treningowych",
+    "amountOfTrainingActivities" : "Ćwiczeń",
+    "amountOfTrainingEntries" : "Wpisów do ćwiczeń",
+    "amountOfMeasurementLists" : "List pomiarowych",
+    "amountOfMeasurementActivities" : "Pomiarów",
+    "amountOfMeasurementEntries" : "Wpisów do pomiarów",
+    "progress" : "Postęp"
   },
   "activity-details": {
     "entries": "Wpisy",
     "entry": "Wpis",
+    "repetitions" : "Powtórzenia",
     "created": "Utworzono",
     "action": "Działanie",
     "edit": "Edytuj",
@@ -36,6 +65,7 @@
   },
   "activities": {
     "activities": "Aktywności",
+    "measurements": "Pomiary",
     "name": "Nazwa",
     "entries": "Wpisy",
     "updated": "Aktualizowane",
@@ -43,6 +73,23 @@
     "details": "Szczegóły",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "never": "Nigdy"
+  },
+  "lists": {
+    "header" : "Listy",
+    "name": "Nazwa",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "delete": "Usuń"
+  },
+  "pagination": {
+    "previous": "Poprzednia strona",
+    "next": "Następna strona"
+  },
+  "chart": {
+    "share": "Udostępnij",
+    "export": "Wyeksportuj",
+    "timeRange": "Zakres czasowy"
   }
 }
