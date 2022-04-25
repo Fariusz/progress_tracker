@@ -15,6 +15,7 @@
     "max" : "Ta liczba jest zbyt duża."
   },
   "navbar": {
+    "name" : "Dziennik treningowy",
     "home": "Początek",
     "measurements": "Pomiary",
     "activities": "Aktywności",

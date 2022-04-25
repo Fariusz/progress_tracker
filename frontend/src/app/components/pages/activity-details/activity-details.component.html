@@ -96,6 +96,8 @@
                 <button (click)="openAddModal()" class="btn btn-primary" role="button">
                   <i class="fa fa-plus float-end"></i>
                 </button>
+                <br>
+                <br>
                 <ng-container *ngIf="content.length > 10">
                   <pagination-controls (pageChange)="page = $event"
                                        nextLabel=" {{ 'pagination.next' | translate }} "

@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
 /*
         this.showError('Please check your email', errorMessage);
 */
-        this.showError('Błędny adres email', errorMessage);
+        this.showError('Błędne dane logowania', errorMessage);
         this.isLoading = false;
       }
     );

@@ -15,6 +15,7 @@
     "max" : "This number is too great."
   },
   "navbar": {
+    "name" : "Progress tracker",
     "home": "Home",
     "measurements": "Measurements",
     "activities": "Activities",
