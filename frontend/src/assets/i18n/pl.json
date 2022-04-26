@@ -48,9 +48,12 @@
     "amountOfTrainingActivities" : "Ćwiczeń",
     "amountOfTrainingEntries" : "Wpisów do ćwiczeń",
     "amountOfMeasurementLists" : "List pomiarowych",
-    "amountOfMeasurementActivities" : "Pomiarów",
-    "amountOfMeasurementEntries" : "Wpisów do pomiarów",
-    "progress" : "Postęp"
+    "amountOfMeasurementActivities" : "Obiektów pomiaru",
+    "amountOfMeasurementEntries" : "Pomiarów",
+    "progress" : "Postęp",
+    "increase" : "Przyrost",
+    "change" : "Zmiana",
+    "consistency" : "Konsekwencja"
   },
   "activity-details": {
     "entries": "Wpisy",

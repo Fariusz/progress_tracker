@@ -17,7 +17,6 @@ import {ActivityDto} from "../../../models/ActivityDto";
 })
 export class ActivityDetailsComponent implements OnInit {
 
-  //Fields
   isTraining: boolean;
   page: number = 1;
   id: number;

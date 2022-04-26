@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   userName = JSON.parse(localStorage.getItem('user'))['username'];
 
+  excercisesProgress;
+  measurementProgress;
+  consistency;
+
   lists: ActivityListDto[] = [];
   activities: ActivityDto[] = [];
   content: ContentDto[] = [];
@@ -70,7 +74,7 @@ export class HomeComponent implements OnInit {
           this.measurementContent.push(item);
         })
       })
-
+      this.setProgress();
       this.isLoading = false;
     });
 
@@ -86,13 +90,69 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getProgress() {
+  setProgress() {
+    var date = new Date();
+    var sumBefore = 0;
+    var sumAfter = 0;
+    var entriesBefore = 0;
+    var entriesAfter = 0;
 
+    date.setDate(date.getDate() - 30);
 
-    var tablica = this.trainingContent.filter(item => {
-      if (item.created < new Date()) {
-        return item.content;
+    this.trainingContent.forEach(item => {
+
+      if (new Date(item.created) < date) {
+        sumBefore += Number(item.content) * Number(item.repetitions);
+        entriesBefore++;
+      }
+      else if (new Date(item.created) > date){
+        sumAfter += Number(item.content) * Number(item.repetitions);
+        entriesAfter++;
+      }
+    })
+
+    this.excercisesProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 10).toFixed(2);
+
+    if(isNaN(this.excercisesProgress)){
+      this.excercisesProgress = 0;
+    }
+
+    sumAfter = 0;
+    sumBefore = 0;
+    entriesAfter = 0;
+    entriesBefore = 0;
+
+    this.measurementContent.forEach(item => {
+
+      if (new Date(item.created) < date) {
+        sumBefore += Number(item.content);
+        entriesBefore++;
+      }
+      else if (new Date(item.created) > date){
+        sumAfter += Number(item.content);
+        entriesAfter++;
+      }
+    })
+
+    this.measurementProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 10).toFixed(2);
+
+    if(isNaN(this.measurementProgress)){
+      this.measurementProgress = 0;
+    }
+    if(this.measurementProgress < 0){
+      this.measurementProgress = -this.measurementProgress;
+    }
+
+    this.content.filter(item => {
+
+      if (new Date(item.created) < date) {
+
+      }
+      else if (new Date(item.created) > date){
+
       }
     })
   }
+
+
 }

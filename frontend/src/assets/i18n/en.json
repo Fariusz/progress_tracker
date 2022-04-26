@@ -50,7 +50,10 @@
     "amountOfMeasurementLists" : "Measurements lists",
     "amountOfMeasurementActivities" : "Body measurements",
     "amountOfMeasurementEntries" : "Measurements entries",
-    "progress" : "Progress"
+    "progress" : "Progress",
+    "increase" : "Increase",
+    "change" : "Change",
+    "consistency" : "Consistency"
   },
   "activity-details": {
     "entries": "Entries",

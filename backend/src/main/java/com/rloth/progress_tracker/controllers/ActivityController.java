@@ -34,7 +34,6 @@ public class ActivityController {
         int pageNumber = page != null && page > 0 ? page : 1;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         return activityService.getUserActivitiesPageable(username, pageNumber - 1, pageSize, sortDirection);
-
     }
 
     @GetMapping("/activities")
