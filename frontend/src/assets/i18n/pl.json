@@ -53,7 +53,15 @@
     "progress" : "Postęp",
     "increase" : "Przyrost",
     "change" : "Zmiana",
-    "consistency" : "Konsekwencja"
+    "consistency" : "Konsekwencja",
+    "totalLifted" : "Całkowite obciążenie",
+    "totalLiftedInfo" : "podniesione od samego początku",
+    "totalReps" : "Całkowita ilość serii",
+    "totalRepsInfo" : "wykonana od samego początku",
+    "good" : "Dobra",
+    "neutral" : "Średnia",
+    "bad" : "Zła",
+    "lack" : "Brak"
   },
   "activity-details": {
     "entries": "Wpisy",

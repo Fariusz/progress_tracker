@@ -53,7 +53,15 @@
     "progress" : "Progress",
     "increase" : "Increase",
     "change" : "Change",
-    "consistency" : "Consistency"
+    "consistency" : "Consistency",
+    "totalLifted" : "Total weight lifted",
+    "totalLiftedInfo" : "from the very beggining",
+    "totalReps" : "Total reps",
+    "totalRepsInfo" : "from the very beggining",
+    "good" : "Good",
+    "neutral" : "Neutral",
+    "bad" : "Bad",
+    "lack" : "Lack"
   },
   "activity-details": {
     "entries": "Entries",

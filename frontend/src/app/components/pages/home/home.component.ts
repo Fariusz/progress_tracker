@@ -74,8 +74,15 @@ export class HomeComponent implements OnInit {
           this.measurementContent.push(item);
         })
       })
-      this.setProgress();
-      this.isLoading = false;
+
+      this.contentService.getContent().subscribe((content: ContentDto[]) => {
+        this.content = content;
+        this.isLoading = false;
+
+        this.setProgress();
+        this.isLoading = false;
+      });
+
     });
 
     this.activitiesService.getActivities().subscribe(
@@ -84,34 +91,67 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       });
 
-    this.contentService.getContent().subscribe((content: ContentDto[]) => {
-      this.content = content;
-      this.isLoading = false;
-    });
+
   }
 
   setProgress() {
-    var date = new Date();
+    var fourWeeksAgo = new Date();
+    fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 30);
+    var weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    var twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
     var sumBefore = 0;
     var sumAfter = 0;
     var entriesBefore = 0;
     var entriesAfter = 0;
 
-    date.setDate(date.getDate() - 30);
-
+    //Progress in excercises
     this.trainingContent.forEach(item => {
 
-      if (new Date(item.created) < date) {
-        sumBefore += Number(item.content) * Number(item.repetitions);
-        entriesBefore++;
+      if(this.trainingContent.find(element => new Date(element.created) < fourWeeksAgo))
+      {
+        if (new Date(item.created) < fourWeeksAgo) {
+          sumBefore += Number(item.content) * Number(item.repetitions);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > fourWeeksAgo){
+          sumAfter += Number(item.content) * Number(item.repetitions);
+          entriesAfter++;
+        }
       }
-      else if (new Date(item.created) > date){
-        sumAfter += Number(item.content) * Number(item.repetitions);
-        entriesAfter++;
+      else if(this.trainingContent.find(element => new Date(element.created) < twoWeeksAgo))
+      {
+        if (new Date(item.created) < twoWeeksAgo) {
+          sumBefore += Number(item.content) * Number(item.repetitions);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > twoWeeksAgo){
+          sumAfter += Number(item.content) * Number(item.repetitions);
+          entriesAfter++;
+        }
+      }
+      else if(this.trainingContent.find(element => new Date(element.created) < weekAgo))
+      {
+        if (new Date(item.created) < weekAgo) {
+          sumBefore += Number(item.content) * Number(item.repetitions);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > weekAgo){
+          sumAfter += Number(item.content) * Number(item.repetitions);
+          entriesAfter++;
+        }
       }
     })
 
-    this.excercisesProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 10).toFixed(2);
+    console.log('sumbefore ' + sumBefore);
+    console.log('entriesBefore ' + entriesBefore);
+    console.log('sumAfter ' + sumAfter);
+    console.log('entriesAfter ' + entriesAfter);
+    this.excercisesProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 100).toFixed(2);
+    if(this.excercisesProgress > 100){
+      this.excercisesProgress = -( ((sumAfter/entriesAfter) / (sumBefore/entriesBefore)) * 100).toFixed(2);
+    }
 
     if(isNaN(this.excercisesProgress)){
       this.excercisesProgress = 0;
@@ -122,15 +162,38 @@ export class HomeComponent implements OnInit {
     entriesAfter = 0;
     entriesBefore = 0;
 
+    //Progress in measurement
     this.measurementContent.forEach(item => {
 
-      if (new Date(item.created) < date) {
-        sumBefore += Number(item.content);
-        entriesBefore++;
+      if(this.measurementContent.find(element => new Date(element.created) < fourWeeksAgo)){
+        if (new Date(item.created) < fourWeeksAgo) {
+          sumBefore += Number(item.content);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > fourWeeksAgo){
+          sumAfter += Number(item.content);
+          entriesAfter++;
+        }
       }
-      else if (new Date(item.created) > date){
-        sumAfter += Number(item.content);
-        entriesAfter++;
+      else if(this.measurementContent.find(element => new Date(element.created) < twoWeeksAgo)) {
+        if (new Date(item.created) < twoWeeksAgo) {
+          sumBefore += Number(item.content);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > twoWeeksAgo){
+          sumAfter += Number(item.content);
+          entriesAfter++;
+        }
+      }
+      else if(this.measurementContent.find(element => new Date(element.created) < weekAgo)) {
+        if (new Date(item.created) < weekAgo) {
+          sumBefore += Number(item.content);
+          entriesBefore++;
+        }
+        else if (new Date(item.created) > weekAgo){
+          sumAfter += Number(item.content);
+          entriesAfter++;
+        }
       }
     })
 
@@ -143,15 +206,22 @@ export class HomeComponent implements OnInit {
       this.measurementProgress = -this.measurementProgress;
     }
 
-    this.content.filter(item => {
+    //Consistency
+    this.consistency = 'lack';
 
-      if (new Date(item.created) < date) {
+    this.content.sort((a,b) => a.created > b.created ? 1 : -1);
 
+      if (new Date((this.content[this.content.length-1]).created) > weekAgo) {
+        this.consistency = 'good';
       }
-      else if (new Date(item.created) > date){
-
+      else if (new Date((this.content[this.content.length-1]).created) > twoWeeksAgo){
+        this.consistency = 'neutral';
       }
-    })
+      else if (new Date((this.content[this.content.length-1]).created) > fourWeeksAgo){
+        this.consistency = 'bad';
+      }
+
+
   }
 
 
