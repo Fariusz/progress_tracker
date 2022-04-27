@@ -223,11 +223,14 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-info">{{ this.excercisesProgress}} %</h3>
-                    <p class="mb-0">{{ "home.increase" | translate }}</p>
+                    <h3 *ngIf="this.excercisesProgress >= 0" class="text-success">{{ this.excercisesProgress}} %</h3>
+                    <h3 *ngIf="this.excercisesProgress < 0" class="text-danger">{{ this.excercisesProgress}} %</h3>
+                    <p *ngIf="this.excercisesProgress >= 0" class="mb-0">{{ "home.increase" | translate }}</p>
+                    <p *ngIf="this.excercisesProgress < 0" class="mb-0">{{ "home.regress" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-chart-pie text-info fa-3x"></i>
+                    <i *ngIf="this.excercisesProgress >= 0" class="fas fa-chart-pie text-success fa-3x"></i>
+                    <i *ngIf="this.excercisesProgress < 0" class="fas fa-chart-pie text-danger fa-3x"></i>
                   </div>
                 </div>
               </div>

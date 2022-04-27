@@ -148,10 +148,7 @@ export class HomeComponent implements OnInit {
     console.log('entriesBefore ' + entriesBefore);
     console.log('sumAfter ' + sumAfter);
     console.log('entriesAfter ' + entriesAfter);
-    this.excercisesProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 100).toFixed(2);
-    if(this.excercisesProgress > 100){
-      this.excercisesProgress = -( ((sumAfter/entriesAfter) / (sumBefore/entriesBefore)) * 100).toFixed(2);
-    }
+    this.excercisesProgress = Number(((sumAfter/entriesAfter) / (sumBefore/entriesBefore) * 100).toFixed(0)) - 100;
 
     if(isNaN(this.excercisesProgress)){
       this.excercisesProgress = 0;
@@ -197,7 +194,7 @@ export class HomeComponent implements OnInit {
       }
     })
 
-    this.measurementProgress = ( ((sumBefore/entriesBefore) / (sumAfter/entriesAfter)) * 10).toFixed(2);
+    this.measurementProgress = Number(((sumAfter/entriesAfter) / (sumBefore/entriesBefore) * 100).toFixed(0)) - 100;
 
     if(isNaN(this.measurementProgress)){
       this.measurementProgress = 0;
