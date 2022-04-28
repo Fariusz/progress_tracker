@@ -16,9 +16,13 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   userName = JSON.parse(localStorage.getItem('user'))['username'];
 
-  excercisesProgress;
-  measurementProgress;
-  consistency;
+  private excercisesProgress: number = 0;
+  private measurementProgress: number = 0;
+  private consistency;
+  private totalWeight: number = 0;
+  private totalReps: number = 0;
+  private totalTrainings: number = 0;
+  private totalCalories: number = 0;
 
   lists: ActivityListDto[] = [];
   activities: ActivityDto[] = [];
@@ -144,10 +148,6 @@ export class HomeComponent implements OnInit {
       }
     })
 
-    console.log('sumbefore ' + sumBefore);
-    console.log('entriesBefore ' + entriesBefore);
-    console.log('sumAfter ' + sumAfter);
-    console.log('entriesAfter ' + entriesAfter);
     this.excercisesProgress = Number(((sumAfter/entriesAfter) / (sumBefore/entriesBefore) * 100).toFixed(0)) - 100;
 
     if(isNaN(this.excercisesProgress)){
@@ -218,8 +218,21 @@ export class HomeComponent implements OnInit {
         this.consistency = 'bad';
       }
 
+    //Total weight
+    this.content.forEach(item => {
+      this.totalWeight += Number(item.content) * Number(item.repetitions);
+    });
+
+    //Total reps
+    this.content.forEach(item => {
+      this.totalReps += Number(item.repetitions);
+    });
+
+    //Total calories
+
+        //420 calories per hour
+
+    //Total trainings
 
   }
-
-
 }
