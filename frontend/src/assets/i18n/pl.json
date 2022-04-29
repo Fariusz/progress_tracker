@@ -50,19 +50,23 @@
     "amountOfMeasurementLists" : "List pomiarowych",
     "amountOfMeasurementActivities" : "Obiektów pomiaru",
     "amountOfMeasurementEntries" : "Pomiarów",
-    "progress" : "Postęp",
-    "regress" : "Regres",
+    "progress" : "Postęp siłowy",
+    "regress" : "Regres siłowy",
     "increase" : "Przyrost",
     "change" : "Zmiana",
     "consistency" : "Konsekwencja",
-    "totalLifted" : "Całkowite obciążenie",
+    "totalLifted" : "Podniesiony ciężar",
     "totalLiftedInfo" : "podniesione od samego początku",
-    "totalReps" : "Całkowita ilość serii",
+    "totalReps" : "Wykonane powtórzenia",
     "totalRepsInfo" : "wykonana od samego początku",
     "good" : "Dobra",
     "neutral" : "Średnia",
     "bad" : "Zła",
-    "lack" : "Brak"
+    "lack" : "Brak",
+    "fromBeggining" : "od początku",
+    "totalTrainings" : "Wykonane treningi",
+    "totalCalories" : "Spalone kalorie"
+
   },
   "activity-details": {
     "entries": "Wpisy",

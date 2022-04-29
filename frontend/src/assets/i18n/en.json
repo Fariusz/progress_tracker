@@ -59,10 +59,13 @@
     "totalLiftedInfo" : "from the very beggining",
     "totalReps" : "Total reps",
     "totalRepsInfo" : "from the very beggining",
+    "fromBeggining" : "all along",
     "good" : "Good",
     "neutral" : "Neutral",
     "bad" : "Bad",
-    "lack" : "Lack"
+    "lack" : "Lack",
+    "totalTrainings" : "Total trainings",
+    "totalCalories" : "Calories burned"
   },
   "activity-details": {
     "entries": "Entries",

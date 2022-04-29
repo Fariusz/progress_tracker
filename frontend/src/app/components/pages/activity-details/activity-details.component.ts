@@ -25,29 +25,7 @@ export class ActivityDetailsComponent implements OnInit {
   editedContent: ContentDto[] = [];
   selectedContent: ContentDto;
   isLoading = false;
-  //Modal
-  modalConfig: ModalConfig = {
-    modalTitle: "undefined",
-    disableCloseButton() {
-      return true;
-    }, disableDismissButton() {
-      return true;
-    }, hideCloseButton() {
-      return true;
-    }, hideDismissButton() {
-      return true;
-    }, onClose() {
-      return true;
-    }, onDismiss() {
-      return true;
-    }, shouldClose() {
-      return true;
-    }, shouldDismiss() {
-      return true;
-    }
-  };
-  //Form
-  form: FormGroup;
+
   //Arrows in table flags
   isClickedContent: boolean = false;
   isClickedRepetitions: boolean = false;
@@ -123,6 +101,28 @@ export class ActivityDetailsComponent implements OnInit {
       this.editedContent = this.content;
     }
   }
+
+  //Modals
+  modalConfig: ModalConfig = {
+    modalTitle: "undefined",
+    disableCloseButton() {
+      return true;
+    }, disableDismissButton() {
+      return true;
+    }, hideCloseButton() {
+      return true;
+    }, hideDismissButton() {
+      return true;
+    }, onClose() {
+      return true;
+    }, onDismiss() {
+      return true;
+    }, shouldClose() {
+      return true;
+    }, shouldDismiss() {
+      return true;
+    }
+  };
 
   onDismiss(modal: string) {
     (modal == 'addModal') ? this.addModalComponent.dismiss()
@@ -226,21 +226,8 @@ export class ActivityDetailsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  clickedSort(thing: string) {
-    if (thing === 'content') {
-      this.isClickedContent = !this.isClickedContent;
-      this.isClickedRepetitions = false;
-      this.isClickedCreated = false;
-    } else if (thing === 'repetitions') {
-      this.isClickedContent = false;
-      this.isClickedRepetitions = !this.isClickedRepetitions;
-      this.isClickedCreated = false;
-    } else if (thing === 'created') {
-      this.isClickedContent = false;
-      this.isClickedRepetitions = false;
-      this.isClickedCreated = !this.isClickedCreated;
-    }
-  }
+  //Form
+  form: FormGroup;
 
   private createForm(content: ContentDto) {
     if (this.isTraining) {
@@ -293,4 +280,22 @@ export class ActivityDetailsComponent implements OnInit {
       }
     }
   }
+
+  //Sort
+  clickedSort(thing: string) {
+    if (thing === 'content') {
+      this.isClickedContent = !this.isClickedContent;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = false;
+    } else if (thing === 'repetitions') {
+      this.isClickedContent = false;
+      this.isClickedRepetitions = !this.isClickedRepetitions;
+      this.isClickedCreated = false;
+    } else if (thing === 'created') {
+      this.isClickedContent = false;
+      this.isClickedRepetitions = false;
+      this.isClickedCreated = !this.isClickedCreated;
+    }
+  }
+
 }

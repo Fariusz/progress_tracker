@@ -228,11 +228,11 @@ export class HomeComponent implements OnInit {
       this.totalReps += Number(item.repetitions);
     });
 
-    //Total calories
-
-        //420 calories per hour
-
     //Total trainings
+    const trainings = [... new Set(this.content.map(item => item.created))];
+    this.totalTrainings = trainings.length;
 
+    //Total calories
+    this.totalCalories = this.totalTrainings * 420;
   }
 }

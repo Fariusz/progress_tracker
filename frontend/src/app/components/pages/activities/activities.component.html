@@ -19,7 +19,7 @@
           <td>{{activity.content.length}}</td>
           <td *ngIf="activity.content.length == 0">{{"activities.never" | translate}}</td>
           <ng-container *ngFor="let content of activity.content let last = last; ">
-            <td *ngIf="last">{{content.created | date: 'shortDate'}}</td>
+            <td *ngIf="last">{{content.created | date: 'dd.MM.yyyy'}}</td>
           </ng-container>
           <td>
             <div class="btn-group">
