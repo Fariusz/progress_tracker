@@ -18,6 +18,7 @@ public class Content {
     private long id;
     private long activityId;
     private String content;
+    private String repetitions;
     private LocalDateTime created;
 }
 

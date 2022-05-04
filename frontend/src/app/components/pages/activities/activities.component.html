@@ -1,82 +1,65 @@
 <ng-container *ngIf="!isLoading">
-  <div class="container-fluid">
-    <main>
-      <div class="container pt-4">
-        <section class="mb-4">
-          <div class="card shadow-lg">
-            <div class="card-header text-center py-3">
-              <h5 class="mb-0 text-center"><strong>{{ "activities.activities" | translate }}</strong></h5>
+  <div class="table-responsive">
+    <table class="table table-hover text-nowrap">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>{{ "activities.name" | translate }}</th>
+        <th>{{ "activities.entries" | translate }}</th>
+        <th>{{ "activities.updated" | translate }}</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container
+        *ngFor="let activity of activities | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
+        <tr (click)="navigateTo(activity.id)" style="cursor: pointer">
+          <td>{{index + 1}}</td>
+          <td>{{activity.activityName}}</td>
+          <td>{{activity.content.length}}</td>
+          <td *ngIf="activity.content.length == 0">{{"activities.never" | translate}}</td>
+          <ng-container *ngFor="let content of activity.content let last = last; ">
+            <td *ngIf="last">{{content.created | date: 'shortDate'}}</td>
+          </ng-container>
+          <td>
+            <div class="btn-group">
+              <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
+                      data-bs-toggle="dropdown" type="button" (click)="stopPropagation($event)">
+                {{ "activities.action" | translate }}
+              </button>
+              <ul class="dropdown-menu" (click)="stopPropagation($event)">
+                <li>
+                  <a class="dropdown-item" routerLink="/{{this.router.url.split('/').pop()}}/details/{{activity.id}}">
+                    {{ "activities.details" | translate }}
+                    <i class="fa fa-search float-end"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="openEditModal(activity)" class="dropdown-item">
+                    {{ "activities.edit" | translate }}
+                    <i class="fa fa-pen float-end"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="openDeleteModal(activity)" class="dropdown-item">
+                    {{ "activities.delete" | translate }}
+                    <i class="fa fa-trash float-end"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>{{ "activities.name" | translate }}</th>
-                    <th>{{ "activities.entries" | translate }}</th>
-                    <th>{{ "activities.updated" | translate }}</th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <ng-container
-                    *ngFor="let activity of activities |
-                  paginate: {itemsPerPage: 10, currentPage: page};
-                  let index = index"
-                  >
-                    <tr>
-                      <td>{{index + 1}}</td>
-                      <td>{{activity.activityName}}</td>
-                      <td>{{activity.content.length}}</td>
-                      <td *ngIf="activity.content.length == 0">never</td>
-                      <ng-container *ngFor="let content of activity.content let last = last; ">
-                        <td *ngIf="last">{{content.created | date: 'fullDate'}}</td>
-                      </ng-container>
-                      <td>
-                        <div class="btn-group">
-                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
-                                  data-bs-toggle="dropdown" type="button">
-                            {{ "activities.action" | translate }}
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li>
-                              <a class="dropdown-item" routerLink="/details/{{activity.id}}">
-                                {{ "activities.details" | translate }}
-                                <i class="fa fa-search float-end"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a (click)="openEditModal(activity)" class="dropdown-item">
-                                {{ "activities.edit" | translate }}
-                                <i class="fa fa-pen float-end"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a (click)="openDeleteModal(activity)" class="dropdown-item">
-                                {{ "activities.delete" | translate }}
-                                <i class="fa fa-trash float-end"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                  </ng-container>
-                  </tbody>
-                  <tbody>
-                  <button (click)="openAddModal()" class="btn btn-primary" role="button">
-                    <i class="fa fa-plus float-end"></i>
-                  </button>
-                  </tbody>
-                </table>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    <button (click)="openAddModal()" class="btn btn-primary" role="button">
+      <i class="fa fa-plus float-end"></i>
+    </button>
+    <ng-container *ngIf="activities.length > 10">
+      <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} "
+                           previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+    </ng-container>
   </div>
 </ng-container>
 
@@ -96,11 +79,12 @@
           required
           type="text"
         >
-        <label for="editActivityName">{{ "activities.name" | translate }}</label>
+        <label for="addActivityName">{{ "activities.name" | translate }}</label>
       </div>
 
       <div class="modal-footer">
-        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">{{ "activities.cancel" | translate }}</button>
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "activities.cancel" | translate }}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
@@ -108,7 +92,8 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">{{ "activities.cancel" | translate }}</button>
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary"
+          type="reset">{{ "activities.cancel" | translate }}</button>
   <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
   </button>
 </app-modal>
@@ -130,7 +115,8 @@
         <label for="editActivityName">{{ "activities.name" | translate }}</label>
       </div>
       <div class="modal-footer">
-        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">{{ "activities.cancel" | translate }}</button>
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "activities.cancel" | translate }}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>

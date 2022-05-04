@@ -13,7 +13,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private long author_id;
+    private long authorId;
     private LocalDateTime created;
     @Lob
     private byte[] picture;

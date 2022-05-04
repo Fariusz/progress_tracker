@@ -14,8 +14,9 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private long listId;
     private String activityName;
-    private long author_id;
+    private long authorId;
     private LocalDateTime created;
 
     //Relacja jeden (Activity) do wielu (Content)
