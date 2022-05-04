@@ -25,23 +25,20 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
   }
 
+  onSwitchMode() {
+    this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
+      : this.authService.toggleLoginMode(true);
+  }
+
   ngOnInit(): void {
     this.authService.changeLoginMode.subscribe(isLoginMode => {
       this.isLoginMode = isLoginMode;
     });
   }
 
-  onSwitchMode() {
-    this.authService.isLoginMode ? this.authService.toggleLoginMode(false)
-      : this.authService.toggleLoginMode(true);
-  }
-
   onSubmit(form: NgForm) {
     if (!form.valid) {
-/*
       this.showError('Try again', 'Form invalid')
-*/
-      this.showError('Spróbuj ponownie', 'Błędny formularz')
       return;
     }
 
@@ -60,26 +57,17 @@ export class LoginComponent implements OnInit {
       resData => {
         if (this.isLoginMode) {
           this.isLoading = false;
-/*
-          this.showSuccess('Enjoy progress tracking', 'Logged in');
-*/
-          this.showSuccess('Gratulacje', 'Zalogowano pomyślnie');
+          this.showSuccess( 'Enjoy progress tracking', 'Logged in');
           this.router.navigate(['/home']);
         } else {
           this.isLoading = false;
           this.authService.toggleLoginMode(true);
           this.router.navigate(['/login']);
-/*
           this.showSuccess('Proceed to login', 'Register success');
-*/
-          this.showSuccess('Przejdź do logowania', 'Konto zostało zarejestrowane');
         }
       },
       errorMessage => {
-/*
         this.showError('Please check your email', errorMessage);
-*/
-        this.showError('Błędny adres email', errorMessage);
         this.isLoading = false;
       }
     );

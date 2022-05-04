@@ -23,11 +23,6 @@ public class ActivityController {
         return activityService.getUserActivities(username);
     }
 
-    @GetMapping("/userActivitiesByListId/{id}")
-    public List<Activity> userActivitiesByListId(@PathVariable long id) {
-        return activityService.userActivitiesByListId(id);
-    }
-
     @GetMapping("/userActivities/pageable")
     public List<Activity> getUserActivitiesPageable(@AuthenticationPrincipal String username, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer pageSize, Sort.Direction sort) {
 

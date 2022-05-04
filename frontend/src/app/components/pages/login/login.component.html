@@ -70,25 +70,25 @@
               <button
                 [disabled]="!authForm.valid"
                 class="btn btn-lg btn-primary btn-block"
-                translate
-                type="submit">
+                type="submit"
+                translate>
                 <ng-container *ngIf="isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
                 <ng-container *ngIf="!isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
-                <!--
-                                {{ isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
-                -->
+<!--
+                {{ isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+-->
               </button>
               {{ "login.or" | translate }}
               <button
                 (click)="onSwitchMode()"
-                class="btn btn-lg btn-secondary btn-block"
-                translate
-                type="button">
+                class="btn btn-secondary btn-block"
+                type="button"
+                translate>
                 <ng-container *ngIf="!isLoginMode"> {{ "login.sign_in" | translate }}</ng-container>
                 <ng-container *ngIf="isLoginMode"> {{ "login.sign_up" | translate }}</ng-container>
-                <!--
-                                {{ !isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
-                -->
+<!--
+                {{ !isLoginMode ? 'login.sign_in' : 'login.sign_up' }}
+-->
               </button>
             </form>
           </div>

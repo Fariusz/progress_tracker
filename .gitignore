@@ -102,7 +102,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-.idea/workspace.xml
-.idea/vcs.xml
-.idea/progress_tracker.iml
-.idea/modules.xml

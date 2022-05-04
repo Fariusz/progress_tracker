@@ -14,11 +14,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   faSignOut = faSignOutAlt;
 
   isAuthenticated = false;
-  language = 'pl';
   private userSub!: Subscription;
+  language = 'en';
 
   constructor(private authService: AuthService, private translate: TranslateService) {
-    translate.setDefaultLang('pl');
+    translate.setDefaultLang('en');
   }
 
   ngOnInit() {

@@ -79,7 +79,7 @@ public class ActivityService {
     }
 
     public Activity addActivity(Activity activity, String username) {
-        activity.setAuthorId(loginService.getUserId(username));
+        activity.setAuthor_id(loginService.getUserId(username));
         return activityRepository.save(activity);
     }
 
@@ -100,9 +100,5 @@ public class ActivityService {
     @CacheEvict(cacheNames = "Activities")
     public void clearActivities() {
         //Ta metoda czyści Cache
-    }
-
-    public List<Activity> userActivitiesByListId(long id) {
-        return activityRepository.findAllByListId(id);
     }
 }

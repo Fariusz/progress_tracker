@@ -16,10 +16,6 @@ export class ActivitiesService {
     return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivities`);
   }
 
-  getActivitiesByListId(id: bigint): Observable<ActivityDto[]> {
-    return this.httpClient.get<ActivityDto[]>(`${environment.APIEndpoint}/userActivitiesByListId/${id}`);
-  }
-
   getActivity(id: number): Observable<ActivityDto> {
     return this.httpClient.get<ActivityDto>(`${environment.APIEndpoint}/activities/${id}`);
   }
@@ -28,8 +24,7 @@ export class ActivitiesService {
     return this.httpClient.put<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
-  addActivity(activity: ActivityDto, listId: bigint): Observable<ActivityDto> {
-    activity.listId = listId;
+  addActivity(activity: ActivityDto): Observable<ActivityDto> {
     return this.httpClient.post<ActivityDto>(`${environment.APIEndpoint}/activities`, activity);
   }
 
