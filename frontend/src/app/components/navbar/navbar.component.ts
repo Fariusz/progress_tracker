@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
-import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -10,8 +9,6 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-
-  faSignOut = faSignOutAlt;
 
   isAuthenticated = false;
   language = 'pl';

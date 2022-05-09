@@ -26,9 +26,16 @@
     "searchbar_placeholder": "Wyszukaj"
   },
   "main": {
-    "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
+    "header": "Zarządzaj swoimi postępami za pomocą jednego narzędzia",
     "button": "Rozpocznij!",
-    "p": "Nie musisz używać notatnika, arkusza kalkulacyjnego ani innych narzędzi do monitorowania postępów w realizacji\n      zamierzonych działań.\n      Tutaj możesz dodawać ćwiczenia, które wykonujesz, i ich wyniki. Równie dobrze sprawdzi się to w przypadku postanowień.\n      Czy chcesz zacząć czytać więcej książek? Może chcesz zwiększyć ilość spożywanej wody.\n      Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia. - w aplikacji Progress tracker."
+    "text": "Zrezygnuj z notatnika i arkusza kalkulacyjnego do monitorowania postępów w realizacji zamierzonych celów. W dzienniku treningowym możesz dodawać ćwiczenia które wykonujesz i ich wyniki. Równie dobrze sprawdzi się to w przypadku pomiarów ciała. Czy chcesz zacząć się odchudzać lub przybierać masy mięśniowej? Może chcesz zwiększyć swoją siłę i sprawność. Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia.",
+    "functions" : "Funkcje",
+    "lists" : "Listy",
+    "lists_description" : "Segregowanie treningów oraz pomiarów w listy.",
+    "activities" : "Aktywności",
+    "activities_description" : "Definiowanie ćwiczeń oraz pomiarów wagi i obwodów ciała.",
+    "charts" : "Wykresy",
+    "charts_description" : "Obserwowanie zmian w zadanym zakresie czasu."
   },
   "login": {
     "email": "Adres e-mail",
@@ -43,14 +50,30 @@
   "home": {
     "amountOfLists" : "Wszystkich list",
     "amountOfActivities" : "Elementów",
-    "amountOfEntries" : "Wszystkich wpisów",
+    "amountOfEntries" : "Wpisów",
     "amountOfTrainingLists" : "List treningowych",
     "amountOfTrainingActivities" : "Ćwiczeń",
-    "amountOfTrainingEntries" : "Wpisów do ćwiczeń",
+    "amountOfTrainingEntries" : "Serii treningowych",
     "amountOfMeasurementLists" : "List pomiarowych",
-    "amountOfMeasurementActivities" : "Pomiarów",
-    "amountOfMeasurementEntries" : "Wpisów do pomiarów",
-    "progress" : "Postęp"
+    "amountOfMeasurementActivities" : "Obiektów pomiaru",
+    "amountOfMeasurementEntries" : "Pomiarów",
+    "progress" : "Postęp siłowy",
+    "regress" : "Regres siłowy",
+    "increase" : "Przyrost",
+    "change" : "Zmiana",
+    "consistency" : "Konsekwencja",
+    "totalLifted" : "Podniesiony ciężar",
+    "totalLiftedInfo" : "podniesione od samego początku",
+    "totalReps" : "Wykonane powtórzenia",
+    "totalRepsInfo" : "wykonana od samego początku",
+    "good" : "Dobra",
+    "neutral" : "Średnia",
+    "bad" : "Zła",
+    "lack" : "Brak",
+    "fromBeggining" : "od początku",
+    "totalTrainings" : "Wykonane treningi",
+    "totalCalories" : "Spalone kalorie"
+
   },
   "activity-details": {
     "entries": "Wpisy",

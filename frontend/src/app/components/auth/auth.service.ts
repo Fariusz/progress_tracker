@@ -100,15 +100,15 @@ export class AuthService {
 
   private handleError(errorRes: HttpErrorResponse) {
 
-/*
-    let errorMessage = 'An unknown error occurred!';
-*/
+    /*
+        let errorMessage = 'An unknown error occurred!';
+    */
     let errorMessage = 'Wystąpił błąd!';
 
     if (errorRes.status == 401) {
-/*
-      return throwError("Wrong username or password.");
-*/
+      /*
+            return throwError("Wrong username or password.");
+      */
       return throwError("Błędna nazwa użytkownika lub hasło.");
     } else if (!errorRes.error || !errorRes.error.message) {
       return throwError(errorMessage);
@@ -116,27 +116,27 @@ export class AuthService {
 
     switch (errorRes.error.message) {
       case 'EMAIL_EXISTS':
-/*
-        errorMessage = 'There is an account with that email adress.';
-*/
+        /*
+                errorMessage = 'There is an account with that email adress.';
+        */
         errorMessage = 'Podany adres email jest zajęty.';
         break;
     }
 
     switch (errorRes.error.message) {
       case 'USERNAME_EXISTS':
-/*
-        errorMessage = 'There is an account with that username.';
-*/
+        /*
+                errorMessage = 'There is an account with that username.';
+        */
         errorMessage = 'Podana nazwa użytkownika jest zajęta.';
         break;
     }
 
     switch (errorRes.error.message) {
       case 'UNKNOWN':
-/*
-        errorMessage = 'UNKNOWN';
-*/
+        /*
+                errorMessage = 'UNKNOWN';
+        */
         errorMessage = 'Niezdefiniowany błąd';
         break;
     }

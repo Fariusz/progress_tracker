@@ -50,7 +50,22 @@
     "amountOfMeasurementLists" : "Measurements lists",
     "amountOfMeasurementActivities" : "Body measurements",
     "amountOfMeasurementEntries" : "Measurements entries",
-    "progress" : "Progress"
+    "progress" : "Progress",
+    "regress" : "Regress",
+    "increase" : "Increase",
+    "change" : "Change",
+    "consistency" : "Consistency",
+    "totalLifted" : "Total weight lifted",
+    "totalLiftedInfo" : "from the very beggining",
+    "totalReps" : "Total reps",
+    "totalRepsInfo" : "from the very beggining",
+    "fromBeggining" : "all along",
+    "good" : "Good",
+    "neutral" : "Neutral",
+    "bad" : "Bad",
+    "lack" : "Lack",
+    "totalTrainings" : "Total trainings",
+    "totalCalories" : "Calories burned"
   },
   "activity-details": {
     "entries": "Entries",
