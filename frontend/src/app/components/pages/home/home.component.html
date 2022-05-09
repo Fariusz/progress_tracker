@@ -11,7 +11,7 @@
                 <div class="d-flex justify-content-between p-md-1">
                   <div class="d-flex flex-row">
                     <div class="align-self-center">
-                      <i class="fas fa-running text-info fa-3x me-4"></i>
+                      <i class="fas fa-running text-success fa-3x me-4"></i>
                     </div>
                     <div>
                       <h4>{{'home.totalTrainings' | translate}}</h4>
@@ -62,7 +62,7 @@
                     </div>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-weight-hanging text-info fa-3x"></i>
+                    <i class="fas fa-weight-hanging text-success fa-3x"></i>
                   </div>
                 </div>
               </div>
@@ -90,56 +90,50 @@
           </div>
         </div>
       </section>
-      <!--Section: Minimal statistics cards-->
+
+
       <section>
-        <!--General-->
         <div class="row">
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
+          <div class="card-group mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-success">{{this.lists.length}}</h3>
+                    <h3 class="text-info">{{this.lists.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfLists" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fab fa-buffer text-success fa-3x"></i>
+                    <i class="fab fa-buffer text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-success">{{this.activities.length}}</h3>
+                    <h3 class="text-info">{{this.activities.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfActivities" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-check text-success fa-3x"></i>
+                    <i class="fas fa-check text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-success">{{this.content.length}}</h3>
+                    <h3 class="text-info">{{this.content.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfEntries" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-pencil-alt text-success fa-3x"></i>
+                    <i class="fas fa-pencil-alt text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
@@ -161,9 +155,8 @@
             </div>
           </div>
         </div>
-        <!--Trainings-->
         <div class="row">
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
+          <div class="card-group mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
@@ -177,8 +170,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
@@ -192,8 +183,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
@@ -207,8 +196,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
@@ -227,64 +214,56 @@
             </div>
           </div>
         </div>
-
-        <!--Measurements-->
         <div class="row">
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
+          <div class="card-group mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-warning">{{this.measurementLists.length}}</h3>
+                    <h3 class="text-info">{{this.measurementLists.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfMeasurementLists" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-book-open text-warning fa-3x"></i>
+                    <i class="fas fa-book-open text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-warning">{{this.measurementActivities.length}}</h3>
+                    <h3 class="text-info">{{this.measurementActivities.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfMeasurementActivities" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-weight text-warning fa-3x"></i>
+                    <i class="fas fa-weight text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-warning">{{this.measurementContent.length}}</h3>
+                    <h3 class="text-info">{{this.measurementContent.length}}</h3>
                     <p class="mb-0">{{ "home.amountOfMeasurementEntries" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-pencil-alt text-warning fa-3x"></i>
+                    <i class="fas fa-pencil-alt text-info fa-3x"></i>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                   <div>
-                    <h3 class="text-warning">{{this.measurementProgress}} %</h3>
+                    <h3 class="text-success">{{this.measurementProgress}} %</h3>
                     <p class="mb-0">{{ "home.change" | translate }}</p>
                   </div>
                   <div class="align-self-center">
-                    <i class="fas fa-chart-pie text-warning fa-3x"></i>
+                    <i class="fas fa-chart-pie text-success fa-3x"></i>
                   </div>
                 </div>
               </div>
@@ -294,7 +273,6 @@
       </section>
     </div>
   </main>
-  >
 </ng-container>
 
 <app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
