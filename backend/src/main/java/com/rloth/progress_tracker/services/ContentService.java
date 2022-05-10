@@ -25,7 +25,6 @@ public class ContentService {
     }
 
     public Content addContent(Content content) {
-
         return contentRepository.save(content);
     }
 

@@ -33,11 +33,9 @@ public class LoginController {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"EMAIL_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
         } else if (loginService.usernameExist(accountDto)) {
             return new ResponseEntity<>("{\n" + "  \"message\" : \"USERNAME_EXISTS\"\n" + "}\n", HttpStatus.BAD_REQUEST);
-        } else if (!loginService.emailExist(accountDto) || !loginService.usernameExist(accountDto)) {
+        } else {
             loginService.register(accountDto);
             return new ResponseEntity<>("{\n" + "  \"message\" : \"REGISTER_SUCCESS\"\n" + "}\n", HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>("{\n" + "  \"message\" : \"UNKNOWN\"\n" + "}\n", HttpStatus.NOT_IMPLEMENTED);
         }
     }
 

@@ -79,6 +79,8 @@ export class HomeComponent implements OnInit {
         })
       })
 
+
+
       this.contentService.getContent().subscribe((content: ContentDto[]) => {
         this.content = content;
         this.isLoading = false;
@@ -94,8 +96,6 @@ export class HomeComponent implements OnInit {
         this.activities = activities;
         this.isLoading = false;
       });
-
-
   }
 
   setProgress() {
