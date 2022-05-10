@@ -81,19 +81,23 @@ export class HomeComponent implements OnInit {
 
 
 
-      this.contentService.getContent().subscribe((content: ContentDto[]) => {
+/*      this.contentService.getContent().subscribe((content: ContentDto[]) => {
         this.content = content;
-        this.isLoading = false;
-
         this.setProgress();
         this.isLoading = false;
-      });
+      });*/
 
     });
 
     this.activitiesService.getActivities().subscribe(
       (activities: ActivityDto[]) => {
         this.activities = activities;
+        this.activities.forEach(activity => {
+          activity.content.forEach(content => {
+            this.content.push(content);
+          })
+        });
+        this.setProgress();
         this.isLoading = false;
       });
   }
@@ -206,7 +210,8 @@ export class HomeComponent implements OnInit {
     //Consistency
     this.consistency = 'lack';
 
-    this.content.sort((a,b) => a.created > b.created ? 1 : -1);
+    if(this.content.length > 0){
+      this.content.sort((a,b) => a.created > b.created ? 1 : -1);
 
       if (new Date((this.content[this.content.length-1]).created) > weekAgo) {
         this.consistency = 'good';
@@ -217,6 +222,8 @@ export class HomeComponent implements OnInit {
       else if (new Date((this.content[this.content.length-1]).created) > fourWeeksAgo){
         this.consistency = 'bad';
       }
+
+    }
 
     //Total weight
     this.content.forEach(item => {
