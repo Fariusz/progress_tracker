@@ -6,6 +6,7 @@ import { ActivityDetailsComponent } from './pages/activity-details/activity-deta
 import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from "./pages/main/main.component";
+import { UploadPhotoComponent } from './pages/upload-photo/upload-photo.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
+  {path: 'uploadphoto', component: UploadPhotoComponent}
 ];
 
 @NgModule({

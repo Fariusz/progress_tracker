@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivitiesService } from './pages/activities/activities.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { UploadPhotoComponent } from './pages/upload-photo/upload-photo.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActivitiesComponent,
     ActivityDetailsComponent,
     ModalComponent,
-    LineChartComponent
+    LineChartComponent,
+    UploadPhotoComponent
   ],
   imports: [
     BrowserModule,
