@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,6 +19,7 @@ public class Content {
     private long id;
     private long activityId;
     private String content;
-    private LocalDateTime created;
+    private String repetitions;
+    private LocalDate created;
 }
 

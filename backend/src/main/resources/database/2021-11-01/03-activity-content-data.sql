@@ -1,86 +1,54 @@
 --liquibase formatted sql
 --changeset rloth:3
-insert into activity (id, activity_name, author_id, created)
-values (1, 'Push ups', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (2, 'Bench press', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (3, 'Squad', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (4, 'Dead lift', 1, '2020-04-20T13:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (5, 'Over head press', 1, '2020-04-20T13:14:05.724885500');
+
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (1, 'Trening siłowy A', true, 1 ,'2022-01-01T08:00:00');
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (2, 'Trening siłowy B', true, 1 ,'2022-01-01T08:00:00');
+
+insert into activities_list (id, list_name, is_training, author_id, created)
+values (3, 'Pomiary ciała', false, 1 ,'2022-01-01T08:00:00');
+
+insert into activity (id, list_id, activity_name, author_id, created)
+values (1, 1, 'Przysiad klasyczny ze sztangą trzymaną z tyłu - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (2, 1, 'Ściąganie drążka wyciągu górnego szerokim chwytem - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (3, 1, 'Wyciskanie hantli na ławce skośnej dodatniej - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (4, 1, 'Wyciskanie żołnierskie - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (5, 1, 'Zginanie przedramion ze sztangą łamaną stojąc - 3 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (6, 1, 'Spięcia mięśni brzucha przy użyciu linki wyciągu górnego – 3 serie', 1, '2022-01-01T08:00:00');
 
 
-insert into activity (id, activity_name, author_id, created)
-values (6, 'Books', 2, '2021-06-20T22:54:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (7, 'Water', 2, '2021-08-20T07:13:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (8, 'Tidy room', 2, '2021-02-20T09:14:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (9, 'Cigarettes', 2, '2021-09-20T16:20:05.724885500');
-insert into activity (id, activity_name, author_id, created)
-values (10, 'Coffees', 2, '2021-01-20T15:10:05.724885500');
---changeset rloth:4
-insert into content (id, activity_id, content, created)
-values (1, 1, '15', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (6, 1, '17', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (7, 1, '23', '2021-06-20T08:00:00.0');
-insert into content (id, activity_id, content, created)
-values (2, 2, '80', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (8, 2, '85', '2021-06-20T08:00:00.0');
-insert into content (id, activity_id, content, created)
-values (9, 2, '90', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (3, 3, '100', '2021-06-20T08:00:00.0');
-insert into content (id, activity_id, content, created)
-values (10, 3, '105', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (11, 3, '110', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (12, 4, '90', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (13, 4, '95', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (14, 4, '100', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (5, 5, '60', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (15, 5, '62', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (16, 5, '64', '2020-04-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (7, 2, 'Martwy ciąg na "prostych" nogach - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (8, 2, 'Podciąganie na drążku nachwytem – 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (9, 2, 'Wyciskanie sztangi na ławce poziomej - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (10, 2, 'Wyciskanie hantli siedząc na ławce - 4 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (11, 2, 'Pompki na poręczach (z dodatkowym obciążeniem) - 3 serie', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (12, 2, 'Wznosy zgiętych nóg w zwisie na drążku - 3 serie', 1, '2022-01-01T08:00:00');
 
-insert into content (id, activity_id, content, created)
-values (17, 6, '15', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (18, 6, '17', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (19, 6, '23', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (20, 7, '2 l', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (21, 7, '2 l', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (22, 7, '1 l', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (23, 8, '1', '2022-01-01T08:00:0');
-insert into content (id, activity_id, content, created)
-values (24, 8, '1', '2022-01-04T08:00:0');
-insert into content (id, activity_id, content, created)
-values (25, 8, '1', '2022-01-08T08:00:0');
-insert into content (id, activity_id, content, created)
-values (26, 9, '10', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (27, 9, '12', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (28, 9, '17', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (29, 10, '2', '2020-04-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (30, 10, '3', '2020-05-20T13:14:05.724885500');
-insert into content (id, activity_id, content, created)
-values (31, 10, '2', '2020-06-20T13:14:05.724885500');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (13, 3, 'Obwód talii', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (14, 3, 'Obwód pasa', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id, activity_name, author_id, created)
+values (15, 3, 'Obwód uda', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (16, 3, 'Obwód łydki', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (17, 3, 'Obwód ramienia', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (18, 3, 'Obwód klatki piersiowej', 1, '2022-01-01T08:00:00');
+insert into activity (id, list_id , activity_name, author_id, created)
+values (19, 3, 'Waga', 1, '2022-01-01T08:00:00');
+
+

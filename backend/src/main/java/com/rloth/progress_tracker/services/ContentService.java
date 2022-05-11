@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class ContentService {
         Content contentEdited = contentRepository.findById(content.getId()).orElseThrow();
         contentEdited.setContent(content.getContent());
         contentEdited.setCreated(content.getCreated());
+        contentEdited.setRepetitions(content.getRepetitions());
         return contentEdited;
     }
 }
