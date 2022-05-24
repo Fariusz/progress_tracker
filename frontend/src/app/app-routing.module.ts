@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./components/pages/home/home.component";
-import {MainComponent} from "./components/pages/main/main.component";
+import {LandingPageComponent} from "./components/pages/landing-page/landing-page.component";
 import {LoginComponent} from "./components/pages/login/login.component";
 import {AuthGuardService} from "./components/auth/auth-guard.service";
 import {ActivityDetailsComponent} from "./components/pages/activity-details/activity-details.component";
@@ -9,7 +9,7 @@ import {ActivitiesListsComponent} from "./components/pages/activities-lists/acti
 import {PageNotFoundComponent} from "./components/pages/page-not-found/page-not-found.component";
 
 const routes: Routes = [
-  {path: '', component: MainComponent},
+  {path: '', component: LandingPageComponent},
   {path: 'trainings', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
   {path: 'measurements', component: ActivitiesListsComponent, canActivate: [AuthGuardService]},
   {
