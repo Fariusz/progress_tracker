@@ -34,7 +34,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   private dataSetLabel = [];
 
   ngOnInit(): void {
-    this.setDataToChart();
+    this.prepareData();
   }
 
   setDataToChart() {
@@ -48,7 +48,7 @@ export class LineChartComponent implements OnInit, OnChanges {
       this.dataSetLabel.push(formatDate(new Date(data.created), 'dd-MM-yyyy', 'en-US'));
     });
 
-    this.chartDatasets[0].label = 'Progress';
+    this.chartDatasets[0].label = 'Wpis';
     this.chartDatasets[0].data = this.dataSetContent;
     this.chartLabels = this.dataSetLabel;
   }
@@ -61,7 +61,7 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   reloadChart() {
     if (this.chart !== undefined) {
-      this.setDataToChart();
+      this.prepareData();
     }
   }
 
@@ -69,5 +69,10 @@ export class LineChartComponent implements OnInit, OnChanges {
   }
 
   public chartHovered(e: any): void {
+  }
+
+  prepareData() {
+    this.data.sort((a, b) => a.created > b.created ? 1 : -1);
+    this.setDataToChart();
   }
 }

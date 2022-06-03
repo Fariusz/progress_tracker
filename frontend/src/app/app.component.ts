@@ -9,7 +9,8 @@ import {AuthService} from "./components/auth/auth.service";
 export class AppComponent implements OnInit {
   title = 'Progress tracker';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.authService.autoLogin();

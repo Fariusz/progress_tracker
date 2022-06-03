@@ -18,6 +18,8 @@ public class ContentController {
         return contentService.getContent();
     }
 
+
+
     @GetMapping("/content/{id}")
     public List<Content> getActivityContent(@PathVariable long id) {
         return contentService.getActivityContent(id);

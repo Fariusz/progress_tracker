@@ -7,19 +7,26 @@
           <ng-container *ngIf="content.length > 0">
             <div class="card shadow-lg">
               <div class="card-header py-3">
-                <h5 class="mb-0 text-center"><strong>{{activity.activityName.toString()}}</strong></h5>
+                <h5 class="mb-0 text-center"><strong>{{activity.activityName}}</strong></h5>
               </div>
               <div class="card-body">
-                <div class="btn-group me-2">
-                  <button class="btn btn-sm btn-outline-secondary" type="button">Share</button>
-                  <button class="btn btn-sm btn-outline-secondary" type="button">Export</button>
+                <div class="btn-group">
+                  <button aria-expanded="false" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown" type="button">
+                    <span data-feather="calendar"></span>
+                    {{ 'chart.timeRange' | translate }}
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a (click)="setDataRange(7)" class="dropdown-item">{{ 'date.week' | translate }}</a></li>
+                    <li><a (click)="setDataRange(30)" class="dropdown-item">{{ 'date.month' | translate }}</a></li>
+                    <li><a (click)="setDataRange(90)" class="dropdown-item">{{ 'date.3month' | translate }}</a></li>
+                    <li><a (click)="setDataRange(180)" class="dropdown-item">{{ 'date.6months' | translate }}</a></li>
+                    <li><a (click)="setDataRange(365)" class="dropdown-item">{{ 'date.year' | translate }}</a></li>
+                    <li><a (click)="setDataRange(-1)" class="dropdown-item">{{ 'date.all' | translate }}</a></li>
+                  </ul>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
-                  <span data-feather="calendar"></span>
-                  This week
-                </button>
               </div>
-              <app-line-chart [data]="content"></app-line-chart>
+              <app-line-chart [data]="editedContent"></app-line-chart>
             </div>
           </ng-container>
         </section>
@@ -31,30 +38,46 @@
                 <strong>{{ "activity-details.entries" | translate }}</strong>
               </h5>
             </div>
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover text-nowrap">
                   <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">{{ "activity-details.entry" | translate}}</th>
-                    <th scope="col">{{ "activity-details.created" | translate}}</th>
+                    <th (click)="clickedSort('content')" [appSort]="content" data-name="content" data-order="desc"
+                        scope="col" style="cursor: pointer">{{ "activity-details.entry" | translate}}
+                      <i *ngIf="!isClickedContent" class="fas fa-sort-amount-down"></i>
+                      <i *ngIf="isClickedContent" class="fas fa-sort-amount-up-alt"></i>
+                    </th>
+                    <th (click)="clickedSort('repetitions')" *ngIf="isTraining" [appSort]="content" data-name="repetitions"
+                        data-order="desc" scope="col"
+                        style="cursor: pointer">{{ "activity-details.repetitions" | translate}}
+                      <i *ngIf="!isClickedRepetitions" class="fas fa-sort-amount-down"></i>
+                      <i *ngIf="isClickedRepetitions" class="fas fa-sort-amount-up-alt"></i>
+                    </th>
+                    <th (click)="clickedSort('created')" [appSort]="content" data-name="created" data-order="desc"
+                        data-type="date" scope="col"
+                        style="cursor: pointer">{{ "activity-details.created" | translate}}
+                      <i *ngIf="!isClickedCreated" class="fas fa-sort-amount-down"></i>
+                      <i *ngIf="isClickedCreated" class="fas fa-sort-amount-up-alt"></i>
+                    </th>
                     <th scope="col"></th>
                   </tr>
                   </thead>
                   <tbody>
+
                   <ng-container
-                    *ngFor="let entry of content |
-                     paginate: {itemsPerPage: 10, currentPage: page};
-                    let index = index"
-                  >
+                    *ngFor="let entry of content.slice().reverse() | paginate: {itemsPerPage: 10, currentPage: page}; let index = index">
                     <tr>
                       <td>{{index + 1}}</td>
                       <td>{{entry.content}}</td>
-                      <td>{{entry.created | date: 'fullDate'}}</td>
+                      <td *ngIf="isTraining">{{entry.repetitions}}</td>
+                      <td>{{entry.created | date: 'dd.MM.yyyy'}}</td>
                       <td>
                         <div class="btn-group">
-                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+                          <button aria-expanded="false" class="btn btn-outline-secondary dropdown-toggle"
+                                  data-bs-toggle="dropdown" type="button">
                             {{ "activity-details.action" | translate}}
                           </button>
                           <ul class="dropdown-menu">
@@ -76,13 +99,17 @@
                     </tr>
                   </ng-container>
                   </tbody>
-                  <tbody>
-                  <button (click)="openAddModal()" class="btn btn-primary" role="button">
-                    <i class="fa fa-plus float-end"></i>
-                  </button>
-                  </tbody>
                 </table>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                <button (click)="openAddModal()" class="btn btn-primary" role="button">
+                  <i class="fa fa-plus float-end"></i>
+                </button>
+                <br>
+                <br>
+                <ng-container *ngIf="content.length > 10">
+                  <pagination-controls (pageChange)="page = $event"
+                                       nextLabel=" {{ 'pagination.next' | translate }} "
+                                       previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -97,30 +124,57 @@
 <app-modal #addModal [modalConfig]="modalConfig">
   <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
     <div class="form-group">
-
       <div class="form-floating">
         <input
-          class="form-control"
-          formControlName="content"
+          class="form-control" formControlName="content"
           id="addContent"
-          maxlength="50"
-          minlength="1" placeholder="content"
+          mdbInput
+          mdbValidate
+          placeholder="content"
           required
           type="number"
         >
         <label for="addContent"> {{ "activity-details.entry" | translate}}</label>
+        <div *ngIf="inputContent.invalid && (inputContent.dirty || inputContent.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="inputContent.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="inputContent.errors?.['min']">{{"error.min" | translate }}</div>
+          <div *ngIf="inputContent.errors?.['max']">{{"error.max" | translate }}</div>
+        </div>
+      </div>
+      <div *ngIf="isTraining" class="form-floating">
+        <input
+          class="form-control" formControlName="repetitions"
+          id="addRepetitions"
+          mdbInput
+          mdbValidate
+          placeholder="repetitions"
+          required
+          type="number"
+        >
+        <label for="addRepetitions"> {{ "activity-details.repetitions" | translate}}</label>
+        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)"
+             class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="inputRepetitions.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="inputRepetitions.errors?.['min']">{{"error.min" | translate }}</div>
+          <div *ngIf="inputRepetitions.errors?.['max']">{{"error.max" | translate }}</div>
+        </div>
       </div>
       <div class="form-floating">
         <input
           class="form-control"
           formControlName="created"
           id="addDate"
-          type="datetime-local"
+          type="date"
         >
         <label for="addDate">{{ "activity-details.date" | translate}}</label>
       </div>
       <div class="modal-footer">
-        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "activity-details.cancel" | translate}}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>
@@ -128,7 +182,8 @@
 </app-modal>
 
 <app-modal #deleteModal [modalConfig]="modalConfig">
-  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary"
+          type="reset">{{ "activity-details.cancel" | translate}}</button>
   <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
   </button>
 </app-modal>
@@ -138,18 +193,46 @@
     <div class="form-group">
       <div class="form-floating">
         <input
-          class="form-control"
-          formControlName="content"
+          class="form-control" formControlName="content"
           id="editContent"
-          maxlength="50"
-          minlength="1" placeholder="Entry"
+          mdbInput
+          mdbValidate
+          placeholder="Entry"
           required
-          type="text"
+          type="number"
         >
         <label for="editContent">{{ "activity-details.entry" | translate}}</label>
+        <div *ngIf="inputContent.invalid && (inputContent.dirty || inputContent.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="inputContent.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="inputContent.errors?.['min']">{{"error.min" | translate }}</div>
+          <div *ngIf="inputContent.errors?.['max']">{{"error.max" | translate }}</div>
+        </div>
+      </div>
+      <div *ngIf="isTraining" class="form-floating">
+        <input
+          class="form-control" formControlName="repetitions"
+          id="editRepetitions"
+          mdbInput
+          mdbValidate
+          placeholder="Repetitions"
+          required
+          type="number"
+        >
+        <label for="editRepetitions"> {{ "activity-details.repetitions" | translate}}</label>
+        <div *ngIf="inputRepetitions.invalid && (inputRepetitions.dirty || inputRepetitions.touched)"
+             class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="inputRepetitions.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="inputRepetitions.errors?.['min']">{{"error.min" | translate }}</div>
+          <div *ngIf="inputRepetitions.errors?.['max']">{{"error.max" | translate }}</div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary" type="reset">{{ "activity-details.cancel" | translate}}</button>
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "activity-details.cancel" | translate}}</button>
         <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
       </div>
     </div>

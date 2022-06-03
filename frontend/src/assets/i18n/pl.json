@@ -1,14 +1,41 @@
 {
-  "navbar" : {
-    "home" : "Początek",
-    "activities" : "Aktywności",
-    "login" : "Logowanie",
-    "register" : "Rejestracja",
-    "logout" : "Wylogowywanie"
+  "date": {
+    "week": "1 tydzień",
+    "month": "1 miesiąc",
+    "3month" : "3 miesiące",
+    "6months" : "6 miesięcy",
+    "year" : "1 rok",
+    "all" : "Od początku"
   },
-  "main": {
-    "h1": "Zarządzaj swoimi działaniami za pomocą jednego narzędzia",
-    "p": "Nie musisz używać notatnika, arkusza kalkulacyjnego ani innych narzędzi do monitorowania postępów w realizacji\n      zamierzonych działań.\n      Tutaj możesz dodawać ćwiczenia, które wykonujesz, i ich wyniki. Równie dobrze sprawdzi się to w przypadku postanowień.\n      Czy chcesz zacząć czytać więcej książek? Może chcesz zwiększyć ilość spożywanej wody.\n      Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia. - w aplikacji Progress tracker."
+  "error": {
+    "required": "Pole jest wymagane.",
+    "minlength": "To powinno być dłuższe.",
+    "maxlength": "To powinno być krótsze.",
+    "min": "Ta liczba jest zbyt mała.",
+    "max" : "Ta liczba jest zbyt duża."
+  },
+  "navbar": {
+    "name" : "Dziennik treningowy",
+    "home": "Początek",
+    "measurements": "Pomiary",
+    "activities": "Aktywności",
+    "trainings": "Treningi",
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "logout": "Wylogowywanie",
+    "searchbar_placeholder": "Wyszukaj"
+  },
+  "landing-page": {
+    "header": "Zarządzaj swoimi postępami za pomocą jednego narzędzia",
+    "button": "Rozpocznij!",
+    "text": "Zrezygnuj z notatnika i arkusza kalkulacyjnego do monitorowania postępów w realizacji zamierzonych celów. W dzienniku treningowym możesz dodawać ćwiczenia które wykonujesz i ich wyniki. Równie dobrze sprawdzi się to w przypadku pomiarów ciała. Czy chcesz zacząć się odchudzać lub przybierać masy mięśniowej? Może chcesz zwiększyć swoją siłę i sprawność. Zarządzaj swoimi działaniami i śledź ich postępy - od pierwszego do ostatniego dnia.",
+    "functions" : "Funkcje",
+    "lists" : "Listy",
+    "lists_description" : "Segregowanie treningów oraz pomiarów w listy.",
+    "activities" : "Aktywności",
+    "activities_description" : "Definiowanie ćwiczeń oraz pomiarów wagi i obwodów ciała.",
+    "charts" : "Wykresy",
+    "charts_description" : "Obserwowanie zmian w zadanym zakresie czasu."
   },
   "login": {
     "email": "Adres e-mail",
@@ -17,16 +44,41 @@
     "remember_me": "Zapamiętaj mnie",
     "forgot_password": "Zapomniałeś hasła?",
     "or": "lub",
-    "sign_in" : "Zaloguj",
-    "sign_up" : "Zarejestruj"
+    "sign_in": "Zaloguj",
+    "sign_up": "Zarejestruj"
   },
   "home": {
-    "h1": "zacznijmy śledzić postępy!",
-    "p": "Przejdź do aktywności"
+    "amountOfLists" : "Wszystkich list",
+    "amountOfActivities" : "Elementów",
+    "amountOfEntries" : "Wpisów",
+    "amountOfTrainingLists" : "List treningowych",
+    "amountOfTrainingActivities" : "Ćwiczeń",
+    "amountOfTrainingEntries" : "Serii treningowych",
+    "amountOfMeasurementLists" : "List pomiarowych",
+    "amountOfMeasurementActivities" : "Obiektów pomiaru",
+    "amountOfMeasurementEntries" : "Pomiarów",
+    "progress" : "Postęp siłowy",
+    "regress" : "Regres siłowy",
+    "increase" : "Przyrost",
+    "change" : "Zmiana",
+    "consistency" : "Konsekwencja",
+    "totalLifted" : "Podniesiony ciężar",
+    "totalLiftedInfo" : "podniesione od samego początku",
+    "totalReps" : "Wykonane powtórzenia",
+    "totalRepsInfo" : "wykonana od samego początku",
+    "good" : "Dobra",
+    "neutral" : "Średnia",
+    "bad" : "Zła",
+    "lack" : "Brak",
+    "fromBeggining" : "od początku",
+    "totalTrainings" : "Wykonane treningi",
+    "totalCalories" : "Spalone kalorie"
+
   },
   "activity-details": {
     "entries": "Wpisy",
     "entry": "Wpis",
+    "repetitions" : "Powtórzenia",
     "created": "Utworzono",
     "action": "Działanie",
     "edit": "Edytuj",
@@ -36,6 +88,7 @@
   },
   "activities": {
     "activities": "Aktywności",
+    "measurements": "Pomiary",
     "name": "Nazwa",
     "entries": "Wpisy",
     "updated": "Aktualizowane",
@@ -43,6 +96,23 @@
     "details": "Szczegóły",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "never": "Nigdy"
+  },
+  "lists": {
+    "header" : "Listy",
+    "name": "Nazwa",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "delete": "Usuń"
+  },
+  "pagination": {
+    "previous": "Poprzednia strona",
+    "next": "Następna strona"
+  },
+  "chart": {
+    "share": "Udostępnij",
+    "export": "Wyeksportuj",
+    "timeRange": "Zakres czasowy"
   }
 }

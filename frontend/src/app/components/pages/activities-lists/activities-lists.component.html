@@ -1,0 +1,171 @@
+<ng-container *ngIf="!isLoading">
+  <div class="container-fluid">
+    <main>
+      <div class="container pt-4">
+        <section class="mb-4">
+          <div class="card shadow-lg">
+            <div class="card-header text-center py-3">
+              <h5 class="mb-0 text-center"><strong>{{ "lists.header" | translate }}</strong>
+                <button (click)="openAddModal()" class="btn btn-primary float-end" role="button">
+                  <i class="fa fa-plus float-end"></i>
+                </button>
+              </h5>
+            </div>
+
+            <div *ngIf="this.router.url.split('/').pop() === 'trainings'" class="card-body">
+              <ng-container *ngFor="let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
+                <ngb-accordion #acc="ngbAccordion" *ngIf="list.training" [closeOthers]="true" [destroyOnHide]='false'
+                               activeIds="{{'config-panel-one' + 0}}">
+                  <ngb-panel id="{{'panel' + i}}">
+                    <ng-template ngbPanelTitle>
+                      <span>{{list.listName}}</span>
+                      <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
+                        <a (click)="stopPropagation($event)" aria-expanded="false"
+                           class="btn btn-outline-secondary dropdown up" data-bs-toggle="dropdown" type="button">
+                          <i class="fas fa-ellipsis-v text-black"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a (click)="openEditModal(list)" class="dropdown-item">
+                              {{ "lists.edit" | translate }}
+                              <i class="fa fa-pen float-end"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="openDeleteModal(list)" class="dropdown-item">
+                              {{ "lists.delete" | translate }}
+                              <i class="fa fa-trash float-end"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <app-activity [list]="list"></app-activity>
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+              </ng-container>
+            </div>
+
+            <div *ngIf="this.router.url.split('/').pop() === 'measurements'" class="card-body">
+              <ng-container *ngFor="let list of lists | paginate: {itemsPerPage: 10, currentPage: page}; let i = index">
+                <ngb-accordion #acc="ngbAccordion" *ngIf="!list.training" [closeOthers]="true" [destroyOnHide]='false'
+                               activeIds="{{'config-panel-one' + 0}}">
+                  <ngb-panel id="{{'panel' + i}}">
+                    <ng-template ngbPanelTitle>
+                      <span>{{list.listName}}</span>
+                      <div *ngIf="acc.isExpanded('panel' + i)" class="float-end">
+                        <a (click)="stopPropagation($event)" aria-expanded="false"
+                           class="btn btn-outline-secondary dropdown up" data-bs-toggle="dropdown" type="button">
+                          <i class="fas fa-ellipsis-v text-black"></i>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a (click)="openEditModal(list)" class="dropdown-item">
+                              {{ "lists.edit" | translate }}
+                              <i class="fa fa-pen float-end"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="openDeleteModal(list)" class="dropdown-item">
+                              {{ "lists.delete" | translate }}
+                              <i class="fa fa-trash float-end"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <app-activity [list]="list"></app-activity>
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+              </ng-container>
+            </div>
+
+            <ng-container *ngIf="lists.length > 10">
+              <pagination-controls (pageChange)="page = $event" nextLabel=" {{ 'pagination.next' | translate }} "
+                                   previousLabel=" {{ 'pagination.previous' | translate }} "></pagination-controls>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</ng-container>
+
+<app-loading-spinner *ngIf="isLoading" class="d-flex justify-content-center"></app-loading-spinner>
+
+<app-modal #addModal [modalConfig]="modalConfig">
+  <form (ngSubmit)="onAddSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+    <div class="form-group">
+
+      <div class="form-floating">
+        <input
+          class="form-control" formControlName="listName"
+          id="addListName"
+          mdbInput
+          mdbValidate
+          placeholder="Name"
+          required
+          type="text"
+        >
+        <label for="addListName">{{ "lists.name" | translate }}</label>
+        <div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="input.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="input.errors?.['minlength']">{{"error.minlength" | translate }}</div>
+          <div *ngIf="input.errors?.['maxlength']">{{"error.maxlength" | translate }}</div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="onDismiss('addModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "lists.cancel" | translate }}</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
+</app-modal>
+
+<app-modal #deleteModal [modalConfig]="modalConfig">
+  <button (click)="onDismiss('deleteModal')" class="btn btn-outline-secondary"
+          type="reset">{{ "lists.cancel" | translate }}</button>
+  <button (click)="deleteModal.close()" (click)="onDelete()" class="btn btn-danger" ngbAutofocus type="button">Ok
+  </button>
+</app-modal>
+
+<app-modal #editModal [modalConfig]="modalConfig">
+  <form (ngSubmit)="onEditSubmit()" *ngIf="form != null" [formGroup]="form" class="needs-validation" novalidate>
+    <div class="form-group">
+
+      <div class="form-floating">
+        <input
+          class="form-control" formControlName="listName"
+          id="editListName"
+          mdbInput
+          mdbValidate
+          placeholder="Name"
+          required
+          type="text"
+        >
+        <label for="editListName">{{ "lists.name" | translate }}</label>
+        <div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert alert-danger">
+          <mdb-error></mdb-error>
+          <mdb-success></mdb-success>
+          <div *ngIf="input.errors?.['required']">{{"error.required" | translate }}</div>
+          <div *ngIf="input.errors?.['minlength']">{{"error.minlength" | translate }}</div>
+          <div *ngIf="input.errors?.['maxlength']">{{"error.maxlength" | translate }}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="onDismiss('editModal')" class="btn btn-outline-secondary"
+                type="reset">{{ "lists.cancel" | translate }}</button>
+        <button [disabled]="form.invalid" class="btn btn-outline-primary" type="submit">Ok</button>
+      </div>
+    </div>
+  </form>
+</app-modal>

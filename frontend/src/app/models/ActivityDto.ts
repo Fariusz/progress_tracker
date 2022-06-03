@@ -2,8 +2,9 @@ import {ContentDto} from "./ContentDto";
 
 export class ActivityDto {
 
-  constructor(id: bigint, activityName: string, created: Date, content: Array<ContentDto>) {
+  constructor(id: bigint, listId: bigint, activityName: string, created: Date, content: Array<ContentDto>) {
     this._id = id;
+    this._listId = listId;
     this._activityName = activityName;
     this._created = created;
     this._content = content;
@@ -17,6 +18,16 @@ export class ActivityDto {
 
   set id(value: bigint) {
     this._id = value;
+  }
+
+  private _listId: bigint;
+
+  get listId(): bigint {
+    return this._listId;
+  }
+
+  set listId(value: bigint) {
+    this._listId = value;
   }
 
   private _activityName: string;
