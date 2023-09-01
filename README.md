@@ -1,3 +1,2 @@
-https://dbdiagram.io/d/61d9b7b4f8370f0a2ee67553
-
-http://localhost:8080/swagger-ui/index.html
+BEng thesis, all details described here:
+https://github.com/Fariusz/progress_tracker/blob/5d58509860e5fef9c6be81173061fa6ac5b0b655/Radoslaw_Loth_praca_inzynierska.pdf

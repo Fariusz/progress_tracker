@@ -1,9 +1,10 @@
 export class ContentDto {
 
-  constructor(id?: bigint, activityId?: bigint, content?: string, created?: Date) {
+  constructor(id?: bigint, activityId?: bigint, content?: string, repetitions?: string, created?: Date) {
     this._id = id;
     this._activityId = activityId;
     this._content = content;
+    this._repetitions = repetitions;
     this._created = created;
   }
 
@@ -35,6 +36,16 @@ export class ContentDto {
 
   set content(value: string) {
     this._content = value;
+  }
+
+  private _repetitions: string;
+
+  get repetitions(): string {
+    return this._repetitions;
+  }
+
+  set repetitions(value: string) {
+    this._repetitions = value;
   }
 
   private _created: Date;

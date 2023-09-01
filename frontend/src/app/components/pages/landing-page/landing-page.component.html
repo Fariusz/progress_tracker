@@ -1,0 +1,59 @@
+<main class="my-5">
+  <div class="container">
+    <!--Section: Content-->
+    <section>
+      <!-- Jumbotron -->
+      <div id="intro" class="p-5 text-center bg-light shadow-5 rounded mb-5">
+        <h1 class="mb-3 h2">{{ 'landing-page.header' | translate }}</h1>
+        <p class="mb-3">{{ 'landing-page.text' | translate}}</p>
+        <a class="btn btn-primary m-2" routerLink="/home" role="button">{{'landing-page.button' | translate }}</a>
+      </div>
+      <!-- Jumbotron -->
+    </section>
+    <!--Section: Content-->
+
+    <!--Section: Content-->
+    <section class="text-center">
+      <h4 class="mb-5"><strong>{{ 'landing-page.functions' | translate}}</strong></h4>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card">
+            <i class="fas fa-list-ol text-warning fa-6x mt-3"></i>
+            <div class="card-body">
+              <h5 class="card-title">{{ 'landing-page.lists' | translate}}</h5>
+              <p class="card-text">
+                {{ 'landing-page.lists_description' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card">
+              <i class="fas fa-pen text-info fa-6x mt-3"></i>
+            <div class="card-body">
+              <h5 class="card-title">{{ 'landing-page.activities' | translate}}
+              </h5>
+              <p class="card-text">
+                {{ 'landing-page.activities_description' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card">
+                <i class="fas fa-chart-area text-success fa-6x mt-3"></i>
+            <div class="card-body">
+              <h5 class="card-title">{{ 'landing-page.charts' | translate}}</h5>
+              <p class="card-text">
+                {{ 'landing-page.charts_description' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

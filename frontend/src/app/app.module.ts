@@ -10,7 +10,7 @@ import {ActivitiesComponent} from './components/pages/activities/activities.comp
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeComponent} from './components/pages/home/home.component';
 import {LoadingspinnerComponent} from './components/loadingspinner/loadingspinner.component';
-import {MainComponent} from './components/pages/main/main.component';
+import {LandingPageComponent} from './components/pages/landing-page/landing-page.component';
 import {LoginComponent} from './components/pages/login/login.component';
 import {ActivitiesService} from "./components/pages/activities/activities.service";
 import {AuthInterceptorService} from "./components/auth/auth-interceptor.service";
@@ -24,11 +24,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from "@angular/common";
 import {ToastrModule} from "ngx-toastr";
 import {FooterComponent} from './components/footer/footer.component';
-import {MainComponentComponent} from './components/main-component/main-component.component';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {ActivitiesListsComponent} from './components/pages/activities-lists/activities-lists.component';
+import {SortDirective} from './util/sort.directive';
+import {PageNotFoundComponent} from './components/pages/page-not-found/page-not-found.component';
+import {MainComponentComponent} from "./components/main-component/main-component.component";
 
-export function HttpLoaderFactory(http: HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -39,15 +42,19 @@ export function HttpLoaderFactory(http: HttpClient){
     ActivitiesComponent,
     HomeComponent,
     LoadingspinnerComponent,
-    MainComponent,
+    LandingPageComponent,
     LoginComponent,
     ActivityDetailsComponent,
     LineChartComponent,
     ModalComponent,
     FooterComponent,
     MainComponentComponent,
+    ActivitiesListsComponent,
+    SortDirective,
+    PageNotFoundComponent,
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -57,12 +64,10 @@ export function HttpLoaderFactory(http: HttpClient){
     FontAwesomeModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule,
     CommonModule,
     ToastrModule.forRoot(),
-    HttpClientModule,
     TranslateModule.forRoot({
-      loader:{
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
